@@ -1,0 +1,102 @@
+<div class="account-page account-page--dashboard">
+  <div class="account-dashboard">
+    <!-- Header Section -->
+    <div class="account-dashboard-header">
+      <div class="account-dashboard-header-content">
+        <span class="account-greeting">Hello,</span>
+        <h1 class="account-user-name">{{ customer.first_name }}</h1>
+        <p class="account-user-email">{{ customer.email }}</p>
+      </div>
+      <a href="{{ routes.account_logout_url }}" class="account-logout-btn">
+        <span>Log Out</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+      </a>
+    </div>
+    
+    <!-- Quick Stats -->
+    <div class="account-stats">
+      <div class="account-stat">
+        <span class="account-stat-number">{{ customer.orders.size }}</span>
+        <span class="account-stat-label">Orders</span>
+      </div>
+      <div class="account-stat">
+        <span class="account-stat-number">{{ customer.addresses.size }}</span>
+        <span class="account-stat-label">Addresses</span>
+      </div>
+    </div>
+    
+    <!-- Main Content Grid -->
+    <div class="account-dashboard-grid">
+      <!-- Order History -->
+      <div class="account-card account-card--orders">
+        <div class="account-card-header">
+          <h2 class="account-card-title">Order History</h2>
+        </div>
+        
+        <div class="account-card-content">
+          {%- if customer.orders.size > 0 -%}
+            <div class="account-orders-list">
+              {%- for order in customer.orders limit: 5 -%}
+                <a href="{{ order.customer_url }}" class="account-order-item">
+                  <div class="account-order-info">
+                    <span class="account-order-number">{{ order.name }}</span>
+                    <span class="account-order-date">{{ order.created_at | date: "%B %d, %Y" }}</span>
+                  </div>
+                  <div class="account-order-meta">
+                    <span class="account-order-status account-order-status--{{ order.financial_status }}">{{ order.financial_status_label }}</span>
+                    <span class="account-order-total">{{ order.total_price | money }}</span>
+                  </div>
+                  <svg class="account-order-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
+              {%- endfor -%}
+            </div>
+          {%- else -%}
+            <div class="account-empty-state">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              <p>You haven't placed any orders yet.</p>
+              <a href="/" class="account-btn-small">
+                <span>Start Shopping</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="10" viewBox="0 0 43 18" fill="none"><path d="M0 9H42" stroke="currentColor"></path><path d="M33 18C33 10.5 42 9 42 9C42 9 33 7.5 33 0" stroke="currentColor" stroke-linejoin="round"></path></svg>
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+      
+      <!-- Account Details -->
+      <div class="account-card">
+        <div class="account-card-header">
+          <h2 class="account-card-title">Account Details</h2>
+        </div>
+        
+        <div class="account-card-content">
+          <div class="account-detail-group">
+            <span class="account-detail-label">Full Name</span>
+            <span class="account-detail-value">{{ customer.name }}</span>
+          </div>
+          
+          <div class="account-detail-group">
+            <span class="account-detail-label">Email</span>
+            <span class="account-detail-value">{{ customer.email }}</span>
+          </div>
+          
+          {%- if customer.default_address -%}
+            <div class="account-detail-group">
+              <span class="account-detail-label">Default Address</span>
+              <address class="account-detail-value account-address">
+                {{ customer.default_address | format_address }}
+              </address>
+            </div>
+          {%- endif -%}
+        </div>
+        
+        <div class="account-card-footer">
+          <a href="{{ routes.account_addresses_url }}" class="account-link">
+            <span>Manage Addresses</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="10" viewBox="0 0 43 18" fill="none"><path d="M0 9H42" stroke="currentColor"></path><path d="M33 18C33 10.5 42 9 42 9C42 9 33 7.5 33 0" stroke="currentColor" stroke-linejoin="round"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

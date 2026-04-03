@@ -1,0 +1,123 @@
+<div class="account-page">
+  <div class="account-wrapper">
+    <!-- Decorative Side -->
+    <div class="account-hero">
+      <div class="account-hero-content">
+        <span class="account-hero-label">Welcome Back</span>
+        <h2 class="account-hero-title">Your Journey<br><span class="italic">Continues Here</span></h2>
+        <p class="account-hero-text">Sign in to access your orders, manage your subscriptions, and continue growing with intention.</p>
+      </div>
+      <div class="account-hero-overlay"></div>
+    </div>
+    
+    <!-- Form Side -->
+    <div class="account-form-wrapper">
+      <div class="account-form-inner" id="LoginFormWrapper">
+        <span class="account-form-label">Sign In</span>
+        <h1 class="account-title">Welcome Back</h1>
+        <p class="account-subtitle-text">Enter your details to access your account</p>
+        
+        {%- form 'customer_login', class: 'account-form' -%}
+          {{ form.errors | default_errors }}
+          
+          <div class="account-field">
+            <label for="CustomerEmail" class="account-label">Email Address</label>
+            <input 
+              type="email" 
+              name="customer[email]" 
+              id="CustomerEmail" 
+              class="account-input"
+              autocomplete="email"
+              autocapitalize="off"
+              placeholder="your@email.com"
+              required
+            >
+          </div>
+          
+          <div class="account-field">
+            <label for="CustomerPassword" class="account-label">Password</label>
+            <input 
+              type="password" 
+              name="customer[password]" 
+              id="CustomerPassword" 
+              class="account-input"
+              autocomplete="current-password"
+              placeholder="••••••••"
+              required
+            >
+          </div>
+          
+          <div class="account-forgot">
+            <a href="#recover" id="RecoverPassword">Forgot your password?</a>
+          </div>
+          
+          <button type="submit" class="account-btn">
+            <span>Sign In</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="43" height="18" viewBox="0 0 43 18" fill="none"><path d="M0 9H42" stroke="currentColor"></path><path d="M33 18C33 10.5 42 9 42 9C42 9 33 7.5 33 0" stroke="currentColor" stroke-linejoin="round"></path></svg>
+          </button>
+          
+          <p class="account-switch">
+            Don't have an account? <a href="{{ routes.account_register_url }}">Create one</a>
+          </p>
+        {%- endform -%}
+      </div>
+      
+      <!-- Password Recovery Form (Hidden by default) -->
+      <div class="account-form-inner" id="RecoverPasswordForm" style="display: none;">
+        <span class="account-form-label">Password Recovery</span>
+        <h1 class="account-title">Reset Password</h1>
+        <p class="account-subtitle-text">We'll send you an email to reset your password</p>
+        
+        {%- form 'recover_customer_password', class: 'account-form' -%}
+          <div class="account-field">
+            <label for="RecoverEmail" class="account-label">Email Address</label>
+            <input 
+              type="email" 
+              name="email" 
+              id="RecoverEmail" 
+              class="account-input"
+              autocomplete="email"
+              autocapitalize="off"
+              placeholder="your@email.com"
+              required
+            >
+          </div>
+          
+          <button type="submit" class="account-btn">
+            <span>Send Reset Link</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="43" height="18" viewBox="0 0 43 18" fill="none"><path d="M0 9H42" stroke="currentColor"></path><path d="M33 18C33 10.5 42 9 42 9C42 9 33 7.5 33 0" stroke="currentColor" stroke-linejoin="round"></path></svg>
+          </button>
+          
+          <p class="account-switch">
+            <a href="#" id="HideRecoverPasswordLink">← Back to Sign In</a>
+          </p>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var recoverLink = document.getElementById('RecoverPassword');
+    var hideLink = document.getElementById('HideRecoverPasswordLink');
+    var recoverForm = document.getElementById('RecoverPasswordForm');
+    var loginForm = document.getElementById('LoginFormWrapper');
+    
+    if (recoverLink) {
+      recoverLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        loginForm.style.display = 'none';
+        recoverForm.style.display = 'block';
+      });
+    }
+    
+    if (hideLink) {
+      hideLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        recoverForm.style.display = 'none';
+        loginForm.style.display = 'block';
+      });
+    }
+  });
+</script>

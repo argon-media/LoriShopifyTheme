@@ -1,0 +1,280 @@
+{%- comment -%}
+  Cart Drawer Snippet
+{%- endcomment -%}
+
+<div class="cart-drawer" data-cart-drawer>
+  <div class="cart-drawer__header">
+    <h3 class="cart-drawer__title">Your Cart</h3>
+    <button class="cart-drawer__close" aria-label="Close cart" data-cart-close>
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  
+  <div class="cart-drawer__body" data-cart-items>
+    {%- if cart.item_count > 0 -%}
+      {%- for item in cart.items -%}
+        <div class="cart-item" data-cart-item="{{ item.key }}">
+          <div class="cart-item__image">
+            {%- if item.image -%}
+              <img src="{{ item.image | image_url: width: 100 }}" alt="{{ item.title }}" loading="lazy">
+            {%- endif -%}
+          </div>
+          <div class="cart-item__details">
+            <h4 class="cart-item__title">
+              <a href="{{ item.url }}">{{ item.product.title }}</a>
+            </h4>
+            {%- if item.variant.title != 'Default Title' -%}
+              <p class="cart-item__variant">{{ item.variant.title }}</p>
+            {%- endif -%}
+            {%- for property in item.properties -%}
+              {%- unless property.last == blank -%}
+                <p class="cart-item__property">{{ property.first }}: {{ property.last }}</p>
+              {%- endunless -%}
+            {%- endfor -%}
+            <p class="cart-item__price">{{ item.final_line_price | money }}</p>
+            <div class="cart-item__quantity">
+              <button class="cart-item__qty-btn" data-qty-change="-1" data-item-key="{{ item.key }}">−</button>
+              <span class="cart-item__qty-value">{{ item.quantity }}</span>
+              <button class="cart-item__qty-btn" data-qty-change="1" data-item-key="{{ item.key }}">+</button>
+            </div>
+          </div>
+          <button class="cart-item__remove" data-remove-item="{{ item.key }}" aria-label="Remove item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      <div class="cart-drawer__empty">
+        <p>Your cart is empty</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Continue Shopping</a>
+      </div>
+    {%- endif -%}
+  </div>
+  
+  {%- if cart.item_count > 0 -%}
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__subtotal">
+        <span>Subtotal</span>
+        <span data-cart-subtotal>{{ cart.total_price | money }}</span>
+      </div>
+      <p class="cart-drawer__note">Shipping & taxes calculated at checkout</p>
+      <a href="{{ routes.cart_url }}" class="btn btn-outline btn-block">View Cart</a>
+      <a href="/checkout" class="btn btn-primary btn-block">Checkout</a>
+    </div>
+  {%- endif -%}
+</div>
+
+<div class="cart-drawer__overlay" data-cart-overlay></div>
+
+<style>
+  .cart-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    position: relative;
+  }
+  
+  .cart-item__image {
+    width: 80px;
+    flex-shrink: 0;
+  }
+  
+  .cart-item__image img {
+    width: 100%;
+    border-radius: 4px;
+  }
+  
+  .cart-item__details {
+    flex: 1;
+  }
+  
+  .cart-item__title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  
+  .cart-item__title a {
+    color: inherit;
+  }
+  
+  .cart-item__variant,
+  .cart-item__property {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 3px;
+  }
+  
+  .cart-item__price {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 10px 0;
+  }
+  
+  .cart-item__quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .cart-item__qty-btn {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .cart-item__qty-btn:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .cart-item__qty-value {
+    font-size: 14px;
+    min-width: 20px;
+    text-align: center;
+  }
+  
+  .cart-item__remove {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    padding: 5px;
+    color: #999;
+    transition: color 0.2s ease;
+  }
+  
+  .cart-item__remove:hover {
+    color: #dc3545;
+  }
+  
+  .cart-drawer__empty {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .cart-drawer__empty p {
+    margin-bottom: 20px;
+    color: #777;
+  }
+  
+  .cart-drawer__subtotal {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .cart-drawer__note {
+    font-size: 12px;
+    color: #777;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .cart-drawer__footer .btn {
+    margin-bottom: 10px;
+  }
+  
+  .cart-drawer__footer .btn:last-child {
+    margin-bottom: 0;
+  }
+</style>
+
+<script>
+  // Cart drawer functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const cartToggle = document.querySelector('[data-cart-toggle]');
+    const cartDrawer = document.querySelector('[data-cart-drawer]');
+    const cartClose = document.querySelector('[data-cart-close]');
+    const cartOverlay = document.querySelector('[data-cart-overlay]');
+    
+    function openCart() {
+      cartDrawer?.classList.add('active');
+      cartOverlay?.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeCart() {
+      cartDrawer?.classList.remove('active');
+      cartOverlay?.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    cartToggle?.addEventListener('click', function(e) {
+      e.preventDefault();
+      openCart();
+    });
+    
+    cartClose?.addEventListener('click', closeCart);
+    cartOverlay?.addEventListener('click', closeCart);
+    
+    // Handle quantity changes
+    document.querySelectorAll('[data-qty-change]').forEach(btn => {
+      btn.addEventListener('click', async function() {
+        const change = parseInt(this.dataset.qtyChange);
+        const itemKey = this.dataset.itemKey;
+        const qtyEl = this.parentElement.querySelector('.cart-item__qty-value');
+        const currentQty = parseInt(qtyEl.textContent);
+        const newQty = Math.max(0, currentQty + change);
+        
+        // Update cart via AJAX
+        try {
+          const response = await fetch('/cart/change.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: itemKey, quantity: newQty })
+          });
+          
+          if (response.ok) {
+            if (newQty === 0) {
+              location.reload();
+            } else {
+              qtyEl.textContent = newQty;
+              // Update cart count and subtotal
+              const cart = await response.json();
+              document.querySelector('[data-cart-count]').textContent = cart.item_count;
+              document.querySelector('[data-cart-subtotal]').textContent = '$' + (cart.total_price / 100).toFixed(2);
+            }
+          }
+        } catch (error) {
+          console.error('Error updating cart:', error);
+        }
+      });
+    });
+    
+    // Handle item removal
+    document.querySelectorAll('[data-remove-item]').forEach(btn => {
+      btn.addEventListener('click', async function() {
+        const itemKey = this.dataset.removeItem;
+        
+        try {
+          const response = await fetch('/cart/change.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: itemKey, quantity: 0 })
+          });
+          
+          if (response.ok) {
+            location.reload();
+          }
+        } catch (error) {
+          console.error('Error removing item:', error);
+        }
+      });
+    });
+  });
+</script>

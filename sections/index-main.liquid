@@ -1,0 +1,831 @@
+{%- comment -%}
+  Index Main Section - Lori J. Smith Theme
+  Homepage with all sections
+{%- endcomment -%}
+
+{%- assign featured_product = all_products[section.settings.featured_product] -%}
+
+<!-- HERO BANNER -->
+<section class="hero-banner">
+  <div class="hero-sidebar"></div>
+  
+  <div class="hero-content">
+    <div class="hero-content-inner">
+      <p class="hero-label">{{ section.settings.hero_label }}</p>
+      <h1 class="hero-title">
+        <span class="hero-title-line">{{ section.settings.hero_title_line1 }} <strong>{{ section.settings.hero_title_accent }}</strong></span>
+        <span class="hero-title-subtitle italic">{{ section.settings.hero_title_line2 }}</span>
+      </h1>
+      <p class="hero-description">{{ section.settings.hero_description }}</p>
+      <a href="#product-section" class="hero-cta">
+        <span>{{ section.settings.hero_button_text }}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="43" height="18" viewBox="0 0 43 18" fill="none"><path d="M0 9H42" stroke="currentColor"></path><path d="M33 18C33 10.5 42 9 42 9C42 9 33 7.5 33 0" stroke="currentColor" stroke-linejoin="round"></path></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-image-container">
+    <!-- Mobile/Tablet Image -->
+    <picture>
+      <source media="(max-width: 1023px)" srcset="{{ 'hero-mobile.png' | asset_url }}">
+      <source media="(min-width: 1024px)" srcset="{% if section.settings.hero_image %}{{ section.settings.hero_image | image_url: width: 1200 }}{% else %}https://lorijsmith.com/wp-content/uploads/2024/06/journalstack1-scaled.jpg{% endif %}">
+      <img src="{{ 'hero-mobile.png' | asset_url }}" alt="Hero" class="hero-image">
+    </picture>
+    <div class="hero-image-overlay"></div>
+    <div class="hero-floating-card">
+      <p class="hero-floating-card-title">{{ section.settings.floating_card_title }}</p>
+      <p class="hero-floating-card-text">{{ section.settings.floating_card_subtitle }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT SECTION -->
+<section class="product-section" id="product-section">
+  <div class="product-container">
+    <div class="product-grid">
+      
+      <!-- Product Images Gallery -->
+      <div class="product-gallery">
+        <div class="product-gallery__main">
+          {% if featured_product.featured_image %}
+            <img src="{{ featured_product.featured_image | image_url: width: 800 }}" alt="{{ featured_product.title }}" class="product-gallery__main-image" id="mainProductImage">
+          {% else %}
+            <img src="https://lorijsmith.com/wp-content/uploads/2023/04/Outside-Cover.jpg" alt="Product" class="product-gallery__main-image" id="mainProductImage">
+          {% endif %}
+        </div>
+        <div class="product-gallery__thumbs">
+          {% if featured_product.images.size > 0 %}
+            {% for image in featured_product.images %}
+              <button class="product-gallery__thumb{% if forloop.first %} active{% endif %}" data-image-src="{{ image | image_url: width: 800 }}">
+                <img src="{{ image | image_url: width: 200 }}" alt="{{ image.alt | default: featured_product.title }}">
+              </button>
+            {% endfor %}
+          {% else %}
+            <button class="product-gallery__thumb active" data-image-src="https://lorijsmith.com/wp-content/uploads/2023/04/Outside-Cover.jpg">
+              <img src="https://lorijsmith.com/wp-content/uploads/2023/04/Outside-Cover.jpg" alt="Thumb 1">
+            </button>
+            <button class="product-gallery__thumb" data-image-src="https://lorijsmith.com/wp-content/uploads/2023/04/Inside-Cover.jpg">
+              <img src="https://lorijsmith.com/wp-content/uploads/2023/04/Inside-Cover.jpg" alt="Thumb 2">
+            </button>
+            <button class="product-gallery__thumb" data-image-src="https://lorijsmith.com/wp-content/uploads/2023/04/Interior-Page-My-desired-week.jpg">
+              <img src="https://lorijsmith.com/wp-content/uploads/2023/04/Interior-Page-My-desired-week.jpg" alt="Thumb 3">
+            </button>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Purchase Details -->
+      <div class="product-info">
+        <div class="product-info-header">
+          <div class="product-collection-label">{{ section.settings.collection_label }}</div>
+          
+          <h2 class="product-title">
+            {{ section.settings.product_title_line1 }}<br>
+            <span class="italic">{{ section.settings.product_title_line2 }}</span>
+          </h2>
+          
+          <p class="product-intro-text">{{ section.settings.product_intro }}</p>
+        </div>
+        
+        <div class="product-description">
+          <p>{{ section.settings.product_description }}</p>
+          <p class="product-shipping-note">While supplies last, you can get your journal free — just cover the $10 flat-rate for shipping. <strong>Currently, we only ship within the United States.</strong></p>
+        </div>
+
+        <!-- Purchase Form -->
+        {% comment %} Find Standard and Free Trial variants {% endcomment %}
+        {% assign standard_variant = nil %}
+        {% assign free_trial_variant = nil %}
+        {% assign subscription_variant = nil %}
+        {% assign standard_price = 0 %}
+        {% assign highest_price = 0 %}
+        
+        {% if featured_product %}
+          {% comment %} First pass: look for specific variant names {% endcomment %}
+          {% for variant in featured_product.variants %}
+            {% assign variant_title_lower = variant.title | downcase %}
+            {% if variant_title_lower contains 'standard' or variant.title == 'Default Title' %}
+              {% assign standard_variant = variant %}
+              {% assign standard_price = variant.price %}
+            {% elsif variant_title_lower contains 'subscription' %}
+              {% assign subscription_variant = variant %}
+            {% elsif variant_title_lower contains 'free' or variant_title_lower contains 'trial' %}
+              {% assign free_trial_variant = variant %}
+            {% endif %}
+            
+            {% comment %} Track highest price variant (excluding free trial and subscription) {% endcomment %}
+            {% unless variant_title_lower contains 'free' or variant_title_lower contains 'trial' or variant_title_lower contains 'subscription' %}
+              {% if variant.price > highest_price %}
+                {% assign highest_price = variant.price %}
+                {% assign highest_variant = variant %}
+              {% endif %}
+            {% endunless %}
+          {% endfor %}
+          
+          {% comment %} If no Standard variant found, use the highest priced one {% endcomment %}
+          {% if standard_variant == nil and highest_variant %}
+            {% assign standard_variant = highest_variant %}
+            {% assign standard_price = highest_price %}
+          {% endif %}
+          
+          {% comment %} Final fallback to first variant {% endcomment %}
+          {% if standard_variant == nil %}
+            {% assign standard_variant = featured_product.variants.first %}
+            {% assign standard_price = standard_variant.price %}
+          {% endif %}
+          
+          {% comment %} If still no price, use product price {% endcomment %}
+          {% if standard_price == 0 %}
+            {% assign standard_price = featured_product.price %}
+          {% endif %}
+        {% endif %}
+
+        <form action="/cart/add" method="post" id="productForm">
+          {% if featured_product %}
+            <input type="hidden" name="id" id="variantId" value="{{ standard_variant.id }}">
+            {% assign discount_percent = section.settings.subscription_discount | default: 10 %}
+            <script>
+              window.productVariants = {
+                default: {{ standard_variant.id }},
+                defaultPrice: {{ standard_price }},
+                subscriptionDiscount: {{ discount_percent }},
+                {% if subscription_variant %}
+                subscription: {{ subscription_variant.id }},
+                subscriptionPrice: {{ subscription_variant.price }},
+                {% endif %}
+                {% if free_trial_variant %}
+                freeTrial: {{ free_trial_variant.id }},
+                freeTrialPrice: {{ free_trial_variant.price }},
+                {% endif %}
+              };
+            </script>
+          {% endif %}
+          
+          <!-- Purchase Tier Selection -->
+          <div class="purchase-options">
+            <!-- One-Time Purchase -->
+            <div class="purchase-option active" data-purchase-type="onetime">
+              <div class="purchase-option__header">
+                <span class="purchase-option__title">{{ section.settings.option1_title }}</span>
+                <span class="purchase-option__price">{{ standard_price | money }}</span>
+              </div>
+            </div>
+
+            <!-- Subscribe & Save -->
+            <div class="purchase-option" data-purchase-type="subscribe">
+              <div class="purchase-option__header">
+                <div class="purchase-option__title-wrap">
+                  <span class="purchase-option__title">{{ section.settings.option2_title }}</span>
+                  <span class="purchase-option__badge">Save {{ section.settings.subscription_discount }}%</span>
+                </div>
+                {% assign discount_percent = section.settings.subscription_discount | default: 10 %}
+                {% assign multiplier = 100 | minus: discount_percent %}
+                {% assign discounted = standard_price | times: multiplier | divided_by: 100 %}
+                <span class="purchase-option__price">{{ discounted | money }}</span>
+              </div>
+              <p class="purchase-option__subtitle">{{ section.settings.option2_subtitle }}</p>
+            </div>
+
+            <!-- Free Journal Trial -->
+            {% if section.settings.enable_free_trial %}
+            <div class="purchase-option purchase-option--trial" data-purchase-type="first-free">
+              <div class="trial-ribbon">
+                <span>{{ section.settings.option3_badge }}</span>
+              </div>
+              <div class="trial-content">
+                <div class="trial-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                  </svg>
+                </div>
+                <div class="trial-info">
+                  <span class="trial-label">{{ section.settings.option3_title }}</span>
+                  <span class="trial-price">$0.00</span>
+                </div>
+                <p class="trial-note">{{ section.settings.option3_subtitle }}</p>
+              </div>
+              
+              <!-- Email & Check Eligibility (shown when selected) -->
+              <div class="first-free-form" id="firstFreeForm">
+                <input type="email" name="customer_email" id="customerEmail" class="first-free-form__input" placeholder="{{ section.settings.email_placeholder }}">
+                
+                <!-- Weekly Bookmark Newsletter Opt-in -->
+                <label class="first-free-form__newsletter">
+                  <input type="checkbox" name="newsletter_optin" id="newsletterOptin" value="1">
+                  <span class="first-free-form__newsletter-label">
+                    <span class="first-free-form__newsletter-title">Weekly Bookmark</span>
+                    <span class="first-free-form__newsletter-desc">Get weekly inspiration, journaling tips & exclusive offers delivered to your inbox.</span>
+                  </span>
+                </label>
+                
+                <button type="button" id="checkEligibilityBtn" class="first-free-form__eligibility-btn">
+                  <span class="btn-text">Check Eligibility</span>
+                </button>
+                <div class="first-free-form__status" id="emailStatus"></div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+          <!-- Cart Controls -->
+          <div class="product-actions">
+            <div class="quantity-selector" id="quantitySelector">
+              <button type="button" class="quantity-selector__btn quantity-selector__btn--minus">−</button>
+              <input type="number" name="quantity" id="quantity" value="1" min="1" class="quantity-selector__input">
+              <button type="button" class="quantity-selector__btn quantity-selector__btn--plus">+</button>
+            </div>
+            <button type="submit" class="btn-add-to-cart" id="addToCartBtn">
+              <span class="btn-text">{{ section.settings.add_to_cart_text }}</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features-section">
+  <div class="features-container">
+    <div class="features-header">
+      <p class="features-subtitle">{{ section.settings.features_subtitle }}</p>
+      <h2 class="features-title">{{ section.settings.features_title }}</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></div>
+        <h3 class="feature-title">Undated Format</h3>
+        <p class="feature-description">Start anytime without wasting a single page.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m4 0h1m-5 4h1m4 0h1m-5 4h1m4 0h1" /></svg></div>
+        <h3 class="feature-title">Monthly Spreads</h3>
+        <p class="feature-description">Three monthly calendar views for high-level commitment mapping.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg></div>
+        <h3 class="feature-title">Weekly Planning</h3>
+        <p class="feature-description">Dedicated weekly pages to set intentions and priorities.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg></div>
+        <h3 class="feature-title">Journaling Prompts</h3>
+        <p class="feature-description">Daily reflection spaces to help you realign and grow.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></div>
+        <h3 class="feature-title">Faith-Focused</h3>
+        <p class="feature-description">Dedicated space for daily scripture, prayer, and gratitude.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>
+        <h3 class="feature-title">Smart To-Do List</h3>
+        <p class="feature-description">Structured daily tasks with a focus on your 'Top 3'.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>
+        <h3 class="feature-title">Emotional Checks</h3>
+        <p class="feature-description">Space for mental and emotional check-ins each day.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div>
+        <h3 class="feature-title">Habit Tracker</h3>
+        <p class="feature-description">Built-in logs to keep you consistent with your goals.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg></div>
+        <h3 class="feature-title">Wellness Nudges</h3>
+        <p class="feature-description">Self-care reminders integrated into your weekly rhythm.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" /></svg></div>
+        <h3 class="feature-title">Reflection Space</h3>
+        <p class="feature-description">Generous room for notes, prayers, and deep thoughts.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg></div>
+        <h3 class="feature-title">Designed for Peace</h3>
+        <p class="feature-description">Curated specifically for overwhelmed women seeking clarity.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg></div>
+        <h3 class="feature-title">Luxe Materials</h3>
+        <p class="feature-description">Soft-touch linen cover and elegant gold coil binding.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg></div>
+        <h3 class="feature-title">Clean Design</h3>
+        <p class="feature-description">Minimalist and distraction-free interior layout.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg></div>
+        <h3 class="feature-title">Portable Size</h3>
+        <p class="feature-description">Lightweight enough for your purse or nightstand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT CREATOR -->
+<section class="about-section">
+  <div class="about-container">
+    <!-- Left: Creator Image -->
+    <div class="about-image-container">
+      <div class="about-image-frame"></div>
+      {% if section.settings.creator_image %}
+        <img src="{{ section.settings.creator_image | image_url: width: 800 }}" alt="{{ section.settings.creator_name }}" class="about-image">
+      {% else %}
+        <img src="https://lorijsmith.com/wp-content/uploads/2023/03/IMG_1725_Facetune_01-11-2021-09-16-13.jpg" alt="Lori J Smith" class="about-image">
+      {% endif %}
+      <div class="about-signature-card">
+        <p class="about-signature-card-name">{{ section.settings.creator_name }}</p>
+        <p class="about-signature-card-title">{{ section.settings.creator_title }}</p>
+      </div>
+    </div>
+
+    <!-- Right: Scrollable Story Content -->
+    <div class="about-content">
+      <div class="about-header">
+        <p class="about-label">{{ section.settings.about_label }}</p>
+        <h2 class="about-title">{{ section.settings.about_title }}</h2>
+      </div>
+      
+      <div class="about-scroll-content custom-scrollbar">
+        <p class="about-quote">"{{ section.settings.about_quote }}"</p>
+        
+        <p class="about-text">
+          Around six years ago, my life began transitioning into a new season. This transition came through a series of events, such as - the kiddos were no longer under our roof - we sold our home, which I believed would be our forever home, to begin the building process - AND I closed my photography business. Then - I started working full time with my husband - AND to add one more crazy dynamic...we were alone for the first time in our marriage, as new empty nesters.
+        </p>
+        
+        <p class="about-text">
+          In years prior, when I was fully engaged and primarily focused on my family, I felt confident, energetic, solid and at peace. Like I've often shared, I knew that what mattered most was giving my kiddos a better start. This season, everything changed. I knew I was no longer operating in that sense of clarity and vision for where I was headed. I didn't know what mattered most. AND I was doing a lot of what I thought I 'should' be doing. It was clear it was getting the best of me. I needed to find a way to work through this season.
+        </p>
+
+        <p class="about-text emphasis">
+          Overall, I was excited about these changes! I did not expect the downward spiral I was entering into.
+        </p>
+
+        <p class="about-text">
+          I thought I had clarity on where I was headed. However, I was floundering. My health was fading, and by 2 pm every day, I felt anxious, stressed, unsure, needy, insecure, and T I R E D. I didn't recognize how unsettling this transition was until my body and emotions revealed it to me. Life changes can be telling if we decide to take notice. They have a way of exposing areas that need growth.
+        </p>
+
+        <p class="about-text">
+          I have always enjoyed journaling my thoughts and prayers. I love calendars and planning, BUT it would be an understatement to say that I became an obsessive fan of planning my day with intention and determination to spend my time wisely. I changed many of my routines, habits, and ideas I had about the structure of my life.
+        </p>
+
+        <p class="about-text">
+          Then, over the next year, I began studying and learning systems and concepts from the plethora of journals and planners I had on my shelves but never used. This helped me zero in on how to best tackle my day for my overall wellness. I researched and studied books about creating habits, systems, time management, and personal well-being.
+        </p>
+
+        <p class="about-text callout">
+          The changes were healing. I restructured my days and developed healthy habits such as drinking 75 oz of water daily - consistently taking my supplements - creating better sleep habits - and working on daily movement and prayer. I felt like I was on the right track... There was just one secret. <strong>I still felt like something was off...</strong>
+        </p>
+
+        <p class="about-text">
+          I was deep in the pool of productivity hacks, side hustles, BIG dreams, time blocking, and goals; yet, the most successful thing I had experienced in my life to this point was my family, faith, and overall health and wellness. I found that "success" by utilizing the complete opposite idea of what I was learning. I always knew what I desired for myself, my marriage, and my children. It was simple, and it was hard, but it was the desire of my heart.
+        </p>
+
+        <p class="about-text">
+          Recognizing this truth inspired me to begin developing a system that allowed me to find truth for my next season and work through my journey while continuing to organize my schedule and thoughts purposefully. The journals I used often focused on individual areas like fitness or business. That wasn't going to work. I wanted a journal that would be personal, uncomplicated, and encompass my entire life - faith, health, finances, career, family, personal growth, etc.
+        </p>
+
+        <p class="about-text large">
+          I needed it to GROW with me along the way.
+        </p>
+
+        <p class="about-text">
+          That's how I came to create the Plan To GRO Journal system. Planning is exciting; it gives clarity and creates productivity. However, I will always need growth and, therefore, need to journal through that process. Have I discovered my 'what matters most' in this next season? I know this - I want to show up and 'give my best self' in every commitment I make.
+        </p>
+        
+        <div class="about-text closing">
+          <p>
+            You can find me over here building a life that nourishes the best of who I am. I hope I can help you along in your journey, too!
+          </p>
+        </div>
+      </div>
+      
+      <!-- Fade effect at bottom -->
+      <div class="about-fade"></div>
+    </div>
+  </div>
+  
+  <!-- Connection Arrow to Testimonials -->
+  <div class="about-arrow">
+    <p class="about-arrow-text">{{ section.settings.arrow_text }}</p>
+    <svg class="about-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="43" height="18" viewBox="0 0 43 18" fill="none" style="transform: rotate(90deg);"><path d="M0 9H42" stroke="currentColor"></path><path d="M33 18C33 10.5 42 9 42 9C42 9 33 7.5 33 0" stroke="currentColor" stroke-linejoin="round"></path></svg>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="testimonials-container">
+    <div class="testimonials-header">
+      <h2 class="testimonials-title">
+        {{ section.settings.testimonials_title_line1 }}<br>
+        <span class="italic">{{ section.settings.testimonials_title_line2 }}</span>
+      </h2>
+    </div>
+    <div class="testimonials-slider">
+      <button class="testimonial-nav-btn testimonial-nav-btn--prev"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 19l-7-7 7-7" /></svg></button>
+      <button class="testimonial-nav-btn testimonial-nav-btn--next"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7" /></svg></button>
+      <div class="testimonial-content">
+        <div class="testimonial-quote-mark">"</div>
+        <div id="testimonialSlider">
+          {% for block in section.blocks %}
+            {% if block.type == 'testimonial' %}
+              <blockquote class="testimonial-card" {% unless forloop.first %}style="display:none"{% endunless %}>
+                <p class="testimonial-text">"{{ block.settings.quote }}"</p>
+                <cite class="testimonial-author">- {{ block.settings.author }}</cite>
+              </blockquote>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="testimonial-dots">
+        {% for block in section.blocks %}
+          {% if block.type == 'testimonial' %}
+            <div class="testimonial-dot{% if forloop.first %} active{% endif %}"></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section cta-section--v2">
+  <div class="cta-container">
+    <div class="cta-content">
+      <h2 class="cta-v2-title">
+        {{ section.settings.cta_title_line1 }} {{ section.settings.cta_title_line2 }}
+      </h2>
+      <p class="cta-v2-script font-script">{{ section.settings.cta_subtitle }}</p>
+      <p class="cta-v2-body">{{ section.settings.cta_body | default: 'New here? Get your first journal free just pay shipping.' }}</p>
+      <a href="#product-section" class="cta-btn">
+        <span>{{ section.settings.cta_button_text }}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="43" height="18" viewBox="0 0 43 18" fill="none"><path d="M0 9H42" stroke="currentColor"></path><path d="M33 18C33 10.5 42 9 42 9C42 9 33 7.5 33 0" stroke="currentColor" stroke-linejoin="round"></path></svg>
+      </a>
+    </div>
+    <div class="cta-image-container">
+      <div class="cta-image-frame"></div>
+      {%- if section.settings.cta_image -%}
+        <img src="{{ section.settings.cta_image | image_url: width: 900 }}" alt="Authentic Living" class="cta-image">
+      {%- else -%}
+        <img src="https://lorijsmith.com/wp-content/uploads/2023/03/Facetune_11-07-2022-16-57-16-1536x898.jpg" alt="Authentic Living" class="cta-image">
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<!-- FULL-WIDTH IMAGE BANNER -->
+<section class="banner-strip">
+  {%- if section.settings.banner_image -%}
+    <img src="{{ section.settings.banner_image | image_url: width: 1920 }}" alt="{{ section.settings.banner_alt | default: 'Community' }}" class="banner-strip__img" loading="lazy">
+  {%- else -%}
+    <img src="https://lorijsmith.com/wp-content/uploads/2023/03/three-women-journals.jpg" alt="Community" class="banner-strip__img" loading="lazy">
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Homepage",
+  "settings": [
+    {
+      "type": "product",
+      "id": "featured_product",
+      "label": "Featured Product"
+    },
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "text",
+      "id": "hero_label",
+      "label": "Label",
+      "default": "Established in Intention"
+    },
+    {
+      "type": "text",
+      "id": "hero_title_line1",
+      "label": "Title Line 1",
+      "default": "Crush the"
+    },
+    {
+      "type": "text",
+      "id": "hero_title_accent",
+      "label": "Accent Word (Bold)",
+      "default": "Chaos"
+    },
+    {
+      "type": "text",
+      "id": "hero_title_line2",
+      "label": "Subtitle Line",
+      "default": "With a planner that grows with you"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_description",
+      "label": "Description",
+      "default": "The undated, faith-based planner journal created for the woman ready to say goodbye to chaos and experience more joy!"
+    },
+    {
+      "type": "text",
+      "id": "hero_button_text",
+      "label": "Button Text",
+      "default": "Shop The Planner"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "floating_card_title",
+      "label": "Card Title",
+      "default": "Authentic Living"
+    },
+    {
+      "type": "text",
+      "id": "floating_card_subtitle",
+      "label": "Card Subtitle",
+      "default": "Starts Right Here"
+    },
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "text",
+      "id": "collection_label",
+      "label": "Collection Label",
+      "default": "The Signature Collection"
+    },
+    {
+      "type": "text",
+      "id": "product_title_line1",
+      "label": "Title Line 1",
+      "default": "The Plan to GRO"
+    },
+    {
+      "type": "text",
+      "id": "product_title_line2",
+      "label": "Title Line 2",
+      "default": "Daily Planner"
+    },
+    {
+      "type": "text",
+      "id": "product_intro",
+      "label": "Intro Text",
+      "default": "Start living with intention, clarity, and peace — beginning today."
+    },
+    {
+      "type": "textarea",
+      "id": "product_description",
+      "label": "Description",
+      "default": "The Plan to GRO Journal is a thoughtfully designed faith-based 12 week daily planner and journal created for women who are ready to organize what matters and grow from the inside out. Whether you're managing a home, nurturing a family, or simply trying to breathe between busy moments, this journal will guide you toward your most beautiful life — one page at a time."
+    },
+    {
+      "type": "textarea",
+      "id": "product_shipping_note",
+      "label": "Shipping Note",
+      "default": "While supplies last, you can get your journal free — just cover the $10 flat-rate for shipping. Currently, we only ship within the United States."
+    },
+    {
+      "type": "header",
+      "content": "Purchase Options"
+    },
+    {
+      "type": "text",
+      "id": "option1_title",
+      "label": "Option 1",
+      "default": "One-Time Purchase"
+    },
+    {
+      "type": "text",
+      "id": "option2_title",
+      "label": "Option 2",
+      "default": "Subscribe & Save"
+    },
+    {
+      "type": "text",
+      "id": "option2_subtitle",
+      "label": "Option 2 Subtitle",
+      "default": "FREE SHIPPING ON ALL SUBSCRIPTIONS"
+    },
+    {
+      "type": "range",
+      "id": "subscription_discount",
+      "label": "Discount %",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_free_trial",
+      "label": "Enable Free Trial",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "option3_title",
+      "label": "Option 3",
+      "default": "Free Journal Trial"
+    },
+    {
+      "type": "text",
+      "id": "option3_badge",
+      "label": "Badge Text",
+      "default": "Trial Offer"
+    },
+    {
+      "type": "text",
+      "id": "option3_subtitle",
+      "label": "Option 3 Subtitle",
+      "default": "FIRST-TIME USERS ONLY"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email Placeholder",
+      "default": "Enter Email to check your eligibility"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_text",
+      "label": "Button Text",
+      "default": "Add to cart"
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "text",
+      "id": "features_title",
+      "label": "Title",
+      "default": "The Details"
+    },
+    {
+      "type": "text",
+      "id": "features_subtitle",
+      "label": "Subtitle",
+      "default": "Everything you need to bloom"
+    },
+    {
+      "type": "header",
+      "content": "About"
+    },
+    {
+      "type": "image_picker",
+      "id": "creator_image",
+      "label": "Creator Image"
+    },
+    {
+      "type": "text",
+      "id": "creator_name",
+      "label": "Name",
+      "default": "Lori J Smith"
+    },
+    {
+      "type": "text",
+      "id": "creator_title",
+      "label": "Title",
+      "default": "Founder & Life Strategist"
+    },
+    {
+      "type": "text",
+      "id": "about_title",
+      "label": "Section Title",
+      "default": "about the creator"
+    },
+    {
+      "type": "text",
+      "id": "about_label",
+      "label": "Label",
+      "default": "Growth takes intention"
+    },
+    {
+      "type": "textarea",
+      "id": "about_quote",
+      "label": "Quote",
+      "default": "Out of that chaos, the Plan to GRO was born."
+    },
+    {
+      "type": "text",
+      "id": "arrow_text",
+      "label": "Arrow Text",
+      "default": "Read community stories"
+    },
+    {
+      "type": "header",
+      "content": "Testimonials"
+    },
+    {
+      "type": "text",
+      "id": "testimonials_title_line1",
+      "label": "Title Line 1",
+      "default": "See why others love using"
+    },
+    {
+      "type": "text",
+      "id": "testimonials_title_line2",
+      "label": "Title Line 2",
+      "default": "their plan to gro journal"
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Label",
+      "default": "Ready for your transformation?"
+    },
+    {
+      "type": "text",
+      "id": "cta_title_line1",
+      "label": "Title Line 1",
+      "default": "Your Most"
+    },
+    {
+      "type": "text",
+      "id": "cta_title_line2",
+      "label": "Title Line 2",
+      "default": "Authentic Life"
+    },
+    {
+      "type": "text",
+      "id": "cta_subtitle",
+      "label": "Subtitle",
+      "default": "starts today!"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_body",
+      "label": "CTA Body Text",
+      "default": "New here? Get your first journal free just pay shipping."
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "Button",
+      "default": "Claim yours"
+    },
+    {
+      "type": "image_picker",
+      "id": "cta_image",
+      "label": "CTA Section Image"
+    },
+    {
+      "type": "header",
+      "content": "Banner Strip"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Full-Width Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "banner_alt",
+      "label": "Banner Alt Text",
+      "default": "Community"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage",
+      "blocks": [
+        { "type": "testimonial", "settings": { "quote": "My Plan to GRO journal is my constant daily companion! I don't go anywhere without her!! As a busy mom, of course I need daily tasks and calendars but more importantly, this journal helps me keep those tasks in alignment with my overall goals and intentions. YOU NEED THIS PLANNER IN YOUR LIFE!", "author": "Alex" } },
+        { "type": "testimonial", "settings": { "quote": "My Plan to GRO Journal has actually changed my life! No - Really! It has helped me to prioritize my goals each and every day and takes the guesswork out of being intentional with my time!", "author": "Kimmy" } },
+        { "type": "testimonial", "settings": { "quote": "I love my Plan to Gro Journal!! Naturally I am not a disciplined person...like at all. But I've used the Plan to Gro Journal for almost 2 years now and it's helped me create the disciplines and routines that I've always wanted. I love being able to create my to do list, plan the day (hour by hour) and track my progress. Having the visual habit chart has been a game changer for me!", "author": "Kaitlyn" } },
+        { "type": "testimonial", "settings": { "quote": "I have been using the plan to gro journals for over 5 years now!! They are a must in my daily walk for peace, success and living life in alignment with what matters most! I use it as a plan for each day, week, month and quarter. There are many benefits to this journal that it is impossible to sum up in a quick review. 5 out of 5 stars and I have recommended it to so many. I guess the best thing I can convey is that I am a different person because of this journal. I am living a different life, a life that is organized and meaningful and one I am proud of. Thank you, Lori!!", "author": "Jill" } },
+        { "type": "testimonial", "settings": { "quote": "The Plan to gro journal is everything I never knew I needed! As a wife, mother, and business owner I quickly went from just surviving, to truly thriving. The chaos of my thoughts are no longer bottled up in my head. I'm SO thankful I found this planner!!", "author": "Morgan" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

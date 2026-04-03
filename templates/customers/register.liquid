@@ -1,0 +1,90 @@
+<div class="account-page">
+  <div class="account-wrapper">
+    <!-- Decorative Side -->
+    <div class="account-hero">
+      <div class="account-hero-content">
+        <span class="account-hero-label">Join Us</span>
+        <h2 class="account-hero-title">Begin Your<br><span class="italic">Growth Journey</span></h2>
+        <p class="account-hero-text">Create an account to track your orders, save your favorites, and be the first to know about new releases.</p>
+      </div>
+      <div class="account-hero-overlay"></div>
+    </div>
+    
+    <!-- Form Side -->
+    <div class="account-form-wrapper">
+      <div class="account-form-inner">
+        <span class="account-form-label">Create Account</span>
+        <h1 class="account-title">Join the Community</h1>
+        <p class="account-subtitle-text">Start your journey with Plan to GRO</p>
+        
+        {%- form 'create_customer', class: 'account-form' -%}
+          {{ form.errors | default_errors }}
+          
+          <div class="account-field-row">
+            <div class="account-field">
+              <label for="FirstName" class="account-label">First Name</label>
+              <input 
+                type="text" 
+                name="customer[first_name]" 
+                id="FirstName" 
+                class="account-input"
+                autocomplete="given-name"
+                placeholder="First name"
+                required
+              >
+            </div>
+            
+            <div class="account-field">
+              <label for="LastName" class="account-label">Last Name</label>
+              <input 
+                type="text" 
+                name="customer[last_name]" 
+                id="LastName" 
+                class="account-input"
+                autocomplete="family-name"
+                placeholder="Last name"
+                required
+              >
+            </div>
+          </div>
+          
+          <div class="account-field">
+            <label for="Email" class="account-label">Email Address</label>
+            <input 
+              type="email" 
+              name="customer[email]" 
+              id="Email" 
+              class="account-input"
+              autocomplete="email"
+              autocapitalize="off"
+              placeholder="your@email.com"
+              required
+            >
+          </div>
+          
+          <div class="account-field">
+            <label for="CreatePassword" class="account-label">Password</label>
+            <input 
+              type="password" 
+              name="customer[password]" 
+              id="CreatePassword" 
+              class="account-input"
+              autocomplete="new-password"
+              placeholder="Create a password"
+              required
+            >
+          </div>
+          
+          <button type="submit" class="account-btn">
+            <span>Create Account</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="43" height="18" viewBox="0 0 43 18" fill="none"><path d="M0 9H42" stroke="currentColor"></path><path d="M33 18C33 10.5 42 9 42 9C42 9 33 7.5 33 0" stroke="currentColor" stroke-linejoin="round"></path></svg>
+          </button>
+          
+          <p class="account-switch">
+            Already have an account? <a href="{{ routes.account_login_url }}">Sign in</a>
+          </p>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>

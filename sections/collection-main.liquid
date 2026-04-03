@@ -1,0 +1,176 @@
+{%- comment -%}
+  Collection Main Section - Lori J. Smith Theme
+{%- endcomment -%}
+
+<section class="collection-section">
+  <div class="collection-container">
+    <header class="collection-header">
+      <h1 class="collection-title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="collection-description">{{ collection.description }}</div>
+      {%- endif -%}
+    </header>
+
+    {%- if collection.products.size > 0 -%}
+      <div class="collection-grid">
+        {%- for product in collection.products -%}
+          <div class="product-card">
+            <a href="{{ product.url }}" class="product-card__link">
+              <div class="product-card__image">
+                {%- if product.featured_image -%}
+                  <img 
+                    src="{{ product.featured_image | image_url: width: 400 }}" 
+                    alt="{{ product.featured_image.alt | default: product.title }}"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  <div class="product-card__placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                {%- endif -%}
+              </div>
+              <div class="product-card__info">
+                <h3 class="product-card__title">{{ product.title }}</h3>
+                <p class="product-card__price">{{ product.price | money }}</p>
+              </div>
+            </a>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="collection-pagination">
+          {{ paginate | default_pagination }}
+        </nav>
+      {%- endif -%}
+    {%- else -%}
+      <div class="collection-empty">
+        <p>No products found in this collection.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="collection-empty__link">Browse all products</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .collection-section {
+    padding: 60px 20px;
+    background-color: #FAF7F2;
+    min-height: 60vh;
+  }
+  
+  .collection-container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  
+  .collection-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .collection-title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 36px;
+    font-weight: 300;
+    color: #000;
+    margin-bottom: 16px;
+  }
+  
+  .collection-description {
+    font-family: var(--font-body, 'Josefin Sans', sans-serif);
+    font-size: 16px;
+    color: #6B7280;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 40px;
+  }
+  
+  .product-card__link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  
+  .product-card__image {
+    aspect-ratio: 4/5;
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  
+  .product-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .product-card:hover .product-card__image img {
+    transform: scale(1.05);
+  }
+  
+  .product-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #D1D5DB;
+  }
+  
+  .product-card__placeholder svg {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .product-card__title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 20px;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 8px;
+  }
+  
+  .product-card__price {
+    font-family: var(--font-body, 'Josefin Sans', sans-serif);
+    font-size: 16px;
+    color: #8B7355;
+    font-weight: 600;
+  }
+  
+  .collection-empty {
+    text-align: center;
+    padding: 80px 20px;
+  }
+  
+  .collection-empty p {
+    font-size: 18px;
+    color: #6B7280;
+    margin-bottom: 24px;
+  }
+  
+  .collection-empty__link {
+    color: #8B7355;
+    text-decoration: underline;
+  }
+  
+  .collection-pagination {
+    margin-top: 60px;
+    text-align: center;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection Main",
+  "settings": []
+}
+{% endschema %}

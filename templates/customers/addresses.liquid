@@ -1,0 +1,116 @@
+<div class="account-page">
+  <div class="account-container">
+    <h1 class="account-title">My Addresses</h1>
+    
+    <a href="{{ routes.account_url }}" class="account-back">&larr; Back to Account</a>
+    
+    <!-- Add New Address -->
+    <div class="account-section">
+      <h2 class="account-section-title">Add New Address</h2>
+      
+      {%- form 'customer_address', customer.new_address, class: 'account-form' -%}
+        <div class="account-form-grid">
+          <div class="account-field">
+            <label for="AddressFirstName" class="account-label">First Name</label>
+            <input type="text" name="address[first_name]" id="AddressFirstName" class="account-input" autocomplete="given-name">
+          </div>
+          
+          <div class="account-field">
+            <label for="AddressLastName" class="account-label">Last Name</label>
+            <input type="text" name="address[last_name]" id="AddressLastName" class="account-input" autocomplete="family-name">
+          </div>
+        </div>
+        
+        <div class="account-field">
+          <label for="AddressCompany" class="account-label">Company (optional)</label>
+          <input type="text" name="address[company]" id="AddressCompany" class="account-input" autocomplete="organization">
+        </div>
+        
+        <div class="account-field">
+          <label for="AddressAddress1" class="account-label">Address</label>
+          <input type="text" name="address[address1]" id="AddressAddress1" class="account-input" autocomplete="address-line1">
+        </div>
+        
+        <div class="account-field">
+          <label for="AddressAddress2" class="account-label">Apartment, suite, etc. (optional)</label>
+          <input type="text" name="address[address2]" id="AddressAddress2" class="account-input" autocomplete="address-line2">
+        </div>
+        
+        <div class="account-form-grid">
+          <div class="account-field">
+            <label for="AddressCity" class="account-label">City</label>
+            <input type="text" name="address[city]" id="AddressCity" class="account-input" autocomplete="address-level2">
+          </div>
+          
+          <div class="account-field">
+            <label for="AddressCountry" class="account-label">Country/Region</label>
+            <select name="address[country]" id="AddressCountry" class="account-input account-select" data-default="{{ form.country }}">
+              {{ all_country_option_tags }}
+            </select>
+          </div>
+        </div>
+        
+        <div class="account-form-grid">
+          <div class="account-field">
+            <label for="AddressProvince" class="account-label">Province/State</label>
+            <select name="address[province]" id="AddressProvince" class="account-input account-select" data-default="{{ form.province }}"></select>
+          </div>
+          
+          <div class="account-field">
+            <label for="AddressZip" class="account-label">Postal/ZIP Code</label>
+            <input type="text" name="address[zip]" id="AddressZip" class="account-input" autocomplete="postal-code">
+          </div>
+        </div>
+        
+        <div class="account-field">
+          <label for="AddressPhone" class="account-label">Phone (optional)</label>
+          <input type="tel" name="address[phone]" id="AddressPhone" class="account-input" autocomplete="tel">
+        </div>
+        
+        <div class="account-checkbox">
+          <input type="checkbox" name="address[default]" id="AddressDefault" value="1">
+          <label for="AddressDefault">Set as default address</label>
+        </div>
+        
+        <button type="submit" class="account-btn">Add Address</button>
+      {%- endform -%}
+    </div>
+    
+    <!-- Existing Addresses -->
+    {%- if customer.addresses.size > 0 -%}
+      <div class="account-section">
+        <h2 class="account-section-title">Your Addresses</h2>
+        
+        <div class="account-addresses-grid">
+          {%- for address in customer.addresses -%}
+            <div class="account-address-card">
+              {%- if address == customer.default_address -%}
+                <span class="account-address-default">Default</span>
+              {%- endif -%}
+              
+              <address>
+                {{ address | format_address }}
+              </address>
+              
+              <div class="account-address-actions">
+                <a href="{{ routes.account_addresses_url }}?view=edit&id={{ address.id }}">Edit</a>
+                <button type="button" onclick="Shopify.CustomerAddress.destroy({{ address.id }}, 'Are you sure?');">Delete</button>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  // Initialize country/province selectors
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Shopify !== 'undefined' && Shopify.CountryProvinceSelector) {
+      new Shopify.CountryProvinceSelector('AddressCountry', 'AddressProvince', {
+        hideElement: 'AddressProvinceContainer'
+      });
+    }
+  });
+</script>

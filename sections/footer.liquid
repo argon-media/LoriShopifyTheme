@@ -1,0 +1,493 @@
+{%- comment -%}
+  Footer Section - Lori J. Smith Theme
+  Structure:
+  1. Bio & Navigation Section (3 columns)
+  2. Tan Newsletter Band
+  3. Instagram Section (tan background with text left, grid right)
+  4. Copyright Bar
+{%- endcomment -%}
+
+<footer class="site-footer">
+  <!-- 1. BIO & NAVIGATION SECTION -->
+  <div class="footer-main">
+    <div class="footer-grid">
+      
+      <!-- Left: GET AROUND - Navigation -->
+      <div class="footer-nav">
+        <h4 class="footer-nav-title">{{ section.settings.nav_title | default: 'GET AROUND' }}</h4>
+        <div class="footer-nav-links">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'nav_link' -%}
+              <a href="{{ block.settings.link_url }}" class="footer-nav-link" {{ block.shopify_attributes }}>
+                {{ block.settings.link_text }}
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+          
+          {%- assign nav_link_count = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'nav_link' -%}
+              {%- assign nav_link_count = nav_link_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+          
+          {%- if nav_link_count == 0 -%}
+            <a href="https://lorijsmith.com/" class="footer-nav-link">Home</a>
+            <a href="https://lorijsmith.com/learn-with-lori/" class="footer-nav-link">Learn With Lori</a>
+            <a href="https://lorijsmith.com/about/" class="footer-nav-link">About</a>
+            <a href="https://lorijsmith.com/contact/" class="footer-nav-link">Get In Touch</a>
+            <a href="https://lorijsmith.com/the-ljs-blog/" class="footer-nav-link">The Blog</a>
+            <a href="https://lorijsmith.com/my-account/" class="footer-nav-link">My Account</a>
+            <a href="https://lorijsmith.com/the-shop/" class="footer-nav-link">The Shop</a>
+            <a href="https://lorijsmith.com/faqs/" class="footer-nav-link">FAQs</a>
+          {%- endif -%}
+        </div>
+        <a href="{{ section.settings.student_login_url | default: '/account/login' }}" class="footer-student-btn">
+          {{ section.settings.student_login_text | default: 'STUDENT LOGIN' }}
+        </a>
+      </div>
+
+      <!-- Middle: BIO SECTION -->
+      <div class="footer-bio">
+        <span class="footer-bio-greeting font-script">{{ section.settings.bio_greeting | default: 'hey there!' }}</span>
+        <h4 class="footer-bio-name">{{ section.settings.bio_name | default: "I'm Lori J Smith" }}</h4>
+        <p class="footer-bio-text">
+          {{ section.settings.bio_text | default: "Homebody, & yet somehow also aspiring frequent flyer, midwest based online coach & educator, wife, mom, lolo & 'mama' to two golden-doodles, obsessive researcher, lifelong student. I'm glad you're here." }}
+        </p>
+        
+        <!-- Social Icons -->
+        <div class="footer-social">
+          {%- if section.settings.social_tiktok != blank -%}
+            <a href="{{ section.settings.social_tiktok }}" class="footer-social-link" aria-label="TikTok">
+              <svg class="footer-social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+              </svg>
+            </a>
+          {%- else -%}
+            <a href="#" class="footer-social-link" aria-label="TikTok">
+              <svg class="footer-social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+              </svg>
+            </a>
+          {%- endif -%}
+          
+          {%- if section.settings.social_facebook != blank -%}
+            <a href="{{ section.settings.social_facebook }}" class="footer-social-link" aria-label="Facebook">
+              <svg class="footer-social-icon" viewBox="0 0 24 24">
+                <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.312h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+              </svg>
+            </a>
+          {%- else -%}
+            <a href="#" class="footer-social-link" aria-label="Facebook">
+              <svg class="footer-social-icon" viewBox="0 0 24 24">
+                <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.312h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+              </svg>
+            </a>
+          {%- endif -%}
+          
+          {%- if section.settings.social_instagram != blank -%}
+            <a href="{{ section.settings.social_instagram }}" class="footer-social-link" aria-label="Instagram">
+              <svg class="footer-social-icon" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.56.216.96.474 1.38.894.42.42.678.82.894 1.38.163.422.358 1.057.412 2.227.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.249 1.805-.412 2.227-.216.56-.474.96-.894 1.38-.42.42-.82.678-1.38.894-.422.163-1.057.358-2.227.412-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.805-.249-2.227-.412-.56-.216-.96-.474-1.38-.894-.42-.42-.678-.82-.894-1.38-.163-.422-.358-1.057-.412-2.227-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.054-1.17.249-1.805.412-2.227.216-.56.474-.96.894-1.38.42-.42.82-.678 1.38-.894.422-.163 1.057-.358 2.227-.412 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.277.057-2.148.258-2.911.554-.788.306-1.457.716-2.122 1.382-.666.666-1.076 1.334-1.382 2.122-.296.763-.497 1.634-.554 2.911-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.057 1.277.258 2.148.554 2.911.306.788.716 1.457 1.382 2.122.666.666 1.334 1.076 2.122 1.382.763.296 1.634.497 2.911.554 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.277-.057 2.148-.258 2.911-.554.788-.306 1.457-.716 2.122-1.382.666-.666 1.076-1.334 1.382-2.122.296-.763.497-1.634.554-2.911.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.057-1.277-.258-2.148-.554-2.911-.306-.788-.716-1.457-1.382-2.122-.666-.666-1.334-1.076-2.122-1.382-.763-.296-1.634-.497-2.911-.554-1.28-.058-1.688-.072-4.947-.072z"/>
+                <path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-10.845c-.796 0-1.441.645-1.441 1.441s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.441-1.441-1.441z"/>
+              </svg>
+            </a>
+          {%- else -%}
+            <a href="#" class="footer-social-link" aria-label="Instagram">
+              <svg class="footer-social-icon" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.56.216.96.474 1.38.894.42.42.678.82.894 1.38.163.422.358 1.057.412 2.227.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.249 1.805-.412 2.227-.216.56-.474.96-.894 1.38-.42.42-.82.678-1.38.894-.422.163-1.057.358-2.227.412-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.805-.249-2.227-.412-.56-.216-.96-.474-1.38-.894-.42-.42-.678-.82-.894-1.38-.163-.422-.358-1.057-.412-2.227-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.054-1.17.249-1.805.412-2.227.216-.56.474-.96.894-1.38.42-.42.82-.678 1.38-.894.422-.163 1.057-.358 2.227-.412 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.277.057-2.148.258-2.911.554-.788.306-1.457.716-2.122 1.382-.666.666-1.076 1.334-1.382 2.122-.296.763-.497 1.634-.554 2.911-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.057 1.277.258 2.148.554 2.911.306.788.716 1.457 1.382 2.122.666.666 1.334 1.076 2.122 1.382.763.296 1.634.497 2.911.554 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.277-.057 2.148-.258 2.911-.554.788-.306 1.457-.716 2.122-1.382.666-.666 1.076-1.334 1.382-2.122.296-.763.497-1.634.554-2.911.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.057-1.277-.258-2.148-.554-2.911-.306-.788-.716-1.457-1.382-2.122-.666-.666-1.334-1.076-2.122-1.382-.763-.296-1.634-.497-2.911-.554-1.28-.058-1.688-.072-4.947-.072z"/>
+                <path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-10.845c-.796 0-1.441.645-1.441 1.441s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.441-1.441-1.441z"/>
+              </svg>
+            </a>
+          {%- endif -%}
+          
+          {%- if section.settings.social_pinterest != blank -%}
+            <a href="{{ section.settings.social_pinterest }}" class="footer-social-link" aria-label="Pinterest">
+              <svg class="footer-social-icon" viewBox="0 0 24 24">
+                <path d="M12.017 0C5.396 0 0 5.397 0 12.017c0 5.078 3.158 9.412 7.618 11.162-.103-.949-.197-2.403.041-3.438.214-.937 1.382-5.962 1.382-5.962s-.353-.706-.353-1.747c0-1.635.948-2.856 2.125-2.856 1.002 0 1.485.753 1.485 1.656 0 .1.001.211-.001.324-.007.962-.64 2.399-.972 3.73-.277 1.117.545 2.028 1.646 2.028 1.977 0 3.493-2.083 3.493-5.093 0-2.663-1.912-4.524-4.643-4.524-3.163 0-5.021 2.373-5.021 4.825 0 .955.367 1.98.827 2.535.09.11.103.207.076.319l-.326 1.267c-.053.204-.173.248-.399.143-1.487-.691-2.417-2.863-2.417-4.603 0-3.744 2.723-7.18 7.838-7.18 4.114 0 7.311 2.93 7.311 6.85 0 4.088-2.578 7.378-6.154 7.378-1.201 0-2.33-.624-2.716-1.36l-.738 2.81c-.267 1.018-.992 2.289-1.478 3.076 1.112.344 2.294.531 3.52.531 6.621 0 12.017-5.396 12.017-12.017C24.034 5.397 18.638 0 12.017 0z"/>
+              </svg>
+            </a>
+          {%- else -%}
+            <a href="#" class="footer-social-link" aria-label="Pinterest">
+              <svg class="footer-social-icon" viewBox="0 0 24 24">
+                <path d="M12.017 0C5.396 0 0 5.397 0 12.017c0 5.078 3.158 9.412 7.618 11.162-.103-.949-.197-2.403.041-3.438.214-.937 1.382-5.962 1.382-5.962s-.353-.706-.353-1.747c0-1.635.948-2.856 2.125-2.856 1.002 0 1.485.753 1.485 1.656 0 .1.001.211-.001.324-.007.962-.64 2.399-.972 3.73-.277 1.117.545 2.028 1.646 2.028 1.977 0 3.493-2.083 3.493-5.093 0-2.663-1.912-4.524-4.643-4.524-3.163 0-5.021 2.373-5.021 4.825 0 .955.367 1.98.827 2.535.09.11.103.207.076.319l-.326 1.267c-.053.204-.173.248-.399.143-1.487-.691-2.417-2.863-2.417-4.603 0-3.744 2.723-7.18 7.838-7.18 4.114 0 7.311 2.93 7.311 6.85 0 4.088-2.578 7.378-6.154 7.378-1.201 0-2.33-.624-2.716-1.36l-.738 2.81c-.267 1.018-.992 2.289-1.478 3.076 1.112.344 2.294.531 3.52.531 6.621 0 12.017-5.396 12.017-12.017C24.034 5.397 18.638 0 12.017 0z"/>
+              </svg>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Right: Portrait Square -->
+      <div class="footer-portrait">
+        <div class="footer-portrait-image">
+          {%- if section.settings.portrait_image -%}
+            <img 
+              src="{{ section.settings.portrait_image | image_url: width: 680 }}" 
+              alt="{{ section.settings.bio_name | default: 'Lori J Smith' }}"
+            >
+          {%- else -%}
+            <img 
+              src="https://lorijsmith.com/wp-content/uploads/2023/03/IMG_1725_Facetune_01-11-2021-09-16-13.jpg" 
+              alt="Lori J Smith Portrait"
+            >
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. TAN NEWSLETTER BAND -->
+  <div class="footer-newsletter">
+    <div class="footer-newsletter-inner">
+      <p class="footer-newsletter-label">subscribe to the</p>
+      <h2 class="footer-newsletter-title font-script">{{ section.settings.newsletter_title | default: 'Weekly Bookmark' }}</h2>
+      <p class="footer-newsletter-text">
+        {{ section.settings.newsletter_description | default: 'A simple weekly touchpoint to help you build a beautiful life one rhythm, one thought, one week at a time.' }}
+      </p>
+      
+      <form
+        action="https://lorijsmith.us5.list-manage.com/subscribe/post?u=ce5b25d7e73f18ff0a5c2ad81&amp;id=55ace7222c&amp;f_id=00a2a3e6f0"
+        method="post"
+        target="_blank"
+        class="footer-newsletter-form"
+        novalidate
+      >
+        <div class="footer-newsletter-name">
+          <input 
+            type="text" 
+            name="FNAME"
+            placeholder="{{ section.settings.name_placeholder | default: 'Name' }}"
+            class="footer-newsletter-input"
+          >
+        </div>
+        <div class="footer-newsletter-email">
+          <input 
+            type="email" 
+            name="EMAIL"
+            placeholder="{{ section.settings.email_placeholder | default: 'Email' }}"
+            class="footer-newsletter-input"
+            required
+          >
+        </div>
+        <div aria-hidden="true" style="position:absolute;left:-5000px;">
+          <input type="text" name="b_ce5b25d7e73f18ff0a5c2ad81_55ace7222c" tabindex="-1" value="">
+        </div>
+        <div class="footer-newsletter-submit">
+          <button type="submit" class="footer-newsletter-btn">
+            {{ section.settings.newsletter_button | default: 'Yes, I Want the Weekly Bookmark!' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. INSTAGRAM SECTION (Below Newsletter) -->
+  <div class="footer-instagram">
+    <div class="footer-instagram-content">
+      <!-- Left: Text with Segatha script font -->
+      <div class="footer-instagram-text">
+        <h2 class="footer-instagram-heading font-script">Come say hi<br>on the 'gram!</h2>
+        <a href="{{ section.settings.instagram_url | default: 'https://www.instagram.com/lorijsmithco/' }}" target="_blank" class="footer-instagram-handle">
+          {{ section.settings.instagram_handle | default: '@lorijsmithco' }}
+        </a>
+      </div>
+      
+      <!-- Right: Instagram Grid -->
+      <div class="footer-instagram-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'instagram_post' -%}
+            <a href="{{ block.settings.post_url | default: '#' }}" target="_blank" rel="noopener nofollow" class="footer-instagram-item" {{ block.shopify_attributes }}>
+              {%- if block.settings.post_image -%}
+                <img src="{{ block.settings.post_image | image_url: width: 400 }}" alt="Instagram post" loading="lazy">
+              {%- else -%}
+                <img src="{{ block.settings.post_image_url | default: 'https://placehold.co/200x200/EBC199/ffffff?text=IG' }}" alt="Instagram post" loading="lazy">
+              {%- endif -%}
+              {%- if block.settings.is_video -%}
+                <svg class="footer-instagram-play" viewBox="0 0 448 512" aria-hidden="true">
+                  <path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/>
+                </svg>
+              {%- endif -%}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+        
+        {%- comment %} Show placeholder posts if none configured {% endcomment -%}
+        {%- assign instagram_post_count = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'instagram_post' -%}
+            {%- assign instagram_post_count = instagram_post_count | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+        
+        {%- if instagram_post_count == 0 -%}
+          <a href="https://www.instagram.com/lorijsmithco/" target="_blank" rel="noopener nofollow" class="footer-instagram-item">
+            <img src="https://lorijsmith.com/wp-content/uploads/sb-instagram-feed-images/279251632_382094840469024_1886711949968432510_nfull.jpg" alt="Instagram post" loading="lazy">
+            <svg class="footer-instagram-play" viewBox="0 0 448 512" aria-hidden="true">
+              <path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/lorijsmithco/" target="_blank" rel="noopener nofollow" class="footer-instagram-item">
+            <img src="https://lorijsmith.com/wp-content/uploads/sb-instagram-feed-images/275531287_534239611344707_4821377671136136193_nfull.jpg" alt="Instagram post" loading="lazy">
+            <svg class="footer-instagram-play" viewBox="0 0 448 512" aria-hidden="true">
+              <path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/lorijsmithco/" target="_blank" rel="noopener nofollow" class="footer-instagram-item">
+            <img src="https://lorijsmith.com/wp-content/uploads/sb-instagram-feed-images/275406424_450358230173759_2584886778098922557_nfull.jpg" alt="Instagram post" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/lorijsmithco/" target="_blank" rel="noopener nofollow" class="footer-instagram-item">
+            <img src="https://lorijsmith.com/wp-content/uploads/sb-instagram-feed-images/275353676_120619177211724_8231397932934450014_nfull.jpg" alt="Instagram post" loading="lazy">
+            <svg class="footer-instagram-play" viewBox="0 0 448 512" aria-hidden="true">
+              <path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/lorijsmithco/" target="_blank" rel="noopener nofollow" class="footer-instagram-item">
+            <img src="https://lorijsmith.com/wp-content/uploads/sb-instagram-feed-images/275133625_398563505072951_8368333006010608814_nfull.jpg" alt="Instagram post" loading="lazy">
+            <svg class="footer-instagram-play" viewBox="0 0 448 512" aria-hidden="true">
+              <path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/lorijsmithco/" target="_blank" rel="noopener nofollow" class="footer-instagram-item">
+            <img src="https://lorijsmith.com/wp-content/uploads/sb-instagram-feed-images/275181426_720153625649271_3790138145786074895_nfull.jpg" alt="Instagram post" loading="lazy">
+            <svg class="footer-instagram-play" viewBox="0 0 448 512" aria-hidden="true">
+              <path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/>
+            </svg>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. COPYRIGHT BAR -->
+  <div class="footer-copyright">
+    <div class="footer-copyright-inner">
+      <span class="footer-copyright-text">{{ section.settings.copyright_text | default: 'Copyright Lori J. Smith LLC' }}</span>
+      <span class="footer-copyright-divider">|</span>
+      <a href="{{ section.settings.terms_url | default: 'https://lorijsmith.com/terms-of-service/' }}" class="footer-copyright-link">{{ section.settings.terms_text | default: 'Terms' }}</a>
+      <span class="footer-copyright-divider">|</span>
+      <a href="{{ section.settings.privacy_url | default: 'https://lorijsmith.com/privacy-policy/' }}" class="footer-copyright-link">{{ section.settings.privacy_text | default: 'Privacy' }}</a>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "div",
+  "class": "section-footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "text",
+      "id": "nav_title",
+      "label": "Navigation Title",
+      "default": "GET AROUND"
+    },
+    {
+      "type": "text",
+      "id": "student_login_text",
+      "label": "Student Login Button Text",
+      "default": "STUDENT LOGIN"
+    },
+    {
+      "type": "url",
+      "id": "student_login_url",
+      "label": "Student Login Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Bio Section"
+    },
+    {
+      "type": "text",
+      "id": "bio_greeting",
+      "label": "Bio Greeting",
+      "default": "hey there!"
+    },
+    {
+      "type": "text",
+      "id": "bio_name",
+      "label": "Bio Name",
+      "default": "I'm Lori J Smith"
+    },
+    {
+      "type": "textarea",
+      "id": "bio_text",
+      "label": "Bio Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "portrait_image",
+      "label": "Portrait Image"
+    },
+    {
+      "type": "header",
+      "content": "Social Media"
+    },
+    {
+      "type": "url",
+      "id": "social_tiktok",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "social_facebook",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "social_pinterest",
+      "label": "Pinterest URL"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter Title",
+      "default": "Weekly Bookmark"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_description",
+      "label": "Newsletter Description"
+    },
+    {
+      "type": "text",
+      "id": "name_placeholder",
+      "label": "Name Placeholder",
+      "default": "YOUR NAME"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email Placeholder",
+      "default": "YOUR EMAIL"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button",
+      "label": "Newsletter Button Text",
+      "default": "Yes, Count Me In!"
+    },
+    {
+      "type": "header",
+      "content": "Instagram Section"
+    },
+    {
+      "type": "text",
+      "id": "instagram_handle",
+      "label": "Instagram Handle",
+      "default": "@lorijsmithco"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram Profile URL"
+    },
+    {
+      "type": "header",
+      "content": "Copyright & Legal"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "Copyright Lori J. Smith LLC"
+    },
+    {
+      "type": "text",
+      "id": "terms_text",
+      "label": "Terms Link Text",
+      "default": "Terms"
+    },
+    {
+      "type": "url",
+      "id": "terms_url",
+      "label": "Terms URL"
+    },
+    {
+      "type": "text",
+      "id": "privacy_text",
+      "label": "Privacy Link Text",
+      "default": "Privacy"
+    },
+    {
+      "type": "url",
+      "id": "privacy_url",
+      "label": "Privacy URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_link",
+      "name": "Navigation Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "Link"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    },
+    {
+      "type": "instagram_post",
+      "name": "Instagram Post",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "post_image",
+          "label": "Post Image"
+        },
+        {
+          "type": "text",
+          "id": "post_image_url",
+          "label": "Post Image URL (if no image uploaded)"
+        },
+        {
+          "type": "url",
+          "id": "post_url",
+          "label": "Post URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_video",
+          "label": "Is Video (show play icon)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "nav_link", "settings": { "link_text": "Home", "link_url": "https://lorijsmith.com/" } },
+        { "type": "nav_link", "settings": { "link_text": "Learn With Lori", "link_url": "https://lorijsmith.com/learn-with-lori/" } },
+        { "type": "nav_link", "settings": { "link_text": "About", "link_url": "https://lorijsmith.com/about/" } },
+        { "type": "nav_link", "settings": { "link_text": "Get In Touch", "link_url": "https://lorijsmith.com/contact/" } },
+        { "type": "nav_link", "settings": { "link_text": "The Blog", "link_url": "https://lorijsmith.com/the-ljs-blog/" } },
+        { "type": "nav_link", "settings": { "link_text": "My Account", "link_url": "https://lorijsmith.com/my-account/" } },
+        { "type": "nav_link", "settings": { "link_text": "The Shop", "link_url": "https://lorijsmith.com/the-shop/" } },
+        { "type": "nav_link", "settings": { "link_text": "FAQs", "link_url": "https://lorijsmith.com/faqs/" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

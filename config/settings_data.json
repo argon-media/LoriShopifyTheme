@@ -1,0 +1,18 @@
+{
+  "current": {
+    "color_primary": "#e4b485",
+    "color_secondary": "#373737",
+    "color_accent": "#BFA99C",
+    "color_background": "#ffffff",
+    "color_text": "#2D3748",
+    "color_button_cart": "#DC3545",
+    "enable_first_free": true,
+    "shipping_only_price": "9.97",
+    "enable_subscription": true,
+    "subscription_discount": "15",
+    "social_instagram": "https://instagram.com/lorijsmithco",
+    "social_facebook": "https://facebook.com/lorijsmithco",
+    "social_pinterest": "https://pinterest.com/lorijsmithco",
+    "social_tiktok": "https://tiktok.com/@lorijsmithco"
+  }
+}

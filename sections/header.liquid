@@ -1,0 +1,377 @@
+{%- comment -%}
+  Header Section - Lori J. Smith Theme
+  Based on React Header component with dropdown menus
+{%- endcomment -%}
+
+<header class="site-header">
+  <div class="header-container">
+    <!-- Logo - Far Left -->
+    <a href="/" class="header-logo">
+      {%- if section.settings.logo -%}
+        <img 
+          src="{{ section.settings.logo | image_url: width: 200 }}" 
+          alt="{{ shop.name }}"
+        >
+      {%- else -%}
+        <img 
+          src="https://lorijsmith.com/wp-content/uploads/2023/03/admin-ajax-removebg-preview-e1704729907616.png" 
+          alt="{{ shop.name }}"
+        >
+      {%- endif -%}
+    </a>
+
+    <!-- Desktop Navigation & Actions - Grouped Right -->
+    <div class="header-right">
+      <!-- Primary Nav Links -->
+      <nav class="header-nav">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'nav_link' -%}
+            <a href="{{ block.settings.link_url }}" class="header-nav-link" {{ block.shopify_attributes }}>
+              {{ block.settings.link_text }}
+            </a>
+          {%- elsif block.type == 'nav_dropdown' -%}
+            <div class="header-nav-dropdown" {{ block.shopify_attributes }}>
+              <a href="{{ block.settings.dropdown_main_url | default: '#' }}" class="header-nav-dropdown-trigger">
+                <span>{{ block.settings.dropdown_title }}</span>
+                <svg class="dropdown-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
+              <div class="header-nav-dropdown-content">
+                {%- if block.settings.dropdown_link1_text != blank -%}
+                  <a href="{{ block.settings.dropdown_link1_url }}" class="header-nav-dropdown-link">
+                    {{ block.settings.dropdown_link1_text }}
+                  </a>
+                {%- endif -%}
+                {%- if block.settings.dropdown_link2_text != blank -%}
+                  <a href="{{ block.settings.dropdown_link2_url }}" class="header-nav-dropdown-link">
+                    {{ block.settings.dropdown_link2_text }}
+                  </a>
+                {%- endif -%}
+                {%- if block.settings.dropdown_link3_text != blank -%}
+                  <a href="{{ block.settings.dropdown_link3_url }}" class="header-nav-dropdown-link">
+                    {{ block.settings.dropdown_link3_text }}
+                  </a>
+                {%- endif -%}
+                {%- if block.settings.dropdown_link4_text != blank -%}
+                  <a href="{{ block.settings.dropdown_link4_url }}" class="header-nav-dropdown-link">
+                    {{ block.settings.dropdown_link4_text }}
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+        
+        {%- assign nav_count = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- assign nav_count = nav_count | plus: 1 -%}
+        {%- endfor -%}
+        
+        {%- if nav_count == 0 -%}
+          <a href="https://lorijsmith.com/about/" class="header-nav-link">About</a>
+          <a href="https://lorijsmith.com/the-ljs-blog/" class="header-nav-link">The LJS Blog</a>
+          <div class="header-nav-dropdown">
+            <a href="https://lorijsmith.com/learn-with-lori/" class="header-nav-dropdown-trigger">
+              <span>Learn With Lori</span>
+              <svg class="dropdown-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+            <div class="header-nav-dropdown-content">
+              <a href="https://lorijsmith.com/learn-with-lori/one-to-one-coaching/" class="header-nav-dropdown-link">One to One Coaching</a>
+            </div>
+          </div>
+          <div class="header-nav-dropdown">
+            <a href="https://lorijsmith.com/the-shop/" class="header-nav-dropdown-trigger">
+              <span>The Shop</span>
+              <svg class="dropdown-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+            <div class="header-nav-dropdown-content">
+              <a href="/" class="header-nav-dropdown-link">Journal Planner</a>
+            </div>
+          </div>
+        {%- endif -%}
+      </nav>
+
+      <!-- Utility Icons -->
+      <div class="header-icons">
+        {%- if section.settings.show_account_icon -%}
+          <a href="/account" class="header-icon-btn" aria-label="Account">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </a>
+        {%- endif -%}
+        
+        {%- if section.settings.show_cart_icon -%}
+          <a href="/cart" class="header-icon-btn header-cart-btn" aria-label="Cart">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span class="header-cart-count" id="cartCount">{{ cart.item_count }}</span>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <!-- Login Button -->
+      {%- if section.settings.show_cta_button -%}
+        <a href="{{ section.settings.cta_button_url | default: '/account/login' }}" class="header-cta-btn">
+          {{ section.settings.cta_button_text | default: 'Student Login' }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <!-- Mobile Icons & Menu Trigger -->
+    <div class="header-mobile-actions">
+      {%- if section.settings.show_account_icon -%}
+        <a href="/account" class="header-icon-btn header-icon-mobile" aria-label="Account">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </a>
+      {%- endif -%}
+      
+      {%- if section.settings.show_cart_icon -%}
+        <a href="/cart" class="header-icon-btn header-cart-btn header-icon-mobile" aria-label="Cart">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          <span class="header-cart-count" id="cartCountMobile">{{ cart.item_count }}</span>
+        </a>
+      {%- endif -%}
+      
+      <button class="header-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+  
+  <nav class="mobile-menu-nav">
+    {%- assign mobile_nav_count = 0 -%}
+    {%- for block in section.blocks -%}
+      {%- assign mobile_nav_count = mobile_nav_count | plus: 1 -%}
+    {%- endfor -%}
+    
+    {%- if mobile_nav_count > 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'nav_link' -%}
+          <a href="{{ block.settings.link_url }}" class="mobile-menu-link">
+            {{ block.settings.link_text }}
+          </a>
+        {%- elsif block.type == 'nav_dropdown' -%}
+          <div class="mobile-menu-dropdown">
+            <a href="{{ block.settings.dropdown_main_url | default: '#' }}" class="mobile-menu-link mobile-menu-dropdown-title">
+              {{ block.settings.dropdown_title }}
+            </a>
+            <div class="mobile-menu-dropdown-items">
+              {%- if block.settings.dropdown_link1_text != blank -%}
+                <a href="{{ block.settings.dropdown_link1_url }}" class="mobile-menu-sublink">
+                  {{ block.settings.dropdown_link1_text }}
+                </a>
+              {%- endif -%}
+              {%- if block.settings.dropdown_link2_text != blank -%}
+                <a href="{{ block.settings.dropdown_link2_url }}" class="mobile-menu-sublink">
+                  {{ block.settings.dropdown_link2_text }}
+                </a>
+              {%- endif -%}
+              {%- if block.settings.dropdown_link3_text != blank -%}
+                <a href="{{ block.settings.dropdown_link3_url }}" class="mobile-menu-sublink">
+                  {{ block.settings.dropdown_link3_text }}
+                </a>
+              {%- endif -%}
+              {%- if block.settings.dropdown_link4_text != blank -%}
+                <a href="{{ block.settings.dropdown_link4_url }}" class="mobile-menu-sublink">
+                  {{ block.settings.dropdown_link4_text }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      <a href="https://lorijsmith.com/about/" class="mobile-menu-link">About</a>
+      <a href="https://lorijsmith.com/the-ljs-blog/" class="mobile-menu-link">The LJS Blog</a>
+      <a href="https://lorijsmith.com/learn-with-lori/" class="mobile-menu-link">Learn With Lori</a>
+      <a href="https://lorijsmith.com/the-shop/" class="mobile-menu-link">The Shop</a>
+    {%- endif -%}
+  </nav>
+  
+  {%- if section.settings.show_cta_button -%}
+    <a href="{{ section.settings.cta_button_url | default: '/account/login' }}" class="mobile-menu-cta">
+      {{ section.settings.cta_button_text | default: 'Student Login' }}
+    </a>
+  {%- endif -%}
+</div>
+
+<!-- Mobile menu JavaScript is in theme.js -->
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "div",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account_icon",
+      "label": "Show Account Icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_icon",
+      "label": "Show Cart Icon",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "CTA Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta_button",
+      "label": "Show CTA Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "CTA Button Text",
+      "default": "Student Login"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_url",
+      "label": "CTA Button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_link",
+      "name": "Navigation Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "Link"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    },
+    {
+      "type": "nav_dropdown",
+      "name": "Dropdown Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "dropdown_title",
+          "label": "Menu Title",
+          "default": "Menu"
+        },
+        {
+          "type": "url",
+          "id": "dropdown_main_url",
+          "label": "Main Title Link URL",
+          "info": "Link for the main dropdown title"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown Link 1"
+        },
+        {
+          "type": "text",
+          "id": "dropdown_link1_text",
+          "label": "Link 1 Text"
+        },
+        {
+          "type": "url",
+          "id": "dropdown_link1_url",
+          "label": "Link 1 URL"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown Link 2"
+        },
+        {
+          "type": "text",
+          "id": "dropdown_link2_text",
+          "label": "Link 2 Text"
+        },
+        {
+          "type": "url",
+          "id": "dropdown_link2_url",
+          "label": "Link 2 URL"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown Link 3"
+        },
+        {
+          "type": "text",
+          "id": "dropdown_link3_text",
+          "label": "Link 3 Text"
+        },
+        {
+          "type": "url",
+          "id": "dropdown_link3_url",
+          "label": "Link 3 URL"
+        },
+        {
+          "type": "header",
+          "content": "Dropdown Link 4"
+        },
+        {
+          "type": "text",
+          "id": "dropdown_link4_text",
+          "label": "Link 4 Text"
+        },
+        {
+          "type": "url",
+          "id": "dropdown_link4_url",
+          "label": "Link 4 URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header",
+      "blocks": [
+        { "type": "nav_link", "settings": { "link_text": "About", "link_url": "https://lorijsmith.com/about/" } },
+        { "type": "nav_link", "settings": { "link_text": "The LJS Blog", "link_url": "https://lorijsmith.com/the-ljs-blog/" } },
+        { "type": "nav_dropdown", "settings": { "dropdown_title": "Learn With Lori", "dropdown_main_url": "https://lorijsmith.com/learn-with-lori/", "dropdown_link1_text": "One to One Coaching", "dropdown_link1_url": "https://lorijsmith.com/learn-with-lori/one-to-one-coaching/" } },
+        { "type": "nav_dropdown", "settings": { "dropdown_title": "The Shop", "dropdown_main_url": "https://lorijsmith.com/the-shop/", "dropdown_link1_text": "Journal Planner", "dropdown_link1_url": "/" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

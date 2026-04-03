@@ -1,0 +1,70 @@
+{%- comment -%}
+  Meta Tags Snippet
+{%- endcomment -%}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="{% if template.name == 'product' %}product{% else %}website{% endif %}">
+<meta property="og:title" content="{{ page_title | escape }}">
+{%- if page_description -%}
+  <meta property="og:description" content="{{ page_description | escape }}">
+{%- endif -%}
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:site_name" content="{{ shop.name }}">
+
+{%- if template.name == 'product' -%}
+  {%- if product.featured_image -%}
+    <meta property="og:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="1200">
+  {%- endif -%}
+  <meta property="product:price:amount" content="{{ product.price | money_without_currency }}">
+  <meta property="product:price:currency" content="{{ shop.currency }}">
+{%- elsif page_image -%}
+  <meta property="og:image" content="https:{{ page_image | image_url: width: 1200 }}">
+{%- endif -%}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page_title | escape }}">
+{%- if page_description -%}
+  <meta name="twitter:description" content="{{ page_description | escape }}">
+{%- endif -%}
+
+{%- if template.name == 'product' and product.featured_image -%}
+  <meta name="twitter:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">
+{%- elsif page_image -%}
+  <meta name="twitter:image" content="https:{{ page_image | image_url: width: 1200 }}">
+{%- endif -%}
+
+<!-- Schema.org for Product -->
+{%- if template.name == 'product' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "image": [
+        {%- for image in product.images limit: 5 -%}
+          "https:{{ image | image_url: width: 1200 }}"{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ],
+      "description": {{ product.description | strip_html | json }},
+      "sku": {{ product.selected_or_first_available_variant.sku | json }},
+      "brand": {
+        "@type": "Brand",
+        "name": {{ shop.name | json }}
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "{{ shop.url }}{{ product.url }}",
+        "priceCurrency": {{ shop.currency | json }},
+        "price": {{ product.price | money_without_currency | json }},
+        "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+        "seller": {
+          "@type": "Organization",
+          "name": {{ shop.name | json }}
+        }
+      }
+    }
+  </script>
+{%- endif -%}

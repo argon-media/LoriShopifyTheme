@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "legacy-of-beauty",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

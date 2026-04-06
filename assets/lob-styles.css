@@ -8546,6 +8546,19 @@
   margin-right: auto;
 }
 
+/* Fix orphan words — left-align body paragraphs in "I can help" section */
+.__pf.__pf_kuw2lM9e .pf-267_,
+.__pf.__pf_kuw2lM9e .pf-269_,
+.__pf.__pf_kuw2lM9e .pf-271_,
+.__pf.__pf_kuw2lM9e .pf-273_,
+.__pf.__pf_kuw2lM9e .pf-275_,
+.__pf.__pf_kuw2lM9e .pf-277_,
+.__pf.__pf_kuw2lM9e .pf-279_,
+.__pf.__pf_kuw2lM9e .pf-281_,
+.__pf.__pf_kuw2lM9e .pf-282_ {
+  text-align: left !important;
+}
+
 /* === ROUND 4 FIXES === */
 
 /* FIX 1: Imagine This section — fix background */

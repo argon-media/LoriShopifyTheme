@@ -2397,7 +2397,7 @@
     border-width: 0 0 1px;
   }
   .__pf.__pf_kuw2lM9e .pf-728_ {
-    padding-top: 135px;
+    padding-top: 0;
     margin-right: 0;
     padding-left: 0;
     margin-left: 10px;
@@ -8240,4 +8240,203 @@
   .__pf.__pf_kuw2lM9e .pf-979_ {
     font-size: 3.5rem !important;
   }
+}
+
+/* Challenges section — heading + description + divider layout */
+.__pf.__pf_kuw2lM9e .lob-challenges-list {
+  margin-top: 10px;
+}
+.__pf.__pf_kuw2lM9e .lob-challenge-item {
+  margin-bottom: 10px;
+}
+.__pf.__pf_kuw2lM9e .lob-challenge-heading {
+  font-family: "Hatton", serif;
+  font-weight: 400;
+  font-size: 2.4em;
+  line-height: 1.1;
+  color: #000;
+  margin-bottom: 12px;
+  margin-top: 0;
+}
+.__pf.__pf_kuw2lM9e .lob-challenge-desc {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 20px;
+}
+.__pf.__pf_kuw2lM9e .lob-challenge-divider {
+  border: none;
+  border-top: 1px solid #000;
+  margin: 25px 0;
+  max-width: 500px;
+}
+
+@media (max-width: 767px) {
+  .__pf.__pf_kuw2lM9e .lob-challenge-heading {
+    font-size: 1.6em;
+  }
+}
+
+/* Dividers for "Does this feel familiar" list items */
+.__pf.__pf_kuw2lM9e .pf-362_,
+.__pf.__pf_kuw2lM9e .pf-365_,
+.__pf.__pf_kuw2lM9e .pf-373_,
+.__pf.__pf_kuw2lM9e .pf-376_ {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 25px;
+}
+
+/* Dividers for Before/After list items */
+.__pf.__pf_kuw2lM9e .pf-720_,
+.__pf.__pf_kuw2lM9e .pf-722_,
+.__pf.__pf_kuw2lM9e .pf-724_,
+.__pf.__pf_kuw2lM9e .pf-732_,
+.__pf.__pf_kuw2lM9e .pf-734_,
+.__pf.__pf_kuw2lM9e .pf-736_ {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 25px;
+}
+
+/* Dividers and bold for "Legacy of Beauty is for" items */
+.__pf.__pf_kuw2lM9e .pf-694_,
+.__pf.__pf_kuw2lM9e .pf-695_,
+.__pf.__pf_kuw2lM9e .pf-696_,
+.__pf.__pf_kuw2lM9e .pf-697_,
+.__pf.__pf_kuw2lM9e .pf-698_,
+.__pf.__pf_kuw2lM9e .pf-699_ {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+}
+
+/* Dividers for "You Need" section items */
+.__pf.__pf_kuw2lM9e .pf-510_,
+.__pf.__pf_kuw2lM9e .pf-513_,
+.__pf.__pf_kuw2lM9e .pf-516_,
+.__pf.__pf_kuw2lM9e .pf-519_ {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  padding-bottom: 15px;
+  margin-bottom: 5px;
+}
+
+/* Dividers for year-long experience list items */
+.__pf.__pf_kuw2lM9e .pf-607_,
+.__pf.__pf_kuw2lM9e .pf-609_,
+.__pf.__pf_kuw2lM9e .pf-611_,
+.__pf.__pf_kuw2lM9e .pf-613_,
+.__pf.__pf_kuw2lM9e .pf-615_ {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  padding-bottom: 12px;
+}
+
+/* Increase readability for lighter font weights */
+.__pf.__pf_kuw2lM9e .pf-text-1,
+.__pf.__pf_kuw2lM9e .pf-text-2 {
+  font-weight: 400;
+  font-size: 1.05em;
+  line-height: 1.7;
+}
+.__pf.__pf_kuw2lM9e .pf-text-1 strong,
+.__pf.__pf_kuw2lM9e .pf-text-2 strong {
+  font-weight: 600;
+}
+
+/* Global: increase body paragraph font weight for readability */
+.__pf.__pf_kuw2lM9e p,
+.__pf.__pf_kuw2lM9e .pf-paragraph-content,
+.__pf.__pf_kuw2lM9e .sc-kUdmUV,
+.__pf.__pf_kuw2lM9e .sc-gRtvfn p {
+  font-weight: 400;
+  line-height: 1.7;
+}
+.__pf.__pf_kuw2lM9e p strong,
+.__pf.__pf_kuw2lM9e .pf-paragraph-content strong,
+.__pf.__pf_kuw2lM9e .sc-gRtvfn p strong {
+  font-weight: 600;
+}
+
+/* Slightly larger font for Custom.HTML paragraphs to match reference */
+.__pf.__pf_kuw2lM9e .sc-gRtvfn p {
+  font-size: 1.05em;
+}
+
+/* IMG1 FIX: Pillars/Framework section — tighten Segatha script font */
+.__pf.__pf_kuw2lM9e .pf-403_,
+.__pf.__pf_kuw2lM9e .pf-433_ {
+  font-size: 42px !important;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+.__pf.__pf_kuw2lM9e .pf-396_ {
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+}
+.__pf.__pf_kuw2lM9e .pf-396a_,
+.__pf.__pf_kuw2lM9e .pf-396b_ {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1.05em;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.__pf.__pf_kuw2lM9e .pf-398_ {
+  font-weight: 600 !important;
+  letter-spacing: 2px;
+  margin-top: 30px !important;
+}
+
+/* IMG2 FIX: Good News section — increase Hatton heading weight */
+.__pf.__pf_kuw2lM9e .pf-459_,
+.__pf.__pf_kuw2lM9e .pf-461_ {
+  font-weight: 500 !important;
+}
+.__pf.__pf_kuw2lM9e .pf-465_ {
+  font-weight: 500 !important;
+  letter-spacing: 1px;
+}
+.__pf.__pf_kuw2lM9e .pf-464_ p {
+  font-weight: 400;
+}
+.__pf.__pf_kuw2lM9e .pf-464_ p b,
+.__pf.__pf_kuw2lM9e .pf-464_ p strong {
+  font-weight: 600;
+}
+
+/* IMG4 FIX: Year-Long Experience heading — increase font weight */
+.__pf.__pf_kuw2lM9e .pf-601_ {
+  font-weight: 500 !important;
+  line-height: 1.15 !important;
+}
+.__pf.__pf_kuw2lM9e .pf-604_ {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+/* IMG5 FIX: "Legacy of Beauty is for" — bullet point styling */
+.__pf.__pf_kuw2lM9e .pf-694_ p,
+.__pf.__pf_kuw2lM9e .pf-695_ p,
+.__pf.__pf_kuw2lM9e .pf-696_ p,
+.__pf.__pf_kuw2lM9e .pf-697_ p,
+.__pf.__pf_kuw2lM9e .pf-698_ p,
+.__pf.__pf_kuw2lM9e .pf-699_ p,
+.__pf.__pf_kuw2lM9e .pf-700_ p {
+  padding-left: 20px;
+  position: relative;
+}
+.__pf.__pf_kuw2lM9e .pf-694_ p::before,
+.__pf.__pf_kuw2lM9e .pf-695_ p::before,
+.__pf.__pf_kuw2lM9e .pf-696_ p::before,
+.__pf.__pf_kuw2lM9e .pf-697_ p::before,
+.__pf.__pf_kuw2lM9e .pf-698_ p::before,
+.__pf.__pf_kuw2lM9e .pf-699_ p::before,
+.__pf.__pf_kuw2lM9e .pf-700_ p::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  font-size: 1.2em;
 }

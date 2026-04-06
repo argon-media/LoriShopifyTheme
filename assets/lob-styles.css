@@ -8442,13 +8442,20 @@
 }
 
 /* FIX 2: Center SIGN ME UP button and add padding bottom */
+.__pf.__pf_kuw2lM9e .pf-283_ {
+  display: flex !important;
+  justify-content: center !important;
+}
 .__pf.__pf_kuw2lM9e .pf-284_ {
-  text-align: center;
+  text-align: center !important;
   padding-bottom: 60px;
+  display: flex !important;
+  justify-content: center !important;
 }
 .__pf.__pf_kuw2lM9e .pf-285_ {
   margin-left: auto !important;
   margin-right: auto !important;
+  display: inline-block !important;
 }
 
 /* FIX 3: WHO SHE IS section — vertical align middle */

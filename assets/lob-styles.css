@@ -8685,42 +8685,6 @@
   margin-bottom: 60px !important;
 }
 
-/* Challenges section — overlapping collage */
-.__pf.__pf_kuw2lM9e .lob-challenges-collage {
-  position: relative;
-  min-height: 700px;
-}
-.__pf.__pf_kuw2lM9e .lob-cc-img1 {
-  width: 65% !important;
-  height: auto !important;
-  display: block !important;
-  margin: 0 !important;
-  position: relative;
-  z-index: 2;
-}
-.__pf.__pf_kuw2lM9e .lob-cc-img2 {
-  width: 55% !important;
-  height: auto !important;
-  display: block !important;
-  margin: 0 !important;
-  position: relative;
-  z-index: 1;
-  margin-top: -100px !important;
-  margin-left: auto !important;
-}
-@media (max-width: 767px) {
-  .__pf.__pf_kuw2lM9e .lob-challenges-collage {
-    min-height: auto;
-  }
-  .__pf.__pf_kuw2lM9e .lob-cc-img1 {
-    width: 70% !important;
-  }
-  .__pf.__pf_kuw2lM9e .lob-cc-img2 {
-    width: 60% !important;
-    margin-top: -60px !important;
-  }
-}
-
 /* THE DETAILS section — improve text readability over background */
 .__pf.__pf_kuw2lM9e .pf-764_ {
   background-color: rgba(0, 0, 0, 0.8) !important;

@@ -1678,7 +1678,8 @@
     padding-bottom: 100px;
     background-color: #101010;
     background-image: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-12.jpg");
-    background-position: center top;
+    background-attachment: fixed;
+    background-position: center;
     background-size: cover;
   }
   .__pf.__pf_kuw2lM9e .pf-446_ {
@@ -1859,7 +1860,7 @@
   .__pf.__pf_kuw2lM9e .pf-505_ {
     width: 400px;
     aspect-ratio: 1/1;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center top;
     display: table;
     margin-left: auto;
@@ -2246,7 +2247,7 @@
     padding-top: 100px;
     padding-bottom: 100px;
     background-color: #101010;
-    background-image: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-7.jpg");
+    background-image: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-5.jpg");
     background-position: center top;
     background-size: cover;
   }
@@ -8570,7 +8571,7 @@
 
 /* FIX 1: Imagine This section — fix background */
 .__pf.__pf_kuw2lM9e .pf-672_ {
-  background-image: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-7.jpg") !important;
+  background-image: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-5.jpg") !important;
   background-position: center center !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
@@ -8700,4 +8701,117 @@
   font-family: "Inter", sans-serif !important;
   font-weight: 400 !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* === LOCAL CHANGES (NOT PUSHED) === */
+
+/* 1. Challenges section — full-width white bg, collage, button */
+.__pf.__pf_kuw2lM9e .pf-245_ {
+  background-color: #fff !important;
+  margin-left: calc(-50vw + 50%) !important;
+  margin-right: calc(-50vw + 50%) !important;
+  padding-left: calc(50vw - 50% + 15px) !important;
+  padding-right: calc(50vw - 50% + 15px) !important;
+  padding-top: 80px !important;
+  padding-bottom: 80px !important;
+}
+.__pf.__pf_kuw2lM9e .lob-challenges-collage {
+  position: relative;
+  padding-top: 20px;
+  min-height: 100%;
+}
+.__pf.__pf_kuw2lM9e .lob-cc-img1 {
+  width: 65% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 !important;
+}
+.__pf.__pf_kuw2lM9e .lob-cc-img2 {
+  width: 60% !important;
+  height: auto !important;
+  display: block !important;
+  margin-top: -80px !important;
+  margin-left: auto !important;
+}
+.__pf.__pf_kuw2lM9e .lob-cc-img3 {
+  width: 55% !important;
+  height: auto !important;
+  display: block !important;
+  margin-top: -60px !important;
+  margin-left: 5% !important;
+}
+.__pf.__pf_kuw2lM9e .lob-cc-img4 {
+  width: 58% !important;
+  height: auto !important;
+  display: block !important;
+  margin-top: -70px !important;
+  margin-left: auto !important;
+}
+.__pf.__pf_kuw2lM9e .lob-challenges-btn {
+  margin-top: 30px !important;
+}
+
+/* 2. Center SIGN ME UP button in I can help section */
+.__pf.__pf_kuw2lM9e .pf-283_ {
+  justify-content: center !important;
+  width: 100% !important;
+}
+/* Parent of pf-283_ needs centering */
+.__pf.__pf_kuw2lM9e .pf-260_ > .pf-c {
+  justify-content: center !important;
+}
+.__pf.__pf_kuw2lM9e .pf-284_ {
+  text-align: center !important;
+  padding-bottom: 60px;
+  display: flex !important;
+  justify-content: center !important;
+}
+.__pf.__pf_kuw2lM9e .pf-285_ {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 4. Creating the life section — bg color */
+.__pf.__pf_kuw2lM9e .pf-527_ {
+  background-color: #fff !important;
+}
+
+/* Year-Long Experience section — white bg */
+.__pf.__pf_kuw2lM9e .pf-594_ {
+  background-color: #fff !important;
+}
+
+/* 5. Legacy is for — full-width card layout */
+.__pf.__pf_kuw2lM9e .lob-for-section {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding: 60px 0;
+}
+.__pf.__pf_kuw2lM9e .lob-for-section .pf-692_ {
+  text-align: center !important;
+  margin-bottom: 40px !important;
+}
+.__pf.__pf_kuw2lM9e .lob-for-section .pf-694_,
+.__pf.__pf_kuw2lM9e .lob-for-section .pf-695_,
+.__pf.__pf_kuw2lM9e .lob-for-section .pf-696_,
+.__pf.__pf_kuw2lM9e .lob-for-section .pf-697_,
+.__pf.__pf_kuw2lM9e .lob-for-section .pf-698_,
+.__pf.__pf_kuw2lM9e .lob-for-section .pf-699_,
+.__pf.__pf_kuw2lM9e .lob-for-section .pf-700_ {
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+.__pf.__pf_kuw2lM9e .lob-for-section .pf-701_ {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 30px !important;
+}
+
+/* 6. Ready to begin — white bg */
+.__pf.__pf_kuw2lM9e .pf-869_ {
+  background-color: #fff !important;
 }

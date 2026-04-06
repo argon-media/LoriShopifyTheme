@@ -8440,3 +8440,45 @@
   font-weight: 700;
   font-size: 1.2em;
 }
+
+/* FIX 2: Center SIGN ME UP button and add padding bottom */
+.__pf.__pf_kuw2lM9e .pf-284_ {
+  text-align: center;
+  padding-bottom: 60px;
+}
+.__pf.__pf_kuw2lM9e .pf-285_ {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* FIX 3: WHO SHE IS section — vertical align middle */
+.__pf.__pf_kuw2lM9e .pf-292_ {
+  align-items: center;
+}
+
+/* FIX 4: "I used to think" section — white centered text, fix italic line */
+.__pf.__pf_kuw2lM9e .pf-347_ {
+  color: #fff;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* FIX 5: Pillars section — center the body text paragraphs, smaller script heading */
+.__pf.__pf_kuw2lM9e .pf-396a_,
+.__pf.__pf_kuw2lM9e .pf-396b_ {
+  text-align: center !important;
+}
+.__pf.__pf_kuw2lM9e .pf-403_ {
+  font-size: 36px !important;
+  line-height: 1.15 !important;
+  letter-spacing: 1px !important;
+}
+
+/* FIX 6: "LET THIS YEAR SHAPE HOW YOU LIVE" — smaller, cleaner heading */
+.__pf.__pf_kuw2lM9e .pf-433_ {
+  font-size: 32px !important;
+  line-height: 1.2 !important;
+  letter-spacing: 1px !important;
+}

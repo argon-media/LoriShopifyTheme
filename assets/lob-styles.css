@@ -8482,3 +8482,66 @@
   line-height: 1.2 !important;
   letter-spacing: 1px !important;
 }
+
+/* ROUND 3 FIX 1: Bad News section — reduce heading font size, better readability */
+.__pf.__pf_kuw2lM9e .pf-448_ {
+  font-size: 2.8em !important;
+  line-height: 1.25 !important;
+  font-weight: 500 !important;
+  font-family: "Hatton", serif !important;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ROUND 3 FIX 2: Good News section — fix heading and bottom text */
+.__pf.__pf_kuw2lM9e .pf-461_ {
+  font-size: 1.4em !important;
+  line-height: 1.4 !important;
+  font-weight: 500 !important;
+  font-family: "Inter", sans-serif !important;
+}
+.__pf.__pf_kuw2lM9e .pf-459_ {
+  font-size: 1.6em !important;
+  font-weight: 600 !important;
+  font-family: "Inter", sans-serif !important;
+  letter-spacing: 1px;
+}
+.__pf.__pf_kuw2lM9e .pf-465_ {
+  font-family: "Inter", sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 1.1em !important;
+  letter-spacing: 2px !important;
+  line-height: 1.5 !important;
+  margin-top: 30px !important;
+}
+
+/* ROUND 3 FIX 3: Year-Long Experience — fix heading font */
+.__pf.__pf_kuw2lM9e .pf-601_ {
+  font-family: "Inter", sans-serif !important;
+  font-size: 1.6em !important;
+  font-weight: 400 !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0 !important;
+}
+.__pf.__pf_kuw2lM9e .pf-601_ span {
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* ROUND 3 FIX 4: "Legacy is for" dark overlay — fix background */
+.__pf.__pf_kuw2lM9e .pf-623_ {
+  background-image: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-3.jpg") !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+.__pf.__pf_kuw2lM9e .pf-626_ {
+  font-family: "Inter", sans-serif !important;
+  font-size: 2em !important;
+  line-height: 1.4 !important;
+  font-weight: 400 !important;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}

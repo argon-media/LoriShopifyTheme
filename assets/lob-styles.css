@@ -8584,29 +8584,32 @@
   margin-right: auto;
 }
 
-/* FIX 2+3: Legacy is for — collage layout + reduce spacing */
+/* FIX 2+3: Legacy is for — collage layout (offset stacked like WHY 12 MONTHS) */
 .__pf.__pf_kuw2lM9e .lob-collage {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  position: relative;
+  padding-bottom: 80px;
 }
 .__pf.__pf_kuw2lM9e .lob-collage-main {
-  grid-row: 1 / 3;
-  width: 100%;
-  height: 100%;
+  width: 75%;
+  height: auto;
   object-fit: cover;
+  display: block;
 }
 .__pf.__pf_kuw2lM9e .lob-collage-secondary {
-  width: 100%;
-  height: 100%;
+  width: 55%;
+  height: auto;
   object-fit: cover;
+  display: block;
+  margin-top: -80px;
+  margin-left: auto;
 }
 @media (max-width: 767px) {
-  .__pf.__pf_kuw2lM9e .lob-collage {
-    grid-template-columns: 1fr;
-  }
   .__pf.__pf_kuw2lM9e .lob-collage-main {
-    grid-row: auto;
+    width: 100%;
+  }
+  .__pf.__pf_kuw2lM9e .lob-collage-secondary {
+    width: 70%;
+    margin-top: -40px;
   }
 }
 
@@ -8675,4 +8678,26 @@
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Waitlist button in Legacy is for section — padding bottom */
+.__pf.__pf_kuw2lM9e .pf-701_ {
+  margin-bottom: 60px !important;
+}
+
+/* THE DETAILS section — improve text readability over background */
+.__pf.__pf_kuw2lM9e .pf-764_ {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+.__pf.__pf_kuw2lM9e .pf-771_ h4,
+.__pf.__pf_kuw2lM9e .pf-772_ h4,
+.__pf.__pf_kuw2lM9e .pf-773_ h4,
+.__pf.__pf_kuw2lM9e .pf-774_ h4,
+.__pf.__pf_kuw2lM9e .pf-775_ h4,
+.__pf.__pf_kuw2lM9e .pf-776_ h4 {
+  font-size: 1em !important;
+  line-height: 1.7 !important;
+  font-family: "Inter", sans-serif !important;
+  font-weight: 400 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }

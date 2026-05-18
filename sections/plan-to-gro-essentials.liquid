@@ -1,0 +1,1036 @@
+{%- comment -%}
+Plan to GRO Essentials landing page
+Uses clean ptge- (plan-to-gro-essentials) BEM-like classes.
+Reuses lob-styles.css for shared font-face declarations and base typography.
+{%- endcomment -%}
+{{ 'lob-styles.css' | asset_url | stylesheet_tag }}
+
+<style>
+  /* ===========================================================
+     Plan to GRO Essentials - scoped styles
+     =========================================================== */
+  .ptge {
+    --ptge-bg: #faf7f2;
+    --ptge-ink: #1a1a1a;
+    --ptge-muted: #4a4a4a;
+    --ptge-gold: #e4b485;
+    --ptge-line: #e6ddd0;
+    --ptge-card: #fffaf3;
+    --ff-heading: "Hatton-medium", "Hatton", "Cormorant Garamond", Georgia, serif;
+    --ff-script: "Segatha", "Brittany Signature", "Allura", cursive;
+    --ff-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--ptge-bg);
+    color: var(--ptge-ink);
+    font-family: var(--ff-body);
+    font-size: 17px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  .ptge *,
+  .ptge *::before,
+  .ptge *::after { box-sizing: border-box; }
+  .ptge img { max-width: 100%; height: auto; display: block; }
+  .ptge p { margin: 0 0 1em; color: var(--ptge-muted); }
+  .ptge h1, .ptge h2, .ptge h3, .ptge h4, .ptge h5 {
+    font-family: var(--ff-heading);
+    color: var(--ptge-ink);
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0 0 0.5em;
+    letter-spacing: 0.5px;
+  }
+  .ptge h1 { font-size: clamp(2.2rem, 5vw, 4rem); text-transform: uppercase; }
+  .ptge h2 { font-size: clamp(1.8rem, 3.6vw, 2.8rem); text-transform: uppercase; }
+  .ptge h3 { font-size: clamp(1.4rem, 2.6vw, 2rem); }
+  .ptge h4 { font-size: clamp(1.1rem, 2vw, 1.4rem); text-transform: uppercase; letter-spacing: 1.5px; }
+  .ptge a { color: inherit; }
+
+  .ptge__container {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .ptge__section {
+    padding: 80px 0;
+  }
+  .ptge__section--tight { padding: 50px 0; }
+  .ptge__section--lg { padding: 110px 0; }
+
+  /* Buttons */
+  .ptge__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #000;
+    color: #fff !important;
+    text-decoration: none;
+    padding: 18px 34px;
+    font-family: var(--ff-body);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid #000;
+    transition: background .25s ease, color .25s ease, transform .2s ease;
+    cursor: pointer;
+    margin-top: 14px;
+  }
+  .ptge__btn:hover {
+    background: #fff;
+    color: #000 !important;
+  }
+  .ptge__btn::after {
+    content: "\2192";
+    font-size: 16px;
+    line-height: 1;
+  }
+  .ptge__btn--light {
+    background: #fff;
+    color: #000 !important;
+    border-color: #fff;
+  }
+  .ptge__btn--light:hover {
+    background: transparent;
+    color: #fff !important;
+    border-color: #fff;
+  }
+  .ptge__hide-mobile { display: inline-flex; }
+  @media (max-width: 768px) {
+    .ptge__hide-mobile { display: none; }
+  }
+
+  /* HERO */
+  .ptge-hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    background: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-7.jpg") center/cover no-repeat;
+    color: #fff;
+    text-align: center;
+  }
+  .ptge-hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.55);
+  }
+  .ptge-hero__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 90px 24px;
+  }
+  .ptge-hero h1 { color: #fff; margin-bottom: 24px; }
+  .ptge-hero p { color: #f3eee5; font-size: 1.1rem; }
+  .ptge-hero__sub { font-style: italic; max-width: 720px; margin: 0 auto 18px; }
+  .ptge-hero__buttons { margin-top: 30px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* Two-column block */
+  .ptge-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .ptge-two--reverse { direction: rtl; }
+  .ptge-two--reverse > * { direction: ltr; }
+  @media (max-width: 860px) {
+    .ptge-two { grid-template-columns: 1fr; gap: 36px; }
+    .ptge-two--reverse { direction: ltr; }
+  }
+  .ptge-two__img img {
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.12);
+  }
+  .ptge-two__text h2,
+  .ptge-two__text h3 { margin-bottom: 16px; }
+  .ptge-two__text h4 {
+    color: var(--ptge-gold);
+    margin: 18px 0 14px;
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+  .ptge-two__sublabel {
+    font-family: var(--ff-heading);
+    font-size: 1.1rem;
+    margin: 22px 0 10px;
+    color: var(--ptge-ink);
+    text-transform: none;
+    letter-spacing: .5px;
+  }
+  .ptge-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+  }
+  .ptge-list li {
+    position: relative;
+    padding: 8px 0 8px 26px;
+    color: var(--ptge-muted);
+    border-bottom: 1px solid var(--ptge-line);
+  }
+  .ptge-list li:last-child { border-bottom: none; }
+  .ptge-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 8px; height: 8px;
+    background: var(--ptge-gold);
+    border-radius: 50%;
+  }
+
+  /* DOES THIS RESONATE - dark image background */
+  .ptge-resonate {
+    position: relative;
+    background: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-12.jpg") center/cover no-repeat fixed;
+    color: #fff;
+    text-align: center;
+  }
+  .ptge-resonate::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.6);
+  }
+  .ptge-resonate__inner {
+    position: relative; z-index: 2;
+    padding: 100px 24px;
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+  .ptge-resonate h2 { color: #fff; margin-bottom: 40px; }
+  .ptge-resonate__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    text-align: left;
+    margin-bottom: 30px;
+  }
+  @media (max-width: 800px) {
+    .ptge-resonate__cols { grid-template-columns: 1fr; }
+  }
+  .ptge-resonate__cols ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .ptge-resonate__cols li {
+    color: #f5efe6;
+    padding: 14px 0 14px 26px;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+  }
+  .ptge-resonate__cols li::before {
+    content: "";
+    position: absolute; left: 0; top: 22px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--ptge-gold);
+  }
+
+  /* Quote + freebie */
+  .ptge-quote {
+    text-align: center;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px;
+    font-family: var(--ff-heading);
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+    line-height: 1.5;
+    color: var(--ptge-ink);
+  }
+  .ptge-quote::before, .ptge-quote::after {
+    content: "\201C";
+    color: var(--ptge-gold);
+    font-size: 2.4em;
+    line-height: 0;
+    vertical-align: -0.3em;
+    margin: 0 .15em;
+  }
+  .ptge-quote::after { content: "\201D"; }
+
+  .ptge-freebie {
+    background: var(--ptge-card);
+    border: 1px solid var(--ptge-line);
+    border-radius: 6px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 50px;
+  }
+  @media (max-width: 800px) {
+    .ptge-freebie { grid-template-columns: 1fr; }
+  }
+  .ptge-freebie__img { background: #ddd; }
+  .ptge-freebie__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    min-height: 360px;
+  }
+  .ptge-freebie__body { padding: 50px 44px; }
+  .ptge-freebie__label {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ptge-gold);
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  /* Body life-needs section */
+  .ptge-body__lead {
+    font-family: var(--ff-heading);
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    line-height: 1.4;
+    color: var(--ptge-ink);
+    max-width: 880px;
+    margin: 0 auto 24px;
+    text-align: center;
+  }
+  .ptge-body__inner {
+    max-width: 820px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .ptge-body__inner .ptge-list { text-align: left; }
+
+  /* Two for-you cards */
+  .ptge-foryou {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  @media (max-width: 800px) {
+    .ptge-foryou { grid-template-columns: 1fr; }
+  }
+  .ptge-foryou__card {
+    background: var(--ptge-card);
+    border: 1px solid var(--ptge-line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .ptge-foryou__card img { width: 100%; height: 280px; object-fit: cover; }
+  .ptge-foryou__body { padding: 36px 32px; }
+
+  /* Testimonials */
+  .ptge-testi {
+    text-align: center;
+  }
+  .ptge-testi__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+    margin-top: 40px;
+  }
+  @media (max-width: 1000px) {
+    .ptge-testi__grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .ptge-testi__grid { grid-template-columns: 1fr; }
+  }
+  .ptge-testi__card {
+    background: #fff;
+    border: 1px solid var(--ptge-line);
+    padding: 30px 26px;
+    border-radius: 4px;
+    font-family: var(--ff-heading);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ptge-ink);
+    line-height: 1.55;
+    text-align: left;
+  }
+  .ptge-testi__card::before {
+    content: "\201C";
+    display: block;
+    color: var(--ptge-gold);
+    font-size: 3rem;
+    line-height: 0.8;
+    margin-bottom: 8px;
+  }
+  .ptge-testi__tag {
+    margin-top: 36px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: var(--ptge-gold);
+    font-weight: 600;
+  }
+
+  /* Imagine */
+  .ptge-imagine {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .ptge-imagine__intro {
+    font-family: var(--ff-script);
+    font-style: italic;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    color: var(--ptge-gold);
+    margin-bottom: 18px;
+  }
+  .ptge-imagine__big {
+    font-family: var(--ff-heading);
+    font-size: clamp(1.4rem, 2.8vw, 2rem);
+    line-height: 1.4;
+    color: var(--ptge-ink);
+  }
+  .ptge-imagine__big strong { font-weight: 600; }
+
+  /* Dark overlay full-width section (Here's the thing / Resource for life) */
+  .ptge-dark {
+    position: relative;
+    color: #fff;
+    text-align: center;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .ptge-dark::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.55);
+  }
+  .ptge-dark__inner {
+    position: relative; z-index: 2;
+    padding: 100px 24px;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  .ptge-dark h3 { color: #fff; margin-bottom: 22px; }
+  .ptge-dark p { color: #f3eee5; }
+
+  /* About Lori */
+  .ptge-about__sub {
+    color: var(--ptge-gold);
+    font-family: var(--ff-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 6px 0 22px;
+  }
+  .ptge-about__italic { font-style: italic; }
+
+  /* Big testimonial */
+  .ptge-bigtesti {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .ptge-bigtesti h3 {
+    font-family: var(--ff-heading);
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    line-height: 1.35;
+    margin-bottom: 28px;
+    color: var(--ptge-ink);
+  }
+  .ptge-bigtesti__attrib {
+    margin-top: 16px;
+    color: var(--ptge-gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* Lifetime access */
+  .ptge-lifetime {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .ptge-lifetime p {
+    font-family: var(--ff-heading);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    line-height: 1.6;
+    color: var(--ptge-ink);
+  }
+
+  /* How it works */
+  .ptge-how {
+    text-align: center;
+  }
+  .ptge-how__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 50px;
+    text-align: left;
+  }
+  @media (max-width: 800px) {
+    .ptge-how__cards { grid-template-columns: 1fr; }
+  }
+  .ptge-how__card {
+    background: var(--ptge-card);
+    border: 1px solid var(--ptge-line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .ptge-how__num {
+    font-family: var(--ff-heading);
+    font-size: clamp(2.6rem, 5vw, 3.6rem);
+    color: var(--ptge-gold);
+    padding: 30px 36px 0;
+    letter-spacing: 2px;
+  }
+  .ptge-how__body { padding: 8px 36px 36px; }
+  .ptge-how__card img {
+    width: 100%; height: 320px; object-fit: cover;
+  }
+
+  /* Pricing */
+  .ptge-price { text-align: center; }
+  .ptge-price h2 { margin-bottom: 50px; }
+  .ptge-price__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+    text-align: left;
+  }
+  @media (max-width: 1000px) {
+    .ptge-price__grid { grid-template-columns: 1fr; max-width: 540px; margin: 0 auto; }
+  }
+  .ptge-price__card {
+    background: #fff;
+    border: 1px solid var(--ptge-line);
+    border-radius: 6px;
+    padding: 38px 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .ptge-price__card--feat {
+    border-color: var(--ptge-gold);
+    box-shadow: 0 18px 40px rgba(228,180,133,0.25);
+  }
+  .ptge-price__feat-tag {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ptge-gold);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .ptge-price__label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ptge-gold);
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .ptge-price__card h3 {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .ptge-price__tagline {
+    font-family: var(--ff-heading);
+    font-style: italic;
+    color: var(--ptge-muted);
+    margin-bottom: 18px;
+  }
+  .ptge-price__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+  }
+  .ptge-price__list li {
+    padding: 10px 0 10px 22px;
+    position: relative;
+    color: var(--ptge-muted);
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--ptge-line);
+  }
+  .ptge-price__list li:last-child { border-bottom: none; }
+  .ptge-price__list li::before {
+    content: "\2713";
+    color: var(--ptge-gold);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    font-weight: 700;
+  }
+  .ptge-price__card .ptge__btn { margin-top: auto; justify-content: center; }
+
+  /* FAQ */
+  .ptge-faq__accordion details {
+    border-bottom: 1px solid var(--ptge-line);
+    padding: 18px 0;
+  }
+  .ptge-faq__accordion summary {
+    font-family: var(--ff-heading);
+    font-size: 1.05rem;
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    padding-right: 30px;
+    color: var(--ptge-ink);
+  }
+  .ptge-faq__accordion summary::-webkit-details-marker { display: none; }
+  .ptge-faq__accordion summary::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.3rem;
+    color: var(--ptge-gold);
+    transition: transform .25s ease;
+  }
+  .ptge-faq__accordion details[open] summary::after {
+    content: "\2212";
+  }
+  .ptge-faq__accordion details p {
+    margin-top: 14px;
+    color: var(--ptge-muted);
+    font-size: 0.97rem;
+  }
+  .ptge-faq__cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  /* Section utilities */
+  .ptge__center { text-align: center; }
+  .ptge__btn-row { display: flex; justify-content: center; margin-top: 26px; }
+  .ptge__bold { font-weight: 600; color: var(--ptge-ink); }
+  .ptge__italic { font-style: italic; }
+
+  @media (max-width: 600px) {
+    .ptge { font-size: 16px; }
+    .ptge__section { padding: 60px 0; }
+    .ptge__section--lg { padding: 80px 0; }
+    .ptge-freebie__body,
+    .ptge-foryou__body,
+    .ptge-how__body { padding: 28px 22px; }
+    .ptge-how__num { padding: 22px 22px 0; }
+  }
+</style>
+
+<div class="ptge">
+
+  {%- comment -%} SECTION 1: HERO {%- endcomment -%}
+  <section class="ptge-hero" id="top">
+    <div class="ptge-hero__inner">
+      <h1>Plan to GRO Essentials</h1>
+      <p class="ptge-hero__sub">The overwhelm, mental clutter, unfinished goals, and constant feeling that life is happening TO you instead of WITH you will no longer have to be your normal.</p>
+      <p>This is a guided journaling and planning experience designed to help you create clarity, structure, and intentional momentum around what matters most in this season of your life.</p>
+      <p>You'll stop carrying your entire life mentally, create supportive rhythms, and finally become the woman who follows through on the life she truly desires.</p>
+      <div class="ptge-hero__buttons">
+        <a href="#pricing" class="ptge__btn">Yes, I'm Ready</a>
+        <a href="#pricing" class="ptge__btn ptge__hide-mobile">I Need This!</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 2: STOP DRIFTING {%- endcomment -%}
+  <section class="ptge__section">
+    <div class="ptge__container">
+      <div class="ptge-two">
+        <div class="ptge-two__text">
+          <h2>It's Time to Stop Drifting Through Your Life</h2>
+          <h4>The simple system you need to create a life that feels clear, intentional, and aligned</h4>
+          <p>Life moves fast. And there is nothing more exhausting than constantly feeling behind in your own life.</p>
+          <p>If you've tried planners, routines, productivity hacks, mindset work, and constantly "starting over," and you STILL feel overwhelmed, mentally scattered, or inconsistent&hellip; then it's time to stop trying harder and start building systems that actually support your life.</p>
+          <p class="ptge-two__sublabel">Women inside Plan to GRO Essentials often experience:</p>
+          <ul class="ptge-list">
+            <li>Finally feeling mentally clear again</li>
+            <li>Consistently journaling and planning without overwhelm</li>
+            <li>Following through on goals instead of constantly restarting</li>
+            <li>Waking up with intention instead of immediately feeling behind</li>
+            <li>Creating routines that actually support their real life</li>
+            <li>Feeling calmer, more grounded, and more present throughout the week</li>
+          </ul>
+          <a href="#pricing" class="ptge__btn">Yes, I'm Ready!</a>
+        </div>
+        <div class="ptge-two__img">
+          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-35.jpg" alt="Lori J Smith intentional living" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 3: WE NEED TO TALK {%- endcomment -%}
+  <section class="ptge__section" style="background:#f3ece1;">
+    <div class="ptge__container">
+      <div class="ptge-two ptge-two--reverse">
+        <div class="ptge-two__text">
+          <h3>We Need To Talk About Something&hellip;</h3>
+          <p>Let me guess: you've tried planners, routines, productivity hacks, and "starting fresh" more times than you can count&hellip; but you STILL find yourself feeling mentally scattered, behind, overwhelmed, and wondering why life keeps feeling harder than it should.</p>
+          <p>I got you! &#128521;</p>
+          <p class="ptge__bold">Say hello to the simple journaling and planning framework designed to help you stop carrying your entire life mentally and finally create intentional structure that actually supports you.</p>
+          <p class="ptge-two__sublabel">Did you know?</p>
+          <p>Constant overwhelm is often connected to mental overload, unclear priorities, and trying to carry too many decisions at once.</p>
+          <p class="ptge-two__sublabel">Did you know?</p>
+          <p>Most women don't actually need more motivation &mdash; they need clarity, supportive rhythms, and systems that reduce decision fatigue.</p>
+          <p class="ptge__italic ptge__bold">It's about time for you to experience peace, clarity, follow-through, and intentional living as your normal way of life.</p>
+          <a href="#pricing" class="ptge__btn">Yes, I'm Ready!</a>
+        </div>
+        <div class="ptge-two__img">
+          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-20.jpg" alt="Lori J Smith - planning rhythms" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 4: DOES THIS RESONATE {%- endcomment -%}
+  <section class="ptge-resonate">
+    <div class="ptge-resonate__inner">
+      <h2>Does This Resonate?</h2>
+      <div class="ptge-resonate__cols">
+        <ul>
+          <li>You've tried every planner, app, notebook, routine, and "fresh start," but nothing seems to truly stick.</li>
+          <li>The idea of feeling calm, clear, organized, and ahead of your life feels like something meant for other women.</li>
+          <li>You've consumed the podcasts, bought the courses, listened to the advice, and maybe even had seasons where things improved&hellip; but life still keeps slipping back into overwhelm and inconsistency.</li>
+        </ul>
+        <ul>
+          <li>You're tired of how much mental clutter, unfinished tasks, and constant decision fatigue are affecting your energy, your home, your work, and your peace.</li>
+          <li>When life feels chaotic or disorganized, it impacts everything &mdash; your focus, your relationships, your health, your motivation, and your ability to be present.</li>
+          <li>You're exhausted from feeling like you're always trying to "get your life together."</li>
+        </ul>
+      </div>
+      <a href="#pricing" class="ptge__btn ptge__btn--light">I Need This System!</a>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 5: QUOTE + FREEBIE {%- endcomment -%}
+  <section class="ptge__section">
+    <div class="ptge__container">
+      <p class="ptge-quote">often when you've tried new routines, planners, systems, and productivity hacks and still nothing is changing&hellip; it's because the issue isn't just organization &mdash; it's the way you're carrying your life.</p>
+
+      <div class="ptge-freebie">
+        <div class="ptge-freebie__img">
+          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-25.jpg" alt="Weekly Reset Guide" loading="lazy" />
+        </div>
+        <div class="ptge-freebie__body">
+          <span class="ptge-freebie__label">Complimentary Resource!</span>
+          <h3>The Weekly Reset Guide for Your Life &amp; Home</h3>
+          <p>Come take a free glimpse into the rhythms and systems that help women create a more peaceful, intentional life.</p>
+          <p>Want to feel more clearheaded, calm, organized, and supported in your everyday life?</p>
+          <p>Download the complimentary guide for a simple starting point to reset your routines, your home, and your mental load.</p>
+          <p><strong>PLUS:</strong> You'll also receive access to a few of my favorite planning rhythms, reflection prompts, and supportive tools to help you actually stay consistent.</p>
+          <a href="#" class="ptge__btn">Send Me The Guide!</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 6: BODY (life needs) {%- endcomment -%}
+  <section class="ptge__section" style="background:#f3ece1;">
+    <div class="ptge__container ptge-body__inner">
+      <p class="ptge-body__lead">Your life doesn't just need another planner or productivity system. It also needs rhythms that actually support the woman carrying it all.</p>
+      <p>So many women come to me saying they've "tried everything" to finally feel organized, peaceful, and consistent&hellip; but they still feel overwhelmed underneath it all.</p>
+      <ul class="ptge-list">
+        <li>They haven't learned how to stop living in constant pressure and survival mode.</li>
+        <li>They haven't created supportive rhythms that allow them to breathe, reset, and receive support.</li>
+        <li>They haven't released the mental load that keeps them carrying everything alone.</li>
+        <li>They haven't stopped building their lives around urgency, guilt, and reaction.</li>
+      </ul>
+      <p>But once they do, they discover what it feels like to wake up clearheaded, present, intentional, and supported &mdash; with a life that finally feels sustainable instead of constantly exhausting.</p>
+      <div class="ptge__btn-row">
+        <a href="#pricing" class="ptge__btn">I'm Ready To Reset My Life</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 7: TWO FOR-YOU CARDS {%- endcomment -%}
+  <section class="ptge__section">
+    <div class="ptge__container">
+      <div class="ptge-foryou">
+        <div class="ptge-foryou__card">
+          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-30.jpg" alt="Plan to GRO Essentials" loading="lazy" />
+          <div class="ptge-foryou__body">
+            <h3>The Plan to GRO Essentials system is for you if&hellip;</h3>
+            <ul class="ptge-list">
+              <li>Since a certain season, life hasn't felt the same. You feel more overwhelmed, reactive, exhausted, or behind than you used to.</li>
+              <li>The constant clutter, unfinished tasks, and mental load are affecting your confidence, energy, and ability to fully enjoy your life.</li>
+              <li>You'll have a good week where things feel organized and peaceful&hellip; but it never seems to last before life slips back into chaos again.</li>
+              <li>You want a simple system you can return to again-and-again to help reset your routines, your priorities, your home, and your mind before everything starts spiraling again.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ptge-foryou__card">
+          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-50.jpg" alt="Plan to GRO Essentials supportive rhythms" loading="lazy" />
+          <div class="ptge-foryou__body">
+            <h3>The Plan to GRO Essentials system is for you if&hellip;</h3>
+            <ul class="ptge-list">
+              <li>You constantly feel weighed down by mental clutter, decision fatigue, and the pressure of carrying so much responsibility.</li>
+              <li>The stress and overwhelm in your life are making it difficult to feel present, connected, rested, or fully like yourself.</li>
+              <li>You're trying all the "right" productivity tools and routines, but you still feel behind, scattered, inconsistent, or emotionally exhausted.</li>
+              <li>You want supportive rhythms and practical tools you can return to during busy or stressful seasons so you don't have to keep starting over every Monday.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 8: YOU WILL FEEL {%- endcomment -%}
+  <section class="ptge__section" style="background:#f3ece1;">
+    <div class="ptge__container">
+      <div class="ptge-two">
+        <div class="ptge-two__img">
+          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-45.jpg" alt="You will feel" loading="lazy" />
+        </div>
+        <div class="ptge-two__text">
+          <h2>You Will Feel</h2>
+          <ul class="ptge-list">
+            <li>Like you can finally enjoy your life instead of constantly trying to catch up to it</li>
+            <li>Calm waking up in the morning because you know where your focus belongs instead of immediately feeling behind and overwhelmed</li>
+            <li>Clear about what matters most instead of mentally carrying 47 unfinished tasks all day long</li>
+            <li>Like your home, routines, calendar, and responsibilities are finally working with you instead of constantly against you</li>
+            <li>Equipped with rhythms and systems you can return to the moment life starts feeling chaotic again</li>
+            <li>More present, supported, peaceful, and at home in your own life</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 9: TESTIMONIALS {%- endcomment -%}
+  <section class="ptge__section ptge-testi">
+    <div class="ptge__container">
+      <h2>You can create a life that feels like this, too&hellip;</h2>
+      <div class="ptge-testi__grid">
+        <div class="ptge-testi__card">For the first time in years, I don't feel like my entire life is running me.</div>
+        <div class="ptge-testi__card">I finally feel like I have rhythms that support me instead of constantly trying to survive my calendar.</div>
+        <div class="ptge-testi__card">I stopped waking up immediately overwhelmed because I finally had a simple plan for what mattered most.</div>
+        <div class="ptge-testi__card">The weekly resets and planning rhythms completely changed the way I move through my home, work, and responsibilities.</div>
+        <div class="ptge-testi__card">This helped me stop constantly starting over and finally create consistency in a way that feels peaceful instead of restrictive.</div>
+      </div>
+      <p class="ptge-testi__tag">Start Now and Support Your Future Self</p>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 10: IMAGINE THIS {%- endcomment -%}
+  <section class="ptge__section--tight">
+    <div class="ptge-imagine">
+      <p class="ptge-imagine__intro">Imagine this&hellip;</p>
+      <p class="ptge-imagine__big">You wake up knowing exactly what matters most in this season of your life. <strong>This becomes your new normal,</strong> and you don't have to keep living in constant reaction mode anymore.</p>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 11: I CAN HELP {%- endcomment -%}
+  <section class="ptge__section">
+    <div class="ptge__container">
+      <div class="ptge-two">
+        <div class="ptge-two__text">
+          <h3>I Can Help Because I've Lived This Too&hellip;</h3>
+          <p>If you've tried planners, routines, productivity systems, fresh starts, and "getting organized"&hellip; but still feel mentally cluttered, inconsistent, or behind in your own life, the missing piece usually isn't more effort. It's having a simple system that helps you consistently return to what matters most.</p>
+          <p>Your life is always reflecting what you're building daily. When everything stays in your head, it creates overwhelm, inconsistency, and decision fatigue. But when you create intentional rhythms and supportive structure, it changes the way you move through your entire life.</p>
+          <p>The constant feeling of being behind, reactive, or scattered usually isn't because you're incapable. You simply haven't been given a sustainable way to organize your priorities, protect what matters, and follow through with intention. Plan to GRO Essentials helps you build that foundation step by step.</p>
+          <a href="#pricing" class="ptge__btn">I'm Ready To Live With Intention</a>
+        </div>
+        <div class="ptge-two__img">
+          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-22.jpg" alt="Lori J Smith" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 12: HERE'S THE THING {%- endcomment -%}
+  <section class="ptge-dark" style="background-image:url('https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-7.jpg');">
+    <div class="ptge-dark__inner">
+      <h3>Here's The Thing&hellip;</h3>
+      <p>Most women are not struggling because they're lazy, incapable, or unmotivated. The reality is, many women are carrying an overwhelming amount of mental load while trying to hold together everyday life, relationships, responsibilities, goals, and expectations all at once.</p>
+      <p>And when everything lives in your head, it becomes incredibly difficult to feel clear, consistent, focused, or intentional &mdash; even when you deeply desire a different kind of life.</p>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 13: LISTEN TO THIS {%- endcomment -%}
+  <section class="ptge__section">
+    <div class="ptge__container">
+      <div class="ptge-two">
+        <div class="ptge-two__text">
+          <h3>Listen To This&hellip;</h3>
+          <p>Your life is deeply shaped by what you repeatedly give your attention to. And many women are living in constant mental reaction mode without even realizing it. They're carrying endless open loops, unfinished thoughts, overwhelming priorities, and internal pressure that keeps them feeling scattered, inconsistent, and emotionally exhausted.</p>
+          <p>And even if your life looks "fine" on the outside, many women quietly feel disconnected from themselves, their priorities, and the life they actually want to be creating. Over time, that constant overwhelm and lack of intentional structure can make you feel like you're always behind, constantly restarting, and never fully grounded in your own life. That's why creating supportive systems and rhythms matters so much &mdash; because clarity changes the way you live every single day.</p>
+        </div>
+        <div class="ptge-two__img">
+          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-15.jpg" alt="Listen to this" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 14: ABOUT LORI {%- endcomment -%}
+  <section class="ptge__section" style="background:#f3ece1;">
+    <div class="ptge__container">
+      <div class="ptge-two">
+        <div class="ptge-two__img">
+          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-3.jpg" alt="Lori Smith" loading="lazy" />
+        </div>
+        <div class="ptge-two__text ptge-about">
+          <h2>Hi, I'm Lori Smith.</h2>
+          <p class="ptge-about__sub">Coach, Speaker, Podcast Host of Your Most Beautiful Life, and Creator of Plan to GRO and The Legacy of Beauty Community.</p>
+          <p>I help women who are carrying the weight of everything create lives that feel more intentional, peaceful, supported, and beautifully aligned through simple rhythms, emotional clarity, and practical systems that help them finally live what matters most.</p>
+          <p>For years, I've walked women through seasons of overwhelm, transition, emotional exhaustion, and feeling disconnected from themselves &mdash; helping them move from survival mode into a life with more clarity, steadiness, presence, and purpose. Through coaching, teaching, and the rhythms inside Plan to GRO, women learn how to stop constantly reacting to life and begin creating it intentionally.</p>
+          <p>What makes my approach different is that I don't believe transformation comes from doing more. I believe it comes from creating supportive structure, learning to listen to yourself again, and building rhythms that actually support the life you want to live. Plan to GRO was created to help women simplify what matters, organize their lives with intention, and create meaningful change one season at a time.</p>
+          <p class="ptge__italic">I'm also a wife, mom, grandmother, and a woman who deeply understands what it feels like to hold everything together while quietly longing for a life that feels lighter, calmer, and more beautiful from the inside out.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 15: BIG TESTIMONIAL {%- endcomment -%}
+  <section class="ptge__section ptge-bigtesti">
+    <h3>"For the first time in a long time, I don't feel like I'm constantly behind in my own life."</h3>
+    <p>I honestly didn't realize how much mental clutter and emotional pressure I was carrying until I started using Plan to GRO consistently. Instead of waking up already overwhelmed, I finally felt clear. I stopped constantly spinning my wheels and started making decisions that actually supported the life I wanted.</p>
+    <p>What surprised me most was how much calmer I felt emotionally. Writing things down, simplifying what mattered, and creating rhythms I could actually keep helped me stop feeling like I was failing at everything all the time. My home felt calmer. My mind felt calmer. I felt calmer.</p>
+    <p class="ptge-bigtesti__attrib">&mdash; Plan to GRO Member</p>
+  </section>
+
+  {%- comment -%} SECTION 16: LIFETIME ACCESS {%- endcomment -%}
+  <section class="ptge__section--tight ptge-lifetime">
+    <p>Inside Plan to GRO Essentials, you'll have lifetime access to the foundational rhythms, planning tools, guided structure, and intentional practices that help you simplify your life, organize what matters most, and stop living in constant reaction mode. This isn't about doing more perfectly &mdash; it's about finally creating a life that feels clear, supportive, peaceful, and sustainable in the season you're living right now.</p>
+  </section>
+
+  {%- comment -%} SECTION 17: RESOURCE FOR LIFE'S SEASONS {%- endcomment -%}
+  <section class="ptge-dark" style="background-image:url('https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-9.jpg');">
+    <div class="ptge-dark__inner">
+      <p>Plan to GRO Essentials was created to become a resource you can return to again and again during the full seasons of life &mdash; the overwhelming weeks, the emotionally heavy days, the transitions, the mental clutter, the moments you feel behind, disconnected, or like life is running you instead of the other way around.</p>
+      <p>Inside, you'll have simple but meaningful tools to help you reset your rhythms, organize what matters most, calm the constant mental noise, and create supportive structure in your home and life &mdash; not just temporarily feel motivated, but begin living with more clarity, intention, peace, and consistency from the inside out.</p>
+      <a href="#pricing" class="ptge__btn ptge__btn--light">This Is Exactly What I Need</a>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 18: HOW IT WORKS {%- endcomment -%}
+  <section class="ptge__section ptge-how">
+    <div class="ptge__container">
+      <h2>How Plan to GRO Works</h2>
+      <div class="ptge-how__cards">
+        <div class="ptge-how__card">
+          <div class="ptge-how__num">No.01</div>
+          <div class="ptge-how__body">
+            <h4>Decide What Matters Most.</h4>
+            <p>Begin by simplifying the mental clutter and identifying the rhythms, priorities, and areas of life that need your attention most in this season.</p>
+          </div>
+          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-40.jpg" alt="Decide what matters most" loading="lazy" />
+        </div>
+        <div class="ptge-how__card">
+          <div class="ptge-how__num">No.02</div>
+          <div class="ptge-how__body">
+            <h4>Create Supportive Rhythms.</h4>
+            <p>Through guided planning pages, intentional reflection, and practical structure, you'll begin creating a life that feels calmer, more organized, more present, and far more sustainable.</p>
+          </div>
+          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-55.jpg" alt="Create supportive rhythms" loading="lazy" />
+        </div>
+      </div>
+      <div class="ptge__btn-row">
+        <a href="#pricing" class="ptge__btn">I'm Ready To Reset My Life</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 19: PRICING {%- endcomment -%}
+  <section class="ptge__section ptge-price" id="pricing">
+    <div class="ptge__container">
+      <h2>Start Your Next Season</h2>
+      <div class="ptge-price__grid">
+        <div class="ptge-price__card ptge-price__card--feat">
+          <span class="ptge-price__feat-tag">Best Value!</span>
+          <span class="ptge-price__label">Everything You Need to Begin</span>
+          <h3>Plan to GRO Essentials</h3>
+          <p class="ptge-price__tagline">Simple Rhythms. Meaningful Change.</p>
+          <ul class="ptge-price__list">
+            <li>Includes guided planning pages, intentional reflection prompts, supportive rhythms, and practical tools to help you simplify your life and focus on what matters most.</li>
+            <li>A simple step-by-step framework for organizing your days with more clarity and intention.</li>
+            <li>Tools to help you reduce overwhelm, reset your routines, and create more peace in your home and mind.</li>
+            <li>A resource you can return to anytime you need to refocus, reset, or begin again.</li>
+          </ul>
+          <a href="#" class="ptge__btn">1 Payment of $37</a>
+        </div>
+        <div class="ptge-price__card">
+          <span class="ptge-price__label">Foundational Resource</span>
+          <h3>The Plan to GRO Journal</h3>
+          <ul class="ptge-price__list">
+            <li>A guided 12-week journal and planning system designed to help you organize your life with more clarity, intention, and peace.</li>
+            <li>Includes planning pages, reflective prompts, rhythms, and supportive structure so you can stop feeling mentally scattered and constantly behind.</li>
+          </ul>
+          <a href="#" class="ptge__btn">1 Payment of $37</a>
+        </div>
+        <div class="ptge-price__card">
+          <span class="ptge-price__label">Digital Support Resource</span>
+          <h3>What Matters Most Workbook</h3>
+          <ul class="ptge-price__list">
+            <li>A guided process to help you simplify the mental noise, clarify your priorities, and reconnect with the life you actually want to create.</li>
+            <li>Perfect for women feeling overwhelmed, emotionally stretched thin, or disconnected from what truly matters in this season.</li>
+          </ul>
+          <a href="#" class="ptge__btn">Download The Resource</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} SECTION 20: FAQ {%- endcomment -%}
+  <section class="ptge__section" style="background:#f3ece1;">
+    <div class="ptge__container">
+      <div class="ptge-two">
+        <div class="ptge-two__img">
+          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-65.jpg" alt="FAQs" loading="lazy" />
+        </div>
+        <div class="ptge-two__text ptge-faq">
+          <h2>FAQs</h2>
+          <div class="ptge-faq__accordion">
+            <details>
+              <summary>How is this different from a regular planner?</summary>
+              <p>Plan to GRO is not just a planner you fill out and forget about three days later. It's a guided system designed to help you slow down, clarify what matters most, create rhythms that support your real life, and finally stop living in constant reaction mode. Instead of helping you do more, it helps you live with more intention, peace, and alignment.</p>
+            </details>
+            <details>
+              <summary>What actually makes this work?</summary>
+              <p>Plan to GRO works because it helps you reconnect to yourself instead of constantly managing your life from overwhelm. Through the journal prompts, weekly rhythms, planning structure, and reflection process, you begin making decisions from clarity instead of pressure. Over time, that changes the way you live, lead, care for yourself, and show up in your relationships and home.</p>
+            </details>
+            <details>
+              <summary>What if I struggle with consistency or never stick with planners?</summary>
+              <p>Honestly? That's exactly why Plan to GRO was created. Most women don't struggle because they're lazy or incapable &mdash; they struggle because they're mentally overloaded, emotionally exhausted, and trying to carry too much at once. This system is intentionally simple, supportive, and repeatable so you can return to it again and again without shame. The goal is not perfection. The goal is creating rhythms that support your actual life.</p>
+            </details>
+            <details>
+              <summary>If I already listen to the podcast or follow your content, will this still help me?</summary>
+              <p>Yes &mdash; because knowing something and living it are two different things. The podcast gives inspiration and perspective, but Plan to GRO gives you a practical place to actually apply what you're learning to your real life. It helps you take everything you already know you want and turn it into supportive daily rhythms and decisions.</p>
+            </details>
+            <details>
+              <summary>Where should I start if I feel completely overwhelmed right now?</summary>
+              <p>Start small. That's the entire point. Plan to GRO was designed to help you stop feeling paralyzed by everything at once. You do not need to overhaul your entire life overnight. You simply need a place to begin reconnecting to what matters most and taking aligned steps forward one week at a time.</p>
+            </details>
+            <details>
+              <summary>What if my schedule already feels too full for something like this?</summary>
+              <p>That's usually the biggest sign that you need this most. Plan to GRO isn't about adding more pressure to your life. It's about helping you stop wasting energy on mental clutter, constant decision fatigue, and living in survival mode. Most women find that having a simple rhythm actually gives them more breathing room, not less.</p>
+            </details>
+          </div>
+          <div class="ptge-faq__cta">
+            <a href="#pricing" class="ptge__btn">This Is The Reset I've Been Needing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}}));
+</script>
+
+{% schema %}
+{
+  "name": "Plan to GRO Essentials",
+  "settings": []
+}
+{% endschema %}

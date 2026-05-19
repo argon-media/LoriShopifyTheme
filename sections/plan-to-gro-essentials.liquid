@@ -491,6 +491,23 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   /* ===========================================================
      8) YOU WILL FEEL — white card, dashed dividers
      =========================================================== */
+  .ptge-feel-section {
+    position: relative;
+    background-image: url('https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-42.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+  }
+  .ptge-feel-section__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(40, 30, 20, 0.45);
+    z-index: 1;
+  }
+  .ptge-feel-section .ptge__container {
+    position: relative;
+    z-index: 2;
+  }
   .ptge-feel {
     background: #fff;
     border-radius: 8px;
@@ -665,6 +682,23 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   /* ===========================================================
      16) LIFETIME ACCESS
      =========================================================== */
+  .ptge-lifetime-section {
+    position: relative;
+    background-image: url('https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-58.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+  }
+  .ptge-lifetime-section__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(40, 30, 20, 0.45);
+    z-index: 1;
+  }
+  .ptge-lifetime-section .ptge__container {
+    position: relative;
+    z-index: 2;
+  }
   .ptge-lifetime {
     background: #fff;
     border-radius: 8px;
@@ -672,7 +706,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     margin: 0 auto;
     padding: 70px 60px;
     text-align: center;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
   }
   .ptge-lifetime p {
     font-family: Georgia, "Times New Roman", serif;
@@ -1105,8 +1139,9 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     </div>
   </section>
 
-  {%- comment -%} 8) YOU WILL FEEL — white card with dashed dividers {%- endcomment -%}
-  <section class="ptge__section ptge__section--soft">
+  {%- comment -%} 8) YOU WILL FEEL — white card on bg image {%- endcomment -%}
+  <section class="ptge__section ptge-feel-section">
+    <div class="ptge-feel-section__overlay"></div>
     <div class="ptge__container">
       <div class="ptge-feel">
         <h2>You Will Feel</h2>
@@ -1239,8 +1274,9 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     </div>
   </section>
 
-  {%- comment -%} 16) LIFETIME ACCESS — centered white card {%- endcomment -%}
-  <section class="ptge__section">
+  {%- comment -%} 16) LIFETIME ACCESS — centered white card on bg image {%- endcomment -%}
+  <section class="ptge__section ptge-lifetime-section">
+    <div class="ptge-lifetime-section__overlay"></div>
     <div class="ptge__container">
       <div class="ptge-lifetime">
         <p>Inside Plan to GRO Essentials, you&rsquo;ll have lifetime access to the foundational rhythms, planning tools, guided structure, and intentional practices that help you simplify your life, organize what matters most, and stop living in constant reaction mode. This isn&rsquo;t about doing more perfectly &mdash; it&rsquo;s about finally creating a life that feels clear, supportive, peaceful, and sustainable in the season you&rsquo;re living right now.</p>

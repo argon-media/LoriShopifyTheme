@@ -14,8 +14,8 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     --ptge-bg: #faf7f2;
     --ptge-bg-2: #f3ece1;
     --ptge-ink: #2a2a2a;
-    --ptge-muted: #555555;
-    --ptge-gold: #e4b485;
+    --ptge-muted: #2a2a2a;
+    --ptge-gold: #a67738;
     --ptge-line: #e6ddd0;
     --ptge-card: #ffffff;
     --ptge-soft: #efe7da;
@@ -33,7 +33,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge *::before,
   .ptge *::after { box-sizing: border-box; }
   .ptge img { max-width: 100%; height: auto; display: block; }
-  .ptge p { margin: 0 0 1em; color: var(--ptge-muted); }
+  .ptge p { margin: 0 0 1em; color: #2a2a2a; font-size: 17px; line-height: 1.7; }
   .ptge h1, .ptge h2, .ptge h3, .ptge h4, .ptge h5 {
     font-family: var(--ff-heading);
     color: var(--ptge-ink);
@@ -48,49 +48,62 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge h4 { font-size: clamp(1rem, 1.6vw, 1.15rem); text-transform: uppercase; letter-spacing: 2px; }
   .ptge a { color: inherit; }
 
-  /* ----- shared buttons ----- */
-  .ptge__btn {
+  /* ----- shared buttons (unified) ----- */
+  .ptge__btn,
+  .ptge__btn--gold,
+  .ptge__btn--light {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    background: #000;
+    background: #1a1a1a;
     color: #fff !important;
     text-decoration: none;
-    padding: 18px 36px;
+    padding: 16px 36px;
     font-family: var(--ff-body);
     font-size: 13px;
     font-weight: 600;
-    letter-spacing: 2.4px;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    border: 1px solid #000;
-    border-radius: 2px;
+    border: none;
+    border-radius: 0;
     transition: background .25s ease, color .25s ease, transform .2s ease;
     cursor: pointer;
   }
-  .ptge__btn::after {
+  .ptge__btn::after,
+  .ptge__btn--gold::after,
+  .ptge__btn--light::after {
     content: "\2192";
     font-size: 15px;
     line-height: 1;
   }
-  .ptge__btn:hover {
-    background: var(--ptge-gold);
-    color: #fff !important;
-    border-color: var(--ptge-gold);
-  }
-  .ptge__btn--gold {
-    background: var(--ptge-gold);
-    border-color: var(--ptge-gold);
-  }
-  .ptge__btn--gold:hover { background: #000; border-color: #000; }
-  .ptge__btn--light {
-    background: #fff;
-    color: #000 !important;
-    border-color: #fff;
-  }
+  .ptge__btn:hover,
+  .ptge__btn--gold:hover,
   .ptge__btn--light:hover {
-    background: var(--ptge-gold);
+    background: #2a2a2a;
     color: #fff !important;
-    border-color: var(--ptge-gold);
+  }
+  /* Inverted button for dark-bg sections */
+  .ptge-hero .ptge__btn,
+  .ptge-hero .ptge__btn--gold,
+  .ptge-life .ptge__btn,
+  .ptge-life .ptge__btn--gold,
+  .ptge-seasons .ptge__btn,
+  .ptge-seasons .ptge__btn--gold,
+  .ptge-price .ptge__btn,
+  .ptge-price .ptge__btn--gold {
+    background: #fff;
+    color: #1a1a1a !important;
+  }
+  .ptge-hero .ptge__btn:hover,
+  .ptge-hero .ptge__btn--gold:hover,
+  .ptge-life .ptge__btn:hover,
+  .ptge-life .ptge__btn--gold:hover,
+  .ptge-seasons .ptge__btn:hover,
+  .ptge-seasons .ptge__btn--gold:hover,
+  .ptge-price .ptge__btn:hover,
+  .ptge-price .ptge__btn--gold:hover {
+    background: #f0e9dc;
+    color: #1a1a1a !important;
   }
   .ptge__btn-row { display: flex; justify-content: center; margin-top: 36px; }
 
@@ -137,17 +150,18 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   }
   .ptge-checks li {
     position: relative;
-    padding: 10px 0 10px 38px;
-    color: var(--ptge-muted);
-    line-height: 1.55;
+    padding: 10px 0 10px 36px;
+    color: #2a2a2a;
+    line-height: 1.7;
+    font-size: 17px;
   }
   .ptge-checks li::before {
     content: "";
     position: absolute;
     left: 0;
     top: 14px;
-    width: 22px; height: 22px;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e4b485' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center/contain no-repeat;
+    width: 20px; height: 20px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a67738' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center/contain no-repeat;
   }
 
   /* ===========================================================
@@ -155,7 +169,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
      =========================================================== */
   .ptge-hero {
     position: relative;
-    min-height: 80vh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -167,7 +181,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-hero::before {
     content: "";
     position: absolute; inset: 0;
-    background: rgba(0,0,0,0.55);
+    background: rgba(0,0,0,0.65);
   }
   .ptge-hero__inner {
     position: relative;
@@ -179,21 +193,25 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     text-transform: uppercase;
     letter-spacing: 2.5px;
     margin-bottom: 26px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
   }
   .ptge-hero__sub {
-    color: #f3eee5;
+    color: #f3eee5 !important;
     font-size: 1.08rem;
+    font-weight: 500;
     max-width: 700px;
     margin: 0 auto 22px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
   }
   .ptge-hero__result {
     font-family: var(--ff-heading);
     font-style: italic;
-    font-weight: 600;
-    color: #fff;
-    font-size: 1.18rem;
+    font-weight: 700;
+    color: #fff !important;
+    font-size: 1.32rem;
     margin: 8px auto 34px;
     max-width: 700px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
   }
 
   /* ===========================================================
@@ -222,21 +240,22 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     letter-spacing: .4px;
   }
   .ptge-drift__card {
-    background: #efe7da;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.06);
     border-radius: 8px;
     padding: 60px 40px;
     text-align: center;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
     min-height: 320px;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
   .ptge-drift__card-eyebrow {
-    font-size: 11px;
-    letter-spacing: 4px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--ptge-gold);
+    color: #a67738;
     font-weight: 700;
     margin-bottom: 18px;
   }
@@ -252,7 +271,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-drift__card-accent {
     font-family: var(--ff-heading);
     font-style: italic;
-    color: var(--ptge-gold);
+    color: #444;
     font-size: 1.25rem;
     line-height: 1.4;
   }
@@ -270,10 +289,10 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-talk__text p { max-width: 560px; margin-left: auto; margin-right: auto; }
   .ptge-talk__did {
     display: block;
-    font-size: 11px;
-    letter-spacing: 4px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--ptge-gold);
+    color: #a67738;
     font-weight: 700;
     margin: 24px 0 6px;
   }
@@ -352,7 +371,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     width: 92px;
     height: 92px;
     border-radius: 50%;
-    background: var(--ptge-gold);
+    background: #a67738;
     color: #fff;
     display: flex;
     align-items: center;
@@ -360,11 +379,11 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     text-align: center;
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
-    line-height: 1.15;
+    line-height: 1.1;
+    padding: 4px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    transform: rotate(-8deg);
     z-index: 2;
   }
   .ptge-free__body {
@@ -372,10 +391,10 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   }
   .ptge-free__label {
     display: block;
-    font-size: 11px;
-    letter-spacing: 3px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--ptge-gold);
+    color: #a67738;
     font-weight: 700;
     margin-bottom: 14px;
   }
@@ -487,8 +506,8 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     margin: 0;
   }
   .ptge-feel__list li {
-    padding: 22px 10px;
-    border-top: 1px dashed var(--ptge-line);
+    padding: 24px 10px;
+    border-top: 1px solid rgba(166, 119, 56, 0.25);
     color: var(--ptge-ink);
     font-family: var(--ff-heading);
     font-size: 1.05rem;
@@ -541,10 +560,10 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   }
   .ptge-results__tag {
     margin-top: 50px;
-    letter-spacing: 4px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     font-size: 13px;
-    color: var(--ptge-gold);
+    color: #a67738;
     font-weight: 700;
     text-align: center;
   }
@@ -566,10 +585,12 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     margin-bottom: 12px;
   }
   .ptge-help__big {
-    font-family: var(--ff-heading);
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: normal;
+    font-weight: 400;
     font-size: clamp(1.2rem, 2vw, 1.5rem);
-    line-height: 1.45;
-    color: var(--ptge-ink);
+    line-height: 1.55;
+    color: #2a2a2a;
     margin-bottom: 30px;
   }
   .ptge-help__divider {
@@ -594,18 +615,20 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-split--7-5 { grid-template-columns: 7fr 5fr; }
 
   .ptge-about__sub {
-    color: var(--ptge-gold);
+    color: #a67738;
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: 3px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     margin: 4px 0 22px;
   }
   .ptge-about__lead {
-    font-family: var(--ff-heading);
-    font-size: 1.2rem;
-    color: var(--ptge-ink);
-    line-height: 1.5;
+    font-family: var(--ff-body);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    color: #2a2a2a;
+    line-height: 1.6;
     margin-bottom: 18px;
   }
   .ptge-about__italic { font-style: italic; }
@@ -621,16 +644,17 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     margin-bottom: 28px;
   }
   .ptge-bigtesti__quote {
-    font-family: var(--ff-heading);
-    font-style: italic;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: normal;
+    font-weight: 400;
     font-size: clamp(1.15rem, 2vw, 1.4rem);
-    color: var(--ptge-ink);
-    line-height: 1.55;
+    color: #2a2a2a;
+    line-height: 1.7;
   }
   .ptge-bigtesti__attrib {
     margin-top: 20px;
-    color: var(--ptge-gold);
-    letter-spacing: 2px;
+    color: #a67738;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 700;
@@ -649,11 +673,12 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     box-shadow: 0 4px 24px rgba(0,0,0,0.06);
   }
   .ptge-lifetime p {
-    font-family: var(--ff-heading);
-    font-style: italic;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: normal;
+    font-weight: 400;
     font-size: clamp(1.15rem, 2.1vw, 1.45rem);
-    line-height: 1.55;
-    color: var(--ptge-ink);
+    line-height: 1.7;
+    color: #2a2a2a;
     margin: 0;
   }
 
@@ -679,11 +704,12 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     margin: 0 auto;
   }
   .ptge-seasons__inner p {
-    font-family: var(--ff-heading);
-    font-style: italic;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: normal;
+    font-weight: 400;
     font-size: clamp(1.15rem, 2vw, 1.45rem);
     color: #f3eee5;
-    line-height: 1.55;
+    line-height: 1.7;
     margin-bottom: 24px;
   }
 
@@ -724,7 +750,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-price::before {
     content: "";
     position: absolute; inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.7);
   }
   .ptge-price__inner {
     position: relative;
@@ -750,21 +776,21 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     top: -16px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--ptge-gold);
+    background: #a67738;
     color: #fff;
-    font-size: 11px;
-    letter-spacing: 3px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 8px 20px;
+    padding: 8px 22px;
     border-radius: 999px;
     font-weight: 700;
   }
   .ptge-price__label {
     display: block;
-    font-size: 11px;
-    letter-spacing: 3px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--ptge-gold);
+    color: #a67738;
     font-weight: 700;
     margin-bottom: 12px;
   }
@@ -1056,7 +1082,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     <div class="ptge__container">
       <div class="ptge-foryou">
         <div class="ptge-foryou__block">
-          <h3>The Plan to GRO Essentials system is for you if&hellip;</h3>
+          <h3>This Is For You If&hellip;</h3>
           <ul class="ptge-checks">
             <li>Since a certain season, life hasn&rsquo;t felt the same. You feel more overwhelmed, reactive, exhausted, or behind than you used to.</li>
             <li>The constant clutter, unfinished tasks, and mental load are affecting your confidence, energy, and ability to fully enjoy your life.</li>
@@ -1065,7 +1091,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
           </ul>
         </div>
         <div class="ptge-foryou__block">
-          <h3>The Plan to GRO Essentials system is for you if&hellip;</h3>
+          <h3>And Also If&hellip;</h3>
           <ul class="ptge-checks">
             <li>You constantly feel weighed down by mental clutter, decision fatigue, and the pressure of carrying so much responsibility.</li>
             <li>The stress and overwhelm in your life are making it difficult to feel present, connected, rested, or fully like yourself.</li>

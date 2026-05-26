@@ -139,7 +139,8 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge__centered-h2 {
     text-align: center;
     margin: 0 auto 60px;
-    max-width: 900px;
+    width: 100%;
+    display: block;
   }
 
   /* gold checkmark list */
@@ -420,6 +421,17 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     z-index: 2;
     max-width: 900px;
     margin: 0 auto;
+    text-align: center;
+  }
+  .ptge-life__title {
+    font-family: var(--ff-heading);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    margin: 0 0 36px;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
   }
   .ptge-life__lead {
     font-family: var(--ff-heading);
@@ -1100,6 +1112,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   {%- comment -%} 6) WHAT LIFE NEEDS — dark {%- endcomment -%}
   <section class="ptge-life">
     <div class="ptge-life__inner">
+      <h2 class="ptge-life__title">Here&rsquo;s The Truth&hellip;</h2>
       <p class="ptge-life__lead">Your life doesn&rsquo;t just need another planner or productivity system. It also needs rhythms that actually support the woman carrying it all.</p>
       <p>So many women come to me saying they&rsquo;ve &ldquo;tried everything&rdquo; to finally feel organized, peaceful, and consistent&hellip; but they still feel overwhelmed underneath it all.</p>
       <ul class="ptge-life__bullets">

@@ -993,6 +993,27 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     .ptge { font-size: 16px; }
     .ptge-hero h1 { letter-spacing: 1.5px; }
   }
+
+  /* ===== USER OVERRIDES ===== */
+  p.ptge-talk__close {
+    padding-top: 20px;
+    justify-self: center;
+  }
+  p.ptge-quote {
+    justify-self: center;
+  }
+  section.ptge__section {
+    padding-bottom: 0px !important;
+  }
+  h2.ptge-life__title {
+    color: white !important;
+  }
+  p.ptge-results__tag {
+    margin-top: 30px !important;
+  }
+  section.ptge__section--help {
+    background-color: white;
+  }
 </style>
 
 <div class="ptge">
@@ -1202,7 +1223,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   </section>
 
   {%- comment -%} 10 + 11) IMAGINE + I CAN HELP {%- endcomment -%}
-  <section class="ptge__section">
+  <section class="ptge__section ptge__section--help">
     <div class="ptge__container">
       <div class="ptge-help__grid">
         <div>

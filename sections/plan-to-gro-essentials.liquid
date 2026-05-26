@@ -970,9 +970,21 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
       grid-template-columns: 1fr;
       gap: 0;
     }
-    .ptge__img-card { aspect-ratio: 16 / 11; max-height: 360px; }
-    .ptge-how__side { aspect-ratio: 16 / 11; max-height: 320px; }
-    .ptge-results__img { aspect-ratio: 16 / 12; }
+    .ptge__img-card {
+      aspect-ratio: 3 / 4;
+      max-width: 340px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .ptge__img-card img { object-position: center top; }
+    .ptge-how__side {
+      aspect-ratio: 3 / 4;
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .ptge-results__img { aspect-ratio: 3 / 4; }
+    .ptge-results__img img { object-position: center top; }
     .ptge-how__grid {
       grid-template-columns: 1fr;
       gap: 30px;

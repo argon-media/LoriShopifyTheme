@@ -179,7 +179,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     background: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-22.jpg") center/cover no-repeat;
     color: #fff;
     text-align: center;
-    padding: 120px 24px;
+    padding: 100px 24px;
   }
   .ptge-hero::before {
     content: "";
@@ -411,7 +411,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     color: #fff;
     text-align: center;
     background: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-12.jpg") center/cover no-repeat;
-    padding: 120px 24px;
+    padding: 100px 24px;
   }
   .ptge-life::before {
     content: "";
@@ -592,8 +592,8 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     margin-bottom: 8px;
   }
   .ptge-results__tag {
-    margin-top: 100px;
-    margin-bottom: -50px;
+    margin-top: 60px;
+    margin-bottom: 0;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-size: 13px;
@@ -741,7 +741,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     background: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-9.jpg") center/cover no-repeat;
     color: #fff;
     text-align: center;
-    padding: 130px 24px;
+    padding: 100px 24px;
   }
   .ptge-seasons::before {
     content: "";
@@ -796,7 +796,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-price {
     position: relative;
     background: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-12.jpg") center/cover no-repeat;
-    padding: 110px 24px;
+    padding: 100px 24px;
   }
   .ptge-price::before {
     content: "";
@@ -948,9 +948,11 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
      RESPONSIVE — collapse all 2-col grids
      =========================================================== */
   @media (max-width: 900px) {
-    .ptge__section { padding: 60px 20px; }
+    .ptge__section,
+    .ptge-life,
+    .ptge-seasons,
+    .ptge-price { padding: 60px 20px; }
     .ptge-hero { padding: 80px 20px; min-height: 70vh; }
-    .ptge-life, .ptge-seasons, .ptge-price { padding: 70px 20px; }
 
     .ptge-drift__grid,
     .ptge-talk__grid,

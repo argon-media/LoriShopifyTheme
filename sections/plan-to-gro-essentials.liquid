@@ -37,15 +37,15 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge h1, .ptge h2, .ptge h3, .ptge h4, .ptge h5 {
     font-family: var(--ff-heading);
     color: var(--ptge-ink);
-    font-weight: 500;
-    line-height: 1.18;
+    font-weight: 400;
+    line-height: 1.15;
     margin: 0 0 0.55em;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.05em;
   }
-  .ptge h1 { font-size: clamp(2.4rem, 5.4vw, 3.5rem); }
-  .ptge h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); text-transform: uppercase; letter-spacing: 1.5px; }
-  .ptge h3 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); text-transform: uppercase; letter-spacing: 1.2px; }
-  .ptge h4 { font-size: clamp(1rem, 1.6vw, 1.15rem); text-transform: uppercase; letter-spacing: 2px; }
+  .ptge h1 { font-size: clamp(2.4rem, 5.4vw, 3.5rem); text-transform: uppercase; letter-spacing: 0.05em; }
+  .ptge h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 400; }
+  .ptge h3 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 400; }
+  .ptge h4 { font-size: clamp(1rem, 1.6vw, 1.15rem); text-transform: uppercase; letter-spacing: 0.12em; }
   .ptge a { color: inherit; }
 
   /* ----- shared buttons (unified) ----- */
@@ -110,13 +110,14 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   /* ----- shared card / image helpers ----- */
   .ptge__card {
     background: var(--ptge-card);
-    border-radius: 8px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    border-radius: 0;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: none;
   }
   .ptge__img-card {
-    border-radius: 8px;
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    box-shadow: none;
     aspect-ratio: 4 / 5;
     background: #eadfce;
   }
@@ -194,7 +195,8 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-hero h1 {
     color: #fff;
     text-transform: uppercase;
-    letter-spacing: 2.5px;
+    letter-spacing: 0.06em;
+    font-weight: 400;
     margin-bottom: 26px;
     text-shadow: 0 2px 8px rgba(0,0,0,0.4);
   }
@@ -244,11 +246,11 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   }
   .ptge-drift__card {
     background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.06);
-    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 0;
     padding: 60px 40px;
     text-align: center;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    box-shadow: none;
     min-height: 320px;
     display: flex;
     flex-direction: column;
@@ -292,9 +294,10 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-talk__text p { max-width: 560px; margin-left: auto; margin-right: auto; }
   .ptge-talk__did {
     display: block;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 0;
+    text-transform: none;
+    font-style: italic;
     color: #a67738;
     font-weight: 700;
     margin: 24px 0 6px;
@@ -350,11 +353,12 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
 
   .ptge-free {
     background: #efe7da;
-    border-radius: 8px;
+    border-radius: 0;
+    border: 1px solid rgba(0,0,0,0.08);
     overflow: hidden;
     display: grid;
     grid-template-columns: 4fr 8fr;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    box-shadow: none;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -362,6 +366,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     position: relative;
     background: #ddd;
     min-height: 360px;
+    border-radius: 0;
   }
   .ptge-free__img img {
     width: 100%; height: 100%;
@@ -481,9 +486,10 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0;
-    border-radius: 8px;
+    border-radius: 0;
     background: #fff;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: none;
     overflow: hidden;
   }
   .ptge-foryou__block {
@@ -524,11 +530,12 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   }
   .ptge-feel {
     background: #fff;
-    border-radius: 8px;
+    border-radius: 0;
+    border: 1px solid rgba(0,0,0,0.08);
     max-width: 900px;
     margin: 0 auto;
     padding: 80px 70px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    box-shadow: none;
     text-align: center;
   }
   .ptge-feel h2 { margin-bottom: 36px; }
@@ -561,10 +568,10 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   }
   .ptge-results__card {
     background: #fff;
-    border: 1px solid var(--ptge-line);
-    border-radius: 28px;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+    box-shadow: none;
     display: flex;
     flex-direction: column;
   }
@@ -572,6 +579,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     aspect-ratio: 4 / 5;
     background: #eadfce;
     overflow: hidden;
+    border-radius: 0;
   }
   .ptge-results__img img { width: 100%; height: 100%; object-fit: cover; }
   .ptge-results__quote {
@@ -716,12 +724,13 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   }
   .ptge-lifetime {
     background: #fff;
-    border-radius: 8px;
+    border-radius: 0;
+    border: 1px solid rgba(0,0,0,0.08);
     max-width: 900px;
     margin: 0 auto;
     padding: 70px 60px;
     text-align: center;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+    box-shadow: none;
   }
   .ptge-lifetime p {
     font-family: Georgia, "Times New Roman", serif;
@@ -788,6 +797,9 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-how__step h3 {
     font-size: clamp(1.2rem, 2vw, 1.45rem);
     margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 400;
   }
 
   /* ===========================================================
@@ -813,27 +825,28 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
 
   .ptge-price__feat {
     background: #fff;
-    border-radius: 10px;
+    border-radius: 0;
+    border: 1px solid rgba(0,0,0,0.08);
     padding: 50px 50px;
     max-width: 900px;
     margin: 0 auto 36px;
     text-align: center;
-    box-shadow: 0 14px 40px rgba(0,0,0,0.25);
+    box-shadow: none;
     border-top: 4px solid var(--ptge-gold);
     position: relative;
   }
   .ptge-price__feat-tag {
     position: absolute;
-    top: -16px;
+    top: -14px;
     left: 50%;
     transform: translateX(-50%);
     background: #a67738;
     color: #fff;
     font-size: 12px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     padding: 8px 22px;
-    border-radius: 999px;
+    border-radius: 0;
     font-weight: 700;
   }
   .ptge-price__label {
@@ -886,11 +899,12 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   }
   .ptge-price__card {
     background: #fff;
-    border-radius: 10px;
+    border-radius: 0;
+    border: 1px solid rgba(0,0,0,0.08);
     padding: 44px 38px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+    box-shadow: none;
   }
   .ptge-price__card h3 {
     font-size: 1.4rem;
@@ -1011,7 +1025,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
 
   @media (max-width: 600px) {
     .ptge { font-size: 16px; }
-    .ptge-hero h1 { letter-spacing: 1.5px; }
+    .ptge-hero h1 { letter-spacing: 0.04em; }
   }
 
   /* ===== USER OVERRIDES ===== */

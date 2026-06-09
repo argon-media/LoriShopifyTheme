@@ -42,9 +42,9 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     margin: 0 0 0.55em;
     letter-spacing: 0.05em;
   }
-  .ptge h1 { font-size: clamp(2.4rem, 5.4vw, 3.5rem); text-transform: uppercase; letter-spacing: 0.05em; }
-  .ptge h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 400; }
-  .ptge h3 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 400; }
+  .ptge h1 { font-size: clamp(2.6rem, 6vw, 4.1rem); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
+  .ptge h2 { font-size: clamp(2rem, 4.2vw, 3rem); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500; line-height: 1.1; }
+  .ptge h3 { font-size: clamp(1.45rem, 2.6vw, 1.95rem); text-transform: uppercase; letter-spacing: 0.035em; font-weight: 500; }
   .ptge h4 { font-size: clamp(1rem, 1.6vw, 1.15rem); text-transform: uppercase; letter-spacing: 0.12em; }
   .ptge a { color: inherit; }
 
@@ -154,7 +154,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   }
   .ptge-checks li {
     position: relative;
-    padding: 10px 0 10px 36px;
+    padding: 12px 0 12px 32px;
     color: #2a2a2a;
     line-height: 1.7;
     font-size: 17px;
@@ -163,9 +163,9 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     content: "";
     position: absolute;
     left: 0;
-    top: 14px;
-    width: 20px; height: 20px;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a67738' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center/contain no-repeat;
+    top: 18px;
+    width: 16px; height: 16px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a67738' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center/contain no-repeat;
   }
 
   /* ===========================================================
@@ -173,112 +173,122 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
      =========================================================== */
   .ptge-hero {
     position: relative;
-    min-height: 90vh;
+    min-height: 78vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-22.jpg") center/cover no-repeat;
     color: #fff;
     text-align: center;
-    padding: 100px 24px;
+    padding: 110px 24px 130px;
   }
   .ptge-hero::before {
     content: "";
     position: absolute; inset: 0;
-    background: rgba(0,0,0,0.65);
+    background: rgba(0,0,0,0.55);
   }
   .ptge-hero__inner {
     position: relative;
     z-index: 2;
-    max-width: 800px;
+    max-width: 880px;
   }
   .ptge-hero h1 {
     color: #fff;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-weight: 400;
-    margin-bottom: 26px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    margin-bottom: 28px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
   }
   .ptge-hero__sub {
     color: #f3eee5 !important;
-    font-size: 1.08rem;
-    font-weight: 500;
-    max-width: 700px;
-    margin: 0 auto 22px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    font-size: 1.02rem;
+    font-weight: 400;
+    max-width: 680px;
+    margin: 0 auto 18px;
+    line-height: 1.65;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.35);
   }
   .ptge-hero__result {
     font-family: var(--ff-heading);
     font-style: italic;
-    font-weight: 700;
+    font-weight: 500;
     color: #fff !important;
-    font-size: 1.32rem;
-    margin: 8px auto 34px;
-    max-width: 700px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    font-size: 1.24rem;
+    margin: 14px auto 38px;
+    max-width: 720px;
+    line-height: 1.5;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.35);
   }
+  .ptge-hero .ptge__btn { padding: 18px 42px; }
 
   /* ===========================================================
      2) STOP DRIFTING — 7/5 text + headline card right
      =========================================================== */
   .ptge-drift__grid {
     display: grid;
-    grid-template-columns: 7fr 5fr;
-    gap: 70px;
-    align-items: center;
+    grid-template-columns: 6fr 5fr;
+    gap: 80px;
+    align-items: start;
   }
-  .ptge-drift__text h2 { margin-bottom: 18px; }
+  .ptge-drift__text { max-width: 560px; }
+  .ptge-drift__text h2 { margin-bottom: 22px; }
   .ptge-drift__lead {
-    font-family: var(--ff-heading);
-    font-style: italic;
-    font-size: 1.18rem;
-    color: var(--ptge-ink);
-    margin-bottom: 22px;
-    line-height: 1.45;
+    font-family: var(--ff-body);
+    font-style: normal;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a67738;
+    font-weight: 600;
+    margin-bottom: 26px;
+    line-height: 1.5;
   }
   .ptge-drift__sublabel {
-    font-family: var(--ff-heading);
-    font-size: 1.18rem;
-    color: var(--ptge-ink);
-    margin: 28px 0 14px;
-    letter-spacing: .4px;
+    font-family: var(--ff-body);
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #2a2a2a;
+    font-weight: 600;
+    margin: 32px 0 14px;
   }
   .ptge-drift__card {
-    background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.08);
+    background: #f3ece1;
+    border: none;
     border-radius: 0;
-    padding: 60px 40px;
+    padding: 90px 50px;
     text-align: center;
     box-shadow: none;
-    min-height: 320px;
+    min-height: 380px;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
   .ptge-drift__card-eyebrow {
-    font-size: 12px;
-    letter-spacing: 0.08em;
+    font-size: 11px;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: #a67738;
-    font-weight: 700;
-    margin-bottom: 18px;
+    font-weight: 600;
+    margin-bottom: 22px;
   }
   .ptge-drift__card-title {
     font-family: var(--ff-heading);
-    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+    font-size: clamp(1.7rem, 3.4vw, 2.5rem);
     color: var(--ptge-ink);
-    line-height: 1.15;
+    line-height: 1.1;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 16px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    margin-bottom: 22px;
   }
   .ptge-drift__card-accent {
-    font-family: var(--ff-heading);
+    font-family: Georgia, "Times New Roman", serif;
     font-style: italic;
-    color: #444;
-    font-size: 1.25rem;
-    line-height: 1.4;
+    color: #5a4a35;
+    font-size: 1.15rem;
+    line-height: 1.5;
   }
 
   /* ===========================================================
@@ -287,21 +297,23 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-talk__grid {
     display: grid;
     grid-template-columns: 5fr 7fr;
-    gap: 70px;
+    gap: 80px;
     align-items: center;
   }
   .ptge-talk__text { text-align: center; }
-  .ptge-talk__text p { max-width: 560px; margin-left: auto; margin-right: auto; }
+  .ptge-talk__text p { max-width: 540px; margin-left: auto; margin-right: auto; }
   .ptge-talk__did {
     display: block;
-    font-size: 15px;
+    font-family: var(--ff-heading);
+    font-size: 1.2rem;
     letter-spacing: 0;
     text-transform: none;
     font-style: italic;
     color: #a67738;
-    font-weight: 700;
-    margin: 24px 0 6px;
+    font-weight: 500;
+    margin: 28px 0 6px;
   }
+  .ptge-talk__did + p { margin-top: 0; }
   .ptge-talk__close {
     font-family: Georgia, "Times New Roman", serif;
     font-style: italic;
@@ -319,10 +331,11 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
      =========================================================== */
   .ptge-reso__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 70px;
+    grid-template-columns: 7fr 5fr;
+    gap: 80px;
     align-items: center;
   }
+  .ptge-reso__grid .ptge__img-card { aspect-ratio: 4 / 5; }
 
   /* ===========================================================
      5) QUOTE + FREEBIE
@@ -487,25 +500,31 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     grid-template-columns: 1fr 1fr;
     gap: 0;
     border-radius: 0;
-    background: #fff;
-    border: 1px solid rgba(0,0,0,0.08);
+    background: #f3ece1;
+    border: none;
     box-shadow: none;
     overflow: hidden;
   }
   .ptge-foryou__block {
-    padding: 60px;
+    padding: 72px 64px;
     position: relative;
   }
   .ptge-foryou__block + .ptge-foryou__block::before {
     content: "";
     position: absolute;
-    left: 0; top: 60px; bottom: 60px;
+    left: 0; top: 72px; bottom: 72px;
     width: 1px;
-    background: var(--ptge-line);
+    background: rgba(166, 119, 56, 0.35);
   }
   .ptge-foryou__block h3 {
-    margin-bottom: 24px;
-    font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+    margin-bottom: 28px;
+    font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+    font-style: italic;
+    font-family: var(--ff-heading);
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-weight: 500;
+    color: #2a2a2a;
   }
 
   /* ===========================================================
@@ -576,37 +595,40 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     flex-direction: column;
   }
   .ptge-results__img {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 3 / 4;
     background: #eadfce;
     overflow: hidden;
     border-radius: 0;
   }
   .ptge-results__img img { width: 100%; height: 100%; object-fit: cover; }
   .ptge-results__quote {
-    padding: 28px 26px 32px;
-    font-family: var(--ff-heading);
+    padding: 30px 28px 34px;
+    font-family: Georgia, "Times New Roman", serif;
     font-style: italic;
+    font-weight: 400;
     color: var(--ptge-ink);
-    line-height: 1.5;
-    font-size: 1.02rem;
+    line-height: 1.55;
+    font-size: 1rem;
     position: relative;
   }
   .ptge-results__quote::before {
     content: "\201C";
     display: block;
+    font-family: Georgia, serif;
     color: var(--ptge-gold);
-    font-size: 2.6rem;
-    line-height: 0.8;
-    margin-bottom: 8px;
+    font-size: 3.2rem;
+    line-height: 0.7;
+    margin-bottom: 10px;
+    font-style: normal;
   }
   .ptge-results__tag {
-    margin-top: 60px;
+    margin-top: 48px;
     margin-bottom: 0;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    font-size: 13px;
+    font-size: 12px;
     color: #a67738;
-    font-weight: 700;
+    font-weight: 600;
     text-align: center;
   }
 
@@ -616,30 +638,34 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-help__grid {
     display: grid;
     grid-template-columns: 7fr 5fr;
-    gap: 70px;
+    gap: 80px;
     align-items: center;
   }
   .ptge-help__imagine {
-    font-family: var(--ff-script);
+    font-family: var(--ff-heading);
     font-style: italic;
-    color: var(--ptge-gold);
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    margin-bottom: 12px;
+    color: var(--ptge-ink);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    margin-bottom: 14px;
+    letter-spacing: 0;
   }
   .ptge-help__big {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: var(--ff-heading);
     font-style: normal;
-    font-weight: 400;
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
-    line-height: 1.55;
+    font-weight: 500;
+    font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+    line-height: 1.35;
+    letter-spacing: 0.01em;
     color: #2a2a2a;
-    margin-bottom: 30px;
+    margin-bottom: 36px;
   }
+  .ptge-help__big strong { font-style: italic; font-weight: 500; }
   .ptge-help__divider {
-    width: 60px;
-    height: 2px;
+    width: 48px;
+    height: 1px;
     background: var(--ptge-gold);
-    margin: 24px 0 28px;
+    margin: 28px 0 32px;
   }
 
   /* ===========================================================
@@ -677,29 +703,34 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
 
   .ptge-bigtesti__intro {
     display: block;
-    color: #b35a4a;
-    font-weight: 700;
-    letter-spacing: 2.5px;
+    color: #a67738;
+    font-weight: 600;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    font-size: 13px;
-    line-height: 1.5;
-    margin-bottom: 28px;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 24px;
   }
   .ptge-bigtesti__quote {
     font-family: Georgia, "Times New Roman", serif;
     font-style: normal;
     font-weight: 400;
-    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
     color: #2a2a2a;
-    line-height: 1.7;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+  .ptge-bigtesti__quote:first-of-type::first-letter {
+    font-family: Georgia, serif;
+    font-style: italic;
   }
   .ptge-bigtesti__attrib {
-    margin-top: 20px;
+    margin-top: 22px;
     color: #a67738;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   /* ===========================================================
@@ -779,28 +810,33 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-how__grid {
     display: grid;
     grid-template-columns: 3fr 6fr 3fr;
-    gap: 40px;
+    gap: 50px;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 60px;
   }
-  .ptge-how__center { text-align: center; padding: 0 20px; }
-  .ptge-how__step + .ptge-how__step { margin-top: 50px; }
+  .ptge-how__center { text-align: center; padding: 0 30px; max-width: 520px; margin: 0 auto; }
+  .ptge-how__step + .ptge-how__step { margin-top: 64px; }
   .ptge-how__num {
     font-family: var(--ff-heading);
     font-style: italic;
     color: var(--ptge-gold);
-    font-size: clamp(2.6rem, 5vw, 3.4rem);
+    font-size: clamp(1.4rem, 2.2vw, 1.7rem);
     line-height: 1;
-    margin-bottom: 14px;
-    letter-spacing: 1px;
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+    font-weight: 500;
   }
   .ptge-how__step h3 {
-    font-size: clamp(1.2rem, 2vw, 1.45rem);
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-weight: 400;
+    font-family: var(--ff-heading);
+    font-style: italic;
+    font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+    margin-bottom: 18px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 500;
+    color: #2a2a2a;
   }
+  .ptge-how__side { aspect-ratio: 3 / 4; }
 
   /* ===========================================================
      19) PRICING — dark with cards
@@ -813,7 +849,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-price::before {
     content: "";
     position: absolute; inset: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.6);
   }
   .ptge-price__inner {
     position: relative;
@@ -824,30 +860,30 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-price h2 { color: #fff; text-align: center; margin-bottom: 50px; }
 
   .ptge-price__feat {
-    background: #fff;
+    background: rgba(250, 247, 242, 0.96);
     border-radius: 0;
-    border: 1px solid rgba(0,0,0,0.08);
-    padding: 50px 50px;
-    max-width: 900px;
-    margin: 0 auto 36px;
+    border: none;
+    padding: 60px 60px 56px;
+    max-width: 760px;
+    margin: 0 auto 40px;
     text-align: center;
     box-shadow: none;
-    border-top: 4px solid var(--ptge-gold);
+    border-top: none;
     position: relative;
   }
   .ptge-price__feat-tag {
     position: absolute;
-    top: -14px;
+    top: -16px;
     left: 50%;
     transform: translateX(-50%);
     background: #a67738;
     color: #fff;
-    font-size: 12px;
-    letter-spacing: 0.12em;
+    font-size: 11px;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    padding: 8px 22px;
+    padding: 10px 26px;
     border-radius: 0;
-    font-weight: 700;
+    font-weight: 600;
   }
   .ptge-price__label {
     display: block;
@@ -884,12 +920,11 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   }
   .ptge-price__list li:last-child { border-bottom: none; }
   .ptge-price__list li::before {
-    content: "\2713";
+    content: "";
     position: absolute;
-    left: 0; top: 11px;
-    color: var(--ptge-gold);
-    font-weight: 700;
-    font-size: 1.1rem;
+    left: 0; top: 18px;
+    width: 14px; height: 14px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a67738' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center/contain no-repeat;
   }
 
   .ptge-price__row {
@@ -898,14 +933,17 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     gap: 28px;
   }
   .ptge-price__card {
-    background: #fff;
+    background: rgba(250, 247, 242, 0.96);
     border-radius: 0;
-    border: 1px solid rgba(0,0,0,0.08);
-    padding: 44px 38px;
+    border: none;
+    padding: 50px 42px;
     display: flex;
     flex-direction: column;
     box-shadow: none;
+    text-align: center;
   }
+  .ptge-price__card .ptge-price__list { text-align: left; }
+  .ptge-price__row { max-width: 900px; margin: 0 auto; }
   .ptge-price__card h3 {
     font-size: 1.4rem;
     margin-bottom: 14px;
@@ -919,43 +957,50 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
      =========================================================== */
   .ptge-faq__grid {
     display: grid;
-    grid-template-columns: 5fr 7fr;
+    grid-template-columns: 4fr 8fr;
     gap: 70px;
-    align-items: center;
+    align-items: start;
   }
+  .ptge-faq__grid .ptge__img-card { aspect-ratio: 3 / 4; position: sticky; top: 40px; }
   .ptge-faq__accordion details {
-    border-bottom: 1px solid var(--ptge-line);
-    padding: 20px 0;
+    border-bottom: 1px solid rgba(166, 119, 56, 0.25);
+    padding: 24px 0;
   }
-  .ptge-faq__accordion details:first-child { border-top: 1px solid var(--ptge-line); }
+  .ptge-faq__accordion details:first-child { border-top: 1px solid rgba(166, 119, 56, 0.25); }
   .ptge-faq__accordion summary {
-    font-family: var(--ff-heading);
-    font-size: 1.1rem;
+    font-family: var(--ff-body);
+    font-size: 0.98rem;
+    font-weight: 500;
     cursor: pointer;
     list-style: none;
     position: relative;
-    padding-right: 36px;
+    padding-right: 40px;
     color: var(--ptge-ink);
-    line-height: 1.4;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
   }
   .ptge-faq__accordion summary::-webkit-details-marker { display: none; }
   .ptge-faq__accordion summary::after {
     content: "+";
     position: absolute;
-    right: 0; top: -4px;
-    font-size: 1.6rem;
+    right: 4px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
     color: var(--ptge-gold);
-    transition: transform .3s ease;
+    transition: transform .25s ease;
     line-height: 1;
+    font-weight: 300;
   }
   .ptge-faq__accordion details[open] summary::after {
-    content: "\00D7";
-    transform: rotate(0deg);
+    content: "\2212";
+    transform: translateY(-50%) rotate(0deg);
   }
   .ptge-faq__accordion details p {
-    margin-top: 14px;
-    color: var(--ptge-muted);
-    font-size: 0.96rem;
+    margin-top: 16px;
+    color: #2a2a2a;
+    font-size: 17px;
+    line-height: 1.7;
+    padding-right: 40px;
   }
 
   /* ===========================================================

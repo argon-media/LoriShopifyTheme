@@ -173,54 +173,59 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
      =========================================================== */
   .ptge-hero {
     position: relative;
-    min-height: 78vh;
+    min-height: 72vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-22.jpg") center/cover no-repeat;
+    background: url("https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-70.jpg") center 30%/cover no-repeat;
     color: #fff;
     text-align: center;
-    padding: 110px 24px 130px;
+    padding: 90px 24px 100px;
   }
   .ptge-hero::before {
     content: "";
     position: absolute; inset: 0;
-    background: rgba(0,0,0,0.55);
+    background: rgba(0,0,0,0.5);
   }
   .ptge-hero__inner {
     position: relative;
     z-index: 2;
-    max-width: 880px;
+    max-width: 760px;
   }
   .ptge-hero h1 {
     color: #fff;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     font-weight: 500;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
     text-shadow: 0 2px 10px rgba(0,0,0,0.35);
   }
   .ptge-hero__sub {
     color: #f3eee5 !important;
     font-size: 1.02rem;
     font-weight: 400;
-    max-width: 680px;
-    margin: 0 auto 18px;
-    line-height: 1.65;
+    max-width: 620px;
+    margin: 0 auto 14px;
+    line-height: 1.6;
     text-shadow: 0 1px 6px rgba(0,0,0,0.35);
   }
-  .ptge-hero__result {
-    font-family: var(--ff-heading);
-    font-style: italic;
-    font-weight: 500;
+  .ptge-hero__sub:last-of-type { margin-bottom: 26px; }
+  /* Solid-fill brand button override for hero (gold #a67738) */
+  .ptge-hero .ptge__btn,
+  .ptge-hero .ptge__btn--gold {
+    background: #a67738 !important;
     color: #fff !important;
-    font-size: 1.24rem;
-    margin: 14px auto 38px;
-    max-width: 720px;
-    line-height: 1.5;
-    text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+    padding: 14px 32px;
+    letter-spacing: 0.18em;
+    font-size: 12px;
   }
-  .ptge-hero .ptge__btn { padding: 18px 42px; }
+  .ptge-hero .ptge__btn:hover,
+  .ptge-hero .ptge__btn--gold:hover {
+    background: #8d621d !important;
+    color: #fff !important;
+  }
+  .ptge-hero .ptge__btn::after,
+  .ptge-hero .ptge__btn--gold::after { content: none; }
 
   /* ===========================================================
      2) STOP DRIFTING — 7/5 text + headline card right
@@ -1099,10 +1104,9 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   <section class="ptge-hero" id="top">
     <div class="ptge-hero__inner">
       <h1>Plan to GRO Essentials</h1>
-      <p class="ptge-hero__sub">The overwhelm, mental clutter, unfinished goals, and constant feeling that life is happening TO you instead of WITH you will no longer have to be your normal.</p>
-      <p class="ptge-hero__sub">This is a guided journaling and planning experience designed to help you create clarity, structure, and intentional momentum around what matters most in this season of your life.</p>
-      <p class="ptge-hero__result">You&rsquo;ll stop carrying your entire life mentally, create supportive rhythms, and finally become the woman who follows through on the life she truly desires.</p>
-      <a href="#pricing" class="ptge__btn ptge__btn--gold">Yes, I&rsquo;m Ready</a>
+      <p class="ptge-hero__sub">Step into a life that feels grounded, clear, and quietly powerful &mdash; supported by simple rhythms and intentional structure that hold you through every season.</p>
+      <p class="ptge-hero__sub">The mental clutter and unfinished goals don&rsquo;t have to be your normal anymore. Become the woman who leads her days with calm clarity and follows through on what matters most.</p>
+      <a href="#pricing" class="ptge__btn ptge__btn--gold">I&rsquo;m Ready</a>
     </div>
   </section>
 

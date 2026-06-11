@@ -1155,11 +1155,16 @@ h2.ptge-life__title {
       order: -1; /* image on top when 2-col sections stack on mobile */
     }
     .ptge__img-card img { object-position: center; }
-    .ptge-how__side {
-      aspect-ratio: 3 / 4;
-      max-width: 280px;
-      margin-left: auto;
-      margin-right: auto;
+    .ptge-how__side { aspect-ratio: 3 / 4; }
+    .ptge-how__sidewrap { display: flex; flex-direction: column; margin-bottom: 18px; }
+    .ptge-how__side--sm {
+      position: static;
+      width: 64%;
+      aspect-ratio: 4 / 5;
+      margin: -60px 0 0 0;
+      border: 6px solid #fff;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.20);
+      z-index: 2;
     }
     .ptge-results__img { aspect-ratio: 3 / 4; }
     .ptge-results__img img { object-position: center top; }
@@ -1178,16 +1183,13 @@ h2.ptge-life__title {
       width: auto; height: 1px;
     }
     .ptge-free__body { padding: 40px 30px; }
-    .ptge-feel { padding: 50px 20px 40px; margin-top: 0; }
+    .ptge-feel { padding: 20px 20px 40px; margin-top: 0; }
     .ptge-lifetime { display: block; max-width: 460px; }
     .ptge-lifetime__img { width: 100%; aspect-ratio: 4 / 3; }
-    .ptge-lifetime__card { width: auto; margin-left: 0; margin-top: -50px; padding: 36px 26px; }
+    .ptge-lifetime__card { width: auto; margin: -40px 20px 0px; padding: 36px 26px; position: relative; z-index: 2; }
     .ptge-price__feat { padding: 40px 28px; }
     .ptge-price__card { padding: 36px 28px; }
     .ptge-drift__card { padding: 40px 28px; min-height: auto; }
-
-    /* hide decorative side portraits on mobile (how-it-works) */
-    .ptge-how__side { display: none; }
   }
 
   @media (max-width: 767px) {
@@ -1207,6 +1209,7 @@ h2.ptge-life__title {
     .ptge-drift__text { max-width: none; }
     .ptge-results__grid { grid-template-columns: 2fr 2fr; max-width: 100%; }
     .ptge-lifetime { max-width: 100%; }
+    .ptge-how__side--sm { height: auto; width: 56%; }
   }
 
   /* ===== USER OVERRIDES ===== */

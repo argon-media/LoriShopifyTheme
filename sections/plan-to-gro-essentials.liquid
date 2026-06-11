@@ -41,12 +41,26 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     line-height: 1.15;
     margin: 0 0 0.55em;
     letter-spacing: 0.05em;
+    text-wrap: balance;
   }
-  .ptge h1 { font-size: clamp(2.6rem, 6vw, 4.1rem); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
-  .ptge h2 { font-size: clamp(2rem, 4.2vw, 3rem); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500; line-height: 1.1; }
-  .ptge h3 { font-size: clamp(1.45rem, 2.6vw, 1.95rem); text-transform: uppercase; letter-spacing: 0.035em; font-weight: 500; }
-  .ptge h4 { font-size: clamp(1rem, 1.6vw, 1.15rem); text-transform: uppercase; letter-spacing: 0.12em; }
+  .ptge h1 { font-size: clamp(2.1rem, 4.4vw, 3.2rem); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; }
+  .ptge h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); text-transform: uppercase; letter-spacing: 0.03em; font-weight: 500; line-height: 1.14; }
+  .ptge h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); text-transform: uppercase; letter-spacing: 0.03em; font-weight: 500; }
+  .ptge h4 { font-size: clamp(0.95rem, 1.5vw, 1.1rem); text-transform: uppercase; letter-spacing: 0.12em; }
   .ptge a { color: inherit; }
+  .ptge p { text-wrap: pretty; }
+
+  /* small uppercase eyebrow label (used above body sections) */
+  .ptge .ptge-eyebrow {
+    margin: 0 0 1em;
+    color: #2a2a2a;
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: var(--ff-body);
+  }
 
   /* ----- shared buttons (unified) ----- */
   .ptge__btn,
@@ -144,6 +158,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     display: block;
     padding: 0;
     box-sizing: border-box;
+    text-indent: 0.03em; /* optical centering vs trailing letter-spacing */
   }
 
   /* gold checkmark list */
@@ -191,11 +206,14 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     position: relative;
     z-index: 2;
     max-width: 760px;
+    display: grid;
+    justify-items: center;
   }
   .ptge-hero h1 {
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 0.06em;
+    text-indent: 0.06em; /* offset trailing letter-spacing so centered text is optically centered */
     font-weight: 500;
     margin-bottom: 20px;
     text-shadow: 0 2px 10px rgba(0,0,0,0.35);
@@ -280,13 +298,13 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   }
   .ptge-drift__card-title {
     font-family: var(--ff-heading);
-    font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
     color: var(--ptge-ink);
-    line-height: 1.1;
+    line-height: 1.12;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     font-weight: 500;
-    margin-bottom: 22px;
+    margin-bottom: 10px;
   }
   .ptge-drift__card-accent {
     font-family: Georgia, "Times New Roman", serif;
@@ -294,6 +312,13 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     color: #5a4a35;
     font-size: 1.15rem;
     line-height: 1.5;
+  }
+  .ptge-drift__card-sub {
+    font-family: var(--ff-script);
+    font-size: 1.6rem;
+    color: #a67738;
+    line-height: 1;
+    margin-top: 6px;
   }
 
   /* ===========================================================
@@ -346,16 +371,16 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
      5) QUOTE + FREEBIE
      =========================================================== */
   .ptge-quote {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px 24px 80px;
-    font-family: var(--ff-heading);
+font-family: var(--ff-heading);
     font-style: italic;
-    font-size: clamp(1.25rem, 2.5vw, 1.7rem);
-    line-height: 1.5;
-    color: var(--ptge-ink);
+    color: var(--ptge-ink) !important;
     position: relative;
+    font-size: 27px !important;
+    text-align: center;
+    line-height: 1.6em !important;
+    padding: 0px;
+    margin: 50px 0px 0px !important;
+    max-width: 100%;
   }
   .ptge-quote::before,
   .ptge-quote::after {
@@ -448,20 +473,21 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     margin: 0 auto;
     text-align: center;
   }
-  .background-f3ece1{    background: #f3ece1;}
+  .background-f3ece1{    background: #f3ece1;     padding-bottom: 160px;
+}
   .ptge-life__title {
     font-family: var(--ff-heading);
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
     font-weight: 400;
     color: #fff;
     text-align: center;
-    margin: 0 0 36px;
+    margin: 0 0 32px;
     letter-spacing: 0.02em;
-    line-height: 1.1;
+    line-height: 1.12;
   }
   .ptge-life__lead {
     font-family: var(--ff-heading);
-    font-size: clamp(1.4rem, 2.8vw, 2rem);
+    font-size: clamp(1.25rem, 2.3vw, 1.7rem);
     font-weight: 600;
     color: #fff;
     line-height: 1.35;
@@ -504,30 +530,33 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-foryou {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
+    gap: 0 80px;
     border-radius: 0;
     border: none;
     box-shadow: none;
-    overflow: hidden;
   }
   .ptge-foryou__block {
     position: relative;
   }
   .ptge-foryou__block + .ptge-foryou__block::before {
-    content: "";
-    position: absolute;
-    left: 0; top: 72px; bottom: 72px;
-    width: 1px;
-    background: rgba(166, 119, 56, 0.35);
+    content: none;
   }
+  /* design-matched: thin divider under each item, checkmark aligned */
+  .ptge-foryou .ptge-checks { margin: 0; }
+  .ptge-foryou .ptge-checks li {
+    padding: 18px 0 18px 34px;
+    border-bottom: 1px solid rgba(166, 119, 56, 0.30);
+  }
+  .ptge-foryou .ptge-checks li::before { top: 24px; }
   .ptge-foryou__block h3 {
-    margin-bottom: 28px;
-    font-size: clamp(1.4rem, 2.4vw, 1.85rem);
-    font-style: italic;
+    margin-bottom: 30px;
+    font-size: clamp(1.6rem, 2.7vw, 2.05rem);
+    font-style: normal;
     font-family: var(--ff-heading);
     text-transform: none;
     letter-spacing: 0.01em;
     font-weight: 500;
+    line-height: 1.2;
     color: #2a2a2a;
   }
 
@@ -540,7 +569,6 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     background-size: cover;
     background-position: center;
     background-attachment: scroll;
-    padding-top: 0px !important;
   }
   .ptge-feel-section__overlay {
     position: absolute;
@@ -554,16 +582,25 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   }
 
   .ptge-feel {
+    position: relative;
+    z-index: 3;
     border-radius: 0;
     border: 1px solid rgba(0,0,0,0.08);
     max-width: 900px;
+    margin: -180px auto 0;
     box-shadow: none;
     text-align: center;
 
     background-color: #fff;
     padding: 80px 80px 50px;
-    margin-top: -160px;
     box-shadow: rgba(0, 0, 0, .25) 4px 4px 16px;
+  }
+  .ptge-feel > img {
+    display: block;
+    width: 230px;
+    height: auto;
+    margin: 0 auto -8px;
+    border-radius: 0;
   }
   .ptge-feel h2 { margin-bottom: 36px; }
   .ptge-feel__list {
@@ -654,17 +691,18 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     font-style: italic;
     color: var(--ptge-ink);
     font-weight: 500;
-    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    font-size: clamp(1.3rem, 2.1vw, 1.65rem);
     margin-bottom: 14px;
     letter-spacing: 0;
   }
-  .ptge-help__big {
+  .ptge .ptge-help__big {
     font-family: var(--ff-heading);
     font-style: normal;
     font-weight: 500;
-    font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+    font-size: clamp(1.45rem, 2.5vw, 1.95rem);
     line-height: 1.35;
     letter-spacing: 0.01em;
+    text-transform: none;
     color: #2a2a2a;
     margin-bottom: 36px;
   }
@@ -719,13 +757,15 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     line-height: 1.6;
     margin-bottom: 24px;
   }
-  .ptge-bigtesti__quote {
+  .ptge .ptge-bigtesti__quote {
     font-family: Georgia, "Times New Roman", serif;
     font-style: normal;
     font-weight: 400;
-    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    font-size: clamp(1.2rem, 2.1vw, 1.55rem);
     color: #2a2a2a;
-    line-height: 1.55;
+    line-height: 1.6;
+    letter-spacing: normal;
+    text-transform: none;
     margin-bottom: 18px;
   }
   .ptge-bigtesti__quote:first-of-type::first-letter {
@@ -746,37 +786,52 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
      =========================================================== */
   .ptge-lifetime-section {
     position: relative;
-    background-image: url('https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-58.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
+    background: var(--ptge-bg-2);
   }
   .ptge-lifetime-section__overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(40, 30, 20, 0.45);
-    z-index: 1;
+    display: none;
   }
   .ptge-lifetime-section .ptge__container {
     position: relative;
     z-index: 2;
   }
   .ptge-lifetime {
-    background: #fff;
-    border-radius: 0;
-    border: 1px solid rgba(0,0,0,0.08);
-    max-width: 900px;
+    position: relative;
+    max-width: 1150px;
     margin: 0 auto;
-    padding: 70px 60px;
+    display: flex;
+    align-items: center;
+  }
+  .ptge-lifetime__img {
+    width: 52%;
+    flex: none;
+    aspect-ratio: 1 / 1;
+    background: #eadfce;
+    overflow: hidden;
+  }
+  .ptge-lifetime__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .ptge-lifetime__card {
+    position: relative;
+    z-index: 2;
+    width: 56%;
+    margin-left: -110px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+    padding: 56px 54px;
     text-align: center;
-    box-shadow: none;
   }
   .ptge-lifetime p {
     font-family: Georgia, "Times New Roman", serif;
     font-style: normal;
     font-weight: 400;
-    font-size: clamp(1.15rem, 2.1vw, 1.45rem);
-    line-height: 1.7;
+    font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+    line-height: 1.75;
     color: #2a2a2a;
     margin: 0;
   }
@@ -821,6 +876,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     gap: 50px;
     align-items: center;
     margin-top: 60px;
+    margin-bottom: 130px;
   }
   .ptge-how__center { text-align: center; padding: 0 30px; max-width: 520px; margin: 0 auto; }
   .ptge-how__step + .ptge-how__step { margin-top: 64px; }
@@ -837,14 +893,25 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
   .ptge-how__step h3 {
     font-family: var(--ff-heading);
     font-style: italic;
-    font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+    font-size: clamp(1.35rem, 2.2vw, 1.7rem);
     margin-bottom: 18px;
     text-transform: none;
     letter-spacing: 0;
     font-weight: 500;
     color: #2a2a2a;
   }
-  .ptge-how__side { aspect-ratio: 3 / 4; }
+  .ptge-how__side { aspect-ratio: 2 / 3; }
+  /* right column: tall image with a smaller one overlapping its lower-left (staggered) */
+  .ptge-how__sidewrap { position: relative; }
+  .ptge-how__side--sm {
+    position: absolute;
+    left: 14%;
+    bottom: -110px;
+    width: 72%;
+    aspect-ratio: 1 / 1;
+    z-index: 2;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.16);
+  }
 
   /* ===========================================================
      19) PRICING — dark with cards
@@ -872,7 +939,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     border-radius: 0;
     border: none;
     padding: 60px 60px 56px;
-    max-width: 9000px;
+    max-width: 900px;
     margin: 0 auto 40px;
     text-align: center;
     box-shadow: none;
@@ -978,7 +1045,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
      =========================================================== */
   .ptge-faq__grid {
     display: grid;
-    grid-template-columns: 4fr 8fr;
+    grid-template-columns: 5fr 5fr;
     gap: 70px;
     align-items: start;
   }
@@ -1068,6 +1135,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     .ptge-how__grid {
       grid-template-columns: 1fr;
       gap: 30px;
+      margin-bottom: 0;
     }
     .ptge-results__grid {
       grid-template-columns: 1fr;
@@ -1079,8 +1147,10 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     }
     .ptge-foryou__block { padding: 40px 32px; }
     .ptge-free__body { padding: 40px 30px; }
-    .ptge-feel { padding: 50px 30px; }
-    .ptge-lifetime { padding: 50px 30px; }
+    .ptge-feel { padding: 50px 30px; margin-top: -70px; }
+    .ptge-lifetime { display: block; max-width: 460px; }
+    .ptge-lifetime__img { width: 100%; aspect-ratio: 4 / 3; }
+    .ptge-lifetime__card { width: auto; margin-left: 0; margin-top: -50px; padding: 36px 26px; }
     .ptge-price__feat { padding: 40px 28px; }
     .ptge-price__card { padding: 36px 28px; }
     .ptge-drift__card { padding: 40px 28px; min-height: auto; }
@@ -1135,7 +1205,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
           <p class="ptge-drift__lead">The simple system you need to create a life that feels clear, intentional, and aligned.</p>
           <p>Life moves fast. And there is nothing more exhausting than constantly feeling behind in your own life.</p>
           <p>If you&rsquo;ve tried planners, routines, productivity hacks, mindset work, and constantly &ldquo;starting over,&rdquo; and you STILL feel overwhelmed, mentally scattered, or inconsistent&hellip; then it&rsquo;s time to stop trying harder and start building systems that actually support your life.</p>
-          <p class="ptge-drift__sublabel">Women inside Plan to GRO Essentials often experience:</p>
+          <p>Women inside Plan to GRO Essentials often experience:</p>
           <ul class="ptge-checks">
             <li>Finally feeling mentally clear again</li>
             <li>Consistently journaling and planning without overwhelm</li>
@@ -1150,13 +1220,11 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
 
         </div>
         <div class="ptge-drift__card">
-        <div class="ptge-drift__card">
-            <div class="ptge-drift__card-img">
-              <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-25.jpg" alt="Plan to GRO Essentials journal" loading="lazy" width="320" height="400" />
-            </div>
-            <div class="ptge-drift__card-title">Plan to GRO Essentials</div>
-            <div class="ptge-drift__card-sub">Lori J. Smith</div>
+          <div class="ptge-drift__card-img">
+            <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-25.jpg" alt="Plan to GRO Essentials journal" loading="lazy" width="320" height="400" />
           </div>
+          <div class="ptge-drift__card-title">Plan to GRO Essentials</div>
+          <div class="ptge-drift__card-sub">Lori J. Smith</div>
         </div>
       </div>
     </div>
@@ -1173,7 +1241,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
       <h2 class="ptge__centered-h2">We Need To Talk About Something&hellip;</h2>
           <p>Let me guess: you&rsquo;ve tried planners, routines, productivity hacks, and &ldquo;starting fresh&rdquo; more times than you can count&hellip; but you STILL find yourself feeling mentally scattered, behind, overwhelmed, and wondering why life keeps feeling harder than it should.</p>
           <p>I got you.</p>
-          <p><strong>Say hello to the simple journaling and planning framework designed to help you stop carrying your entire life mentally and finally create intentional structure that actually supports you.</strong></p>
+          <p>Say hello to the simple journaling and planning framework designed to help you stop carrying your entire life mentally and finally create intentional structure that actually supports you.</p>
           <p><b>Did you know?</b> Constant overwhelm is often connected to mental overload, unclear priorities, and trying to carry too many decisions at once.</p>
           <p><b>Did you know?</b> Most women don&rsquo;t actually need more motivation &mdash; they need clarity, supportive rhythms, and systems that reduce decision fatigue.</p>
       <p class="ptge-talk__close">It&rsquo;s about time for you to experience peace, clarity, follow-through, and intentional living as your normal way of life.</p>
@@ -1332,9 +1400,8 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     <div class="ptge__container">
       <div class="ptge-help__grid">
         <div>
-          <h2 class="ptge-help__big">Imagine this&hellip You wake up knowing exactly what matters most in this season of your life. <strong>This becomes your new normal,</strong> and you don&rsquo;t have to keep living in constant reaction mode anymore.</h2>
-          <div class="ptge-help__divider"></div>
-          <h3>I Can Help Because I&rsquo;ve Lived This Too&hellip;</h3>
+          <h2 class="ptge-help__big">Imagine this&hellip; You wake up knowing exactly what matters most in this season of your life. <strong>This becomes your new normal,</strong> and you don&rsquo;t have to keep living in constant reaction mode anymore.</h2>
+          <h3 class="ptge-eyebrow">I Can Help Because I&rsquo;ve Lived This Too&hellip;</h3>
           <p>If you&rsquo;ve tried planners, routines, productivity systems, fresh starts, and &ldquo;getting organized&rdquo;&hellip; but still feel mentally cluttered, inconsistent, or behind in your own life, the missing piece usually isn&rsquo;t more effort. It&rsquo;s having a simple system that helps you consistently return to what matters most.</p>
           <p>Your life is always reflecting what you&rsquo;re building daily. When everything stays in your head, it creates overwhelm, inconsistency, and decision fatigue. But when you create intentional rhythms and supportive structure, it changes the way you move through your entire life.</p>
           <p>The constant feeling of being behind, reactive, or scattered usually isn&rsquo;t because you&rsquo;re incapable. You simply haven&rsquo;t been given a sustainable way to organize your priorities, protect what matters, and follow through with intention. Plan to GRO Essentials helps you build that foundation step by step.</p>
@@ -1343,7 +1410,9 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
           <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-22.jpg" alt="Lori J Smith" loading="lazy" />
         </div>
       </div>
+      <div class="ptge__btn-row">
                 <a href="#pricing" class="ptge__btn">I&rsquo;m Ready To Live With Intention</a>
+      </div>
 
     </div>
   </section>
@@ -1356,7 +1425,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
           <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-7.jpg" alt="Here's the thing" loading="lazy" />
         </div>
         <div>
-          <h3>Here&rsquo;s The Thing&hellip;</h3>
+          <h3 class="ptge-eyebrow">Here&rsquo;s The Thing&hellip;</h3>
           <p>Most women are not struggling because they&rsquo;re lazy, incapable, or unmotivated. The reality is, many women are carrying an overwhelming amount of mental load while trying to hold together everyday life, relationships, responsibilities, goals, and expectations all at once.</p>
           <p>And when everything lives in your head, it becomes incredibly difficult to feel clear, consistent, focused, or intentional &mdash; even when you deeply desire a different kind of life.</p>
         </div>
@@ -1369,7 +1438,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     <div class="ptge__container">
       <div class="ptge-split ptge-split--7-5">
         <div>
-          <h3>Listen To This&hellip;</h3>
+          <h3 class="ptge-eyebrow">Listen To This&hellip;</h3>
           <p>Your life is deeply shaped by what you repeatedly give your attention to. And many women are living in constant mental reaction mode without even realizing it. They&rsquo;re carrying endless open loops, unfinished thoughts, overwhelming priorities, and internal pressure that keeps them feeling scattered, inconsistent, and emotionally exhausted.</p>
           <p>And even if your life looks &ldquo;fine&rdquo; on the outside, many women quietly feel disconnected from themselves, their priorities, and the life they actually want to be creating. Over time, that constant overwhelm and lack of intentional structure can make you feel like you&rsquo;re always behind, constantly restarting, and never fully grounded in your own life. That&rsquo;s why creating supportive systems and rhythms matters so much &mdash; because clarity changes the way you live every single day.</p>
         </div>
@@ -1387,7 +1456,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
         <div>
           <h2>Hi, I&rsquo;m Lori Smith.</h2>
           <p class="ptge-about__sub">Coach, Speaker, Podcast Host of Your Most Beautiful Life, and Creator of Plan to GRO and The Legacy of Beauty Community.</p>
-          <p class="ptge-about__lead">I help women who are carrying the weight of everything create lives that feel more intentional, peaceful, supported, and beautifully aligned through simple rhythms, emotional clarity, and practical systems that help them finally live what matters most.</p>
+          <p >I help women who are carrying the weight of everything create lives that feel more intentional, peaceful, supported, and beautifully aligned through simple rhythms, emotional clarity, and practical systems that help them finally live what matters most.</p>
           <p>For years, I&rsquo;ve walked women through seasons of overwhelm, transition, emotional exhaustion, and feeling disconnected from themselves &mdash; helping them move from survival mode into a life with more clarity, steadiness, presence, and purpose. Through coaching, teaching, and the rhythms inside Plan to GRO, women learn how to stop constantly reacting to life and begin creating it intentionally.</p>
           <p>What makes my approach different is that I don&rsquo;t believe transformation comes from doing more. I believe it comes from creating supportive structure, learning to listen to yourself again, and building rhythms that actually support the life you want to live. Plan to GRO was created to help women simplify what matters, organize their lives with intention, and create meaningful change one season at a time.</p>
           <p class="ptge-about__italic">I&rsquo;m also a wife, mom, grandmother, and a woman who deeply understands what it feels like to hold everything together while quietly longing for a life that feels lighter, calmer, and more beautiful from the inside out.</p>
@@ -1421,7 +1490,12 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     <div class="ptge-lifetime-section__overlay"></div>
     <div class="ptge__container">
       <div class="ptge-lifetime">
-        <p>Inside Plan to GRO Essentials, you&rsquo;ll have lifetime access to the foundational rhythms, planning tools, guided structure, and intentional practices that help you simplify your life, organize what matters most, and stop living in constant reaction mode. This isn&rsquo;t about doing more perfectly &mdash; it&rsquo;s about finally creating a life that feels clear, supportive, peaceful, and sustainable in the season you&rsquo;re living right now.</p>
+        <div class="ptge-lifetime__img">
+          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-58.jpg" alt="Plan to GRO Essentials" loading="lazy" />
+        </div>
+        <div class="ptge-lifetime__card">
+          <p>Inside Plan to GRO Essentials, you&rsquo;ll have lifetime access to the foundational rhythms, planning tools, guided structure, and intentional practices that help you simplify your life, organize what matters most, and stop living in constant reaction mode. This isn&rsquo;t about doing more perfectly &mdash; it&rsquo;s about finally creating a life that feels clear, supportive, peaceful, and sustainable in the season you&rsquo;re living right now.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1455,8 +1529,13 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
             <p>Through guided planning pages, intentional reflection, and practical structure, you&rsquo;ll begin creating a life that feels calmer, more organized, more present, and far more sustainable.</p>
           </div>
         </div>
-        <div class="ptge__img-card ptge-how__side">
-          <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-55.jpg" alt="Plan to GRO step 2" loading="lazy" />
+        <div class="ptge-how__sidewrap">
+          <div class="ptge__img-card ptge-how__side">
+            <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-55.jpg" alt="Plan to GRO step 2" loading="lazy" />
+          </div>
+          <div class="ptge__img-card ptge-how__side ptge-how__side--sm">
+            <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-30.jpg" alt="Plan to GRO" loading="lazy" />
+          </div>
         </div>
       </div>
       <div class="ptge__btn-row">
@@ -1540,9 +1619,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
             <summary>What if my schedule already feels too full for something like this?</summary>
             <p>That&rsquo;s usually the biggest sign that you need this most. Plan to GRO isn&rsquo;t about adding more pressure to your life. It&rsquo;s about helping you stop wasting energy on mental clutter, constant decision fatigue, and living in survival mode. Most women find that having a simple rhythm actually gives them more breathing room, not less.</p>
           </details>
-                <div class="ptge__btn-row">
         <a href="#pricing" class="ptge__btn">This Is The Reset I&rsquo;ve Been Needing</a>
-      </div>
 
         </div>
       </div>

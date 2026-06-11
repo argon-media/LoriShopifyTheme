@@ -448,6 +448,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     margin: 0 auto;
     text-align: center;
   }
+  .background-f3ece1{    background: #f3ece1;}
   .ptge-life__title {
     font-family: var(--ff-heading);
     font-size: clamp(2.2rem, 5vw, 3.5rem);
@@ -505,13 +506,11 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     grid-template-columns: 1fr 1fr;
     gap: 0;
     border-radius: 0;
-    background: #f3ece1;
     border: none;
     box-shadow: none;
     overflow: hidden;
   }
   .ptge-foryou__block {
-    padding: 72px 64px;
     position: relative;
   }
   .ptge-foryou__block + .ptge-foryou__block::before {
@@ -541,6 +540,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     background-size: cover;
     background-position: center;
     background-attachment: scroll;
+    padding-top: 0px !important;
   }
   .ptge-feel-section__overlay {
     position: absolute;
@@ -552,15 +552,18 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     position: relative;
     z-index: 2;
   }
+
   .ptge-feel {
-    background: #fff;
     border-radius: 0;
     border: 1px solid rgba(0,0,0,0.08);
     max-width: 900px;
-    margin: 0 auto;
-    padding: 80px 70px;
     box-shadow: none;
     text-align: center;
+
+    background-color: #fff;
+    padding: 80px 80px 50px;
+    margin-top: -160px;
+    box-shadow: rgba(0, 0, 0, .25) 4px 4px 16px;
   }
   .ptge-feel h2 { margin-bottom: 36px; }
   .ptge-feel__list {
@@ -869,7 +872,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     border-radius: 0;
     border: none;
     padding: 60px 60px 56px;
-    max-width: 760px;
+    max-width: 9000px;
     margin: 0 auto 40px;
     text-align: center;
     box-shadow: none;
@@ -1237,22 +1240,24 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     <div class="ptge-life__inner">
       <h2 class="ptge-life__title">Here&rsquo;s The Truth&hellip;</h2>
       <p class="ptge-life__lead">Your life doesn&rsquo;t just need another planner or productivity system. It also needs rhythms that actually support the woman carrying it all.</p>
-      <p>So many women come to me saying they&rsquo;ve &ldquo;tried everything&rdquo; to finally feel organized, peaceful, and consistent&hellip; but they still feel overwhelmed underneath it all.</p>
-      <ul class="ptge-life__bullets">
-        <li>They haven&rsquo;t learned how to stop living in constant pressure and survival mode.</li>
-        <li>They haven&rsquo;t created supportive rhythms that allow them to breathe, reset, and receive support.</li>
-        <li>They haven&rsquo;t released the mental load that keeps them carrying everything alone.</li>
-        <li>They haven&rsquo;t stopped building their lives around urgency, guilt, and reaction.</li>
-      </ul>
+      <p>So many women come to me saying they&rsquo;ve &ldquo;tried everything&rdquo; to finally feel organized, peaceful, and consistent&hellip; but they still feel overwhelmed underneath it all.<p>
+<p>They haven&rsquo;t learned how to stop living in constant pressure and survival mode.
+        <br>They haven&rsquo;t created supportive rhythms that allow them to breathe, reset, and receive support.
+        <br>They haven&rsquo;t released the mental load that keeps them carrying everything alone.
+        <br>They haven&rsquo;t stopped building their lives around urgency, guilt, and reaction.
+
+
+
+      </p>
       <p class="ptge-life__close">But once they do, they discover what it feels like to wake up clearheaded, present, intentional, and supported &mdash; with a life that finally feels sustainable instead of constantly exhausting.</p>
       <a href="#pricing" class="ptge__btn ptge__btn--gold">I&rsquo;m Ready To Reset My Life</a>
     </div>
   </section>
 
   {%- comment -%} 7) TWO FOR-YOU TEXT BLOCKS {%- endcomment -%}
-  <section class="ptge__section">
+  <section class="ptge__section     background-f3ece1">
     <div class="ptge__container">
-      <div class="ptge-foryou">
+      <div class="ptge-foryou" >
         <div class="ptge-foryou__block">
           <h3>This Is For You If&hellip;</h3>
           <ul class="ptge-checks">
@@ -1280,6 +1285,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     <div class="ptge-feel-section__overlay"></div>
     <div class="ptge__container">
       <div class="ptge-feel">
+      <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-25.jpg" alt="Weekly Reset Guide" loading="lazy">
         <h2>You Will Feel</h2>
         <ul class="ptge-feel__list">
           <li>Like you can finally enjoy your life instead of constantly trying to catch up to it</li>
@@ -1326,19 +1332,19 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
     <div class="ptge__container">
       <div class="ptge-help__grid">
         <div>
-          <p class="ptge-help__imagine">Imagine this&hellip;</p>
-          <p class="ptge-help__big">You wake up knowing exactly what matters most in this season of your life. <strong>This becomes your new normal,</strong> and you don&rsquo;t have to keep living in constant reaction mode anymore.</p>
+          <h2 class="ptge-help__big">Imagine this&hellip You wake up knowing exactly what matters most in this season of your life. <strong>This becomes your new normal,</strong> and you don&rsquo;t have to keep living in constant reaction mode anymore.</h2>
           <div class="ptge-help__divider"></div>
           <h3>I Can Help Because I&rsquo;ve Lived This Too&hellip;</h3>
           <p>If you&rsquo;ve tried planners, routines, productivity systems, fresh starts, and &ldquo;getting organized&rdquo;&hellip; but still feel mentally cluttered, inconsistent, or behind in your own life, the missing piece usually isn&rsquo;t more effort. It&rsquo;s having a simple system that helps you consistently return to what matters most.</p>
           <p>Your life is always reflecting what you&rsquo;re building daily. When everything stays in your head, it creates overwhelm, inconsistency, and decision fatigue. But when you create intentional rhythms and supportive structure, it changes the way you move through your entire life.</p>
           <p>The constant feeling of being behind, reactive, or scattered usually isn&rsquo;t because you&rsquo;re incapable. You simply haven&rsquo;t been given a sustainable way to organize your priorities, protect what matters, and follow through with intention. Plan to GRO Essentials helps you build that foundation step by step.</p>
-          <a href="#pricing" class="ptge__btn">I&rsquo;m Ready To Live With Intention</a>
         </div>
         <div class="ptge__img-card">
           <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-22.jpg" alt="Lori J Smith" loading="lazy" />
         </div>
       </div>
+                <a href="#pricing" class="ptge__btn">I&rsquo;m Ready To Live With Intention</a>
+
     </div>
   </section>
 
@@ -1402,7 +1408,7 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
         </div>
         <div>
           <span class="ptge-bigtesti__intro">&ldquo;For the first time in a long time, I don&rsquo;t feel like I&rsquo;m constantly behind in my own life.&rdquo;</span>
-          <p class="ptge-bigtesti__quote">I honestly didn&rsquo;t realize how much mental clutter and emotional pressure I was carrying until I started using Plan to GRO consistently. Instead of waking up already overwhelmed, I finally felt clear. I stopped constantly spinning my wheels and started making decisions that actually supported the life I wanted.</p>
+          <h3 class="ptge-bigtesti__quote">I honestly didn&rsquo;t realize how much mental clutter and emotional pressure I was carrying until I started using Plan to GRO consistently. Instead of waking up already overwhelmed, I finally felt clear. I stopped constantly spinning my wheels and started making decisions that actually supported the life I wanted.</h3>
           <p class="ptge-bigtesti__quote">What surprised me most was how much calmer I felt emotionally. Writing things down, simplifying what mattered, and creating rhythms I could actually keep helped me stop feeling like I was failing at everything all the time. My home felt calmer. My mind felt calmer. I felt calmer.</p>
           <p class="ptge-bigtesti__attrib">&mdash; Plan to GRO Member</p>
         </div>
@@ -1534,10 +1540,11 @@ Reuses lob-styles.css for shared font-face declarations (Hatton, Segatha).
             <summary>What if my schedule already feels too full for something like this?</summary>
             <p>That&rsquo;s usually the biggest sign that you need this most. Plan to GRO isn&rsquo;t about adding more pressure to your life. It&rsquo;s about helping you stop wasting energy on mental clutter, constant decision fatigue, and living in survival mode. Most women find that having a simple rhythm actually gives them more breathing room, not less.</p>
           </details>
-        </div>
-      </div>
-      <div class="ptge__btn-row">
+                <div class="ptge__btn-row">
         <a href="#pricing" class="ptge__btn">This Is The Reset I&rsquo;ve Been Needing</a>
+      </div>
+
+        </div>
       </div>
     </div>
   </section>

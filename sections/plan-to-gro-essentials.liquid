@@ -587,7 +587,7 @@ font-family: var(--ff-heading);
     z-index: 3;
     border-radius: 0;
     border: 1px solid rgba(0,0,0,0.08);
-    max-width: 900px;
+    max-width: 960px;
     margin: -180px auto 0;
     box-shadow: none;
     text-align: center;
@@ -1166,10 +1166,7 @@ font-family: var(--ff-heading);
   }
 
   /* ===== USER OVERRIDES ===== */
-  p.ptge-talk__close {
-    padding-top: 20px;
-    justify-self: center;
-  }
+
   p.ptge-quote {
     justify-self: center;
   }
@@ -1232,7 +1229,9 @@ font-family: var(--ff-heading);
   </section>
 
   {%- comment -%} 3) WE NEED TO TALK — centered title, image left, text right {%- endcomment -%}
-  <section class="ptge__section ptge__section--soft">
+  <section class="ptge__section ptge__section--soft" style="
+    background-color: #fff;
+">
     <div class="ptge__container">
       <div class="ptge-talk__grid">
         <div class="ptge__img-card">
@@ -1255,7 +1254,9 @@ font-family: var(--ff-heading);
   </section>
 
   {%- comment -%} 4) DOES THIS RESONATE — bullets left, image right {%- endcomment -%}
-  <section class="ptge__section">
+  <section style="
+    background-color: white;
+" class="ptge__section">
     <div class="ptge__container">
       <div class="ptge-reso__grid">
         <div>
@@ -1307,8 +1308,7 @@ font-family: var(--ff-heading);
   {%- comment -%} 6) WHAT LIFE NEEDS — dark {%- endcomment -%}
   <section class="ptge-life">
     <div class="ptge-life__inner">
-      <h2 class="ptge-life__title">Here&rsquo;s The Truth&hellip;</h2>
-      <p class="ptge-life__lead">Your life doesn&rsquo;t just need another planner or productivity system. It also needs rhythms that actually support the woman carrying it all.</p>
+      <h2 class="ptge-life__title">Here&rsquo;s The Truth&hellip; Your life doesn&rsquo;t just need another planner or productivity system. It also needs rhythms that actually support the woman carrying it all.</h2>
       <p>So many women come to me saying they&rsquo;ve &ldquo;tried everything&rdquo; to finally feel organized, peaceful, and consistent&hellip; but they still feel overwhelmed underneath it all.<p>
 <p>They haven&rsquo;t learned how to stop living in constant pressure and survival mode.
         <br>They haven&rsquo;t created supportive rhythms that allow them to breathe, reset, and receive support.
@@ -1318,7 +1318,7 @@ font-family: var(--ff-heading);
 
 
       </p>
-      <p class="ptge-life__close">But once they do, they discover what it feels like to wake up clearheaded, present, intentional, and supported &mdash; with a life that finally feels sustainable instead of constantly exhausting.</p>
+      <p>But once they do, they discover what it feels like to wake up clearheaded, present, intentional, and supported &mdash; with a life that finally feels sustainable instead of constantly exhausting.</p>
       <a href="#pricing" class="ptge__btn ptge__btn--gold">I&rsquo;m Ready To Reset My Life</a>
     </div>
   </section>
@@ -1421,7 +1421,9 @@ font-family: var(--ff-heading);
   {%- comment -%} 12) HERE'S THE THING — image left, text right (5/7) {%- endcomment -%}
   <section class="ptge__section ptge__section--soft">
     <div class="ptge__container">
-      <div class="ptge-split ptge-split--5-7">
+      <div class="ptge-split ptge-split--5-7" style="
+    background-color: #fff;
+">
         <div class="ptge__img-card">
           <img src="https://cdn.shopify.com/s/files/1/0797/0390/0415/files/branding-7.jpg" alt="Here's the thing" loading="lazy" />
         </div>
@@ -1435,7 +1437,9 @@ font-family: var(--ff-heading);
   </section>
 
   {%- comment -%} 13) LISTEN TO THIS — text left, image right (7/5) {%- endcomment -%}
-  <section class="ptge__section">
+  <section class="ptge__section" style="
+    background-color: #fff;
+">
     <div class="ptge__container">
       <div class="ptge-split ptge-split--7-5">
         <div>

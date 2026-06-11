@@ -1159,12 +1159,15 @@ h2.ptge-life__title {
     .ptge-how__sidewrap { display: flex; flex-direction: column; margin-bottom: 18px; }
     .ptge-how__side--sm {
       position: static;
-      width: 64%;
       aspect-ratio: 4 / 5;
       margin: -60px 0 0 0;
       border: 6px solid #fff;
       box-shadow: 0 14px 34px rgba(0,0,0,0.20);
       z-index: 2;
+    }
+    .ptge__img-card.ptge-how__side.ptge-how__side--sm {
+      width: 52vw;
+      place-self: center;
     }
     .ptge-results__img { aspect-ratio: 3 / 4; }
     .ptge-results__img img { object-position: center top; }
@@ -1209,7 +1212,7 @@ h2.ptge-life__title {
     .ptge-drift__text { max-width: none; }
     .ptge-results__grid { grid-template-columns: 2fr 2fr; max-width: 100%; }
     .ptge-lifetime { max-width: 100%; }
-    .ptge-how__side--sm { height: auto; width: 56%; }
+    .ptge-how__side--sm { height: auto; }
   }
 
   /* ===== USER OVERRIDES ===== */

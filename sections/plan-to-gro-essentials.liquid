@@ -1093,9 +1093,9 @@ font-family: var(--ff-heading);
   }
 
   /* ===========================================================
-     RESPONSIVE — collapse all 2-col grids
+     RESPONSIVE — collapse all 2-col grids (tablet + mobile, ≤1024)
      =========================================================== */
-  @media (max-width: 900px) {
+  @media (max-width: 1024px) {
   .ptge-drift__grid {
     display: flex;
     flex-direction: column-reverse;
@@ -1124,8 +1124,8 @@ h2.ptge-life__title {
     .ptge__section,
     .ptge-life,
     .ptge-seasons,
-    .ptge-price { padding: 60px 20px; }
-    .ptge-hero { padding: 80px 20px; min-height: 70vh; }
+    .ptge-price { padding: 44px 20px; }
+    .ptge-hero { padding: 64px 20px; min-height: 62vh; }
 
     .ptge-drift__grid,
     .ptge-talk__grid,
@@ -1137,11 +1137,11 @@ h2.ptge-life__title {
     .ptge-price__row,
     .ptge-free {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 28px;
     }
     .ptge-foryou {
       grid-template-columns: 1fr;
-      gap: 50px;
+      gap: 32px;
     }
     .ptge__img-card {
       aspect-ratio: 3 / 4;
@@ -1173,7 +1173,7 @@ h2.ptge-life__title {
       width: auto; height: 1px;
     }
     .ptge-free__body { padding: 40px 30px; }
-    .ptge-feel { padding: 50px 20px 40px; }
+    .ptge-feel { padding: 50px 20px 40px; margin-top: 0; }
     .ptge-lifetime { display: block; max-width: 460px; }
     .ptge-lifetime__img { width: 100%; aspect-ratio: 4 / 3; }
     .ptge-lifetime__card { width: auto; margin-left: 0; margin-top: -50px; padding: 36px 26px; }
@@ -1185,17 +1185,30 @@ h2.ptge-life__title {
     .ptge-how__side { display: none; }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 767px) {
     .ptge { font-size: 16px; }
     .ptge-hero h1 { letter-spacing: 0.04em; }
   }
 
-  /* tablet only: image height = 75vw */
-  @media (min-width: 601px) and (max-width: 900px) {
+  /* tablet only (768–1024): uniform 40px side gutters, content fills between them */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .ptge__section,
+    .ptge-hero,
+    .ptge-life,
+    .ptge-seasons,
+    .ptge-price { padding-left: 40px; padding-right: 40px; }
+    .ptge__container { max-width: none; }
     .ptge__img-card { height: 75vw; }
+    .ptge-drift__text { max-width: none; }
   }
 
   /* ===== USER OVERRIDES ===== */
+
+  /* Resonate section CTA: extra top spacing (all breakpoints) */
+  .ptge-reso__grid a.ptge__btn { margin-top: 20px; }
+
+  /* FAQ section CTA: extra top spacing */
+  .ptge-faq__accordion a.ptge__btn { margin-top: 30px; }
 
   p.ptge-quote {
     justify-self: center;

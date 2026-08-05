@@ -22,6 +22,14 @@
     "social_instagram": "https://instagram.com/lorijsmithco",
     "social_facebook": "https://facebook.com/lorijsmithco",
     "social_pinterest": "https://pinterest.com/lorijsmithco",
-    "social_tiktok": "https://tiktok.com/@lorijsmithco"
+    "social_tiktok": "https://tiktok.com/@lorijsmithco",
+    "content_for_index": [],
+    "blocks": {
+      "18131037017812181619": {
+        "type": "shopify://apps/mailchimp-email-sms/blocks/mailchimp_for_shopify_script/e3b67dce-fd41-4b61-b3cf-961c12344cde",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   }
 }

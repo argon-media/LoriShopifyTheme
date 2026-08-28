@@ -10,6 +10,11 @@
       <div class="cart-page__content">
         <div class="cart-page__items">
           {% for item in cart.items %}
+            {%- assign _vtitle = item.variant.title | downcase -%}
+            {%- assign is_free_trial = false -%}
+            {%- if _vtitle contains 'trial' or _vtitle contains 'free' or item.properties['Purchase Type'] == 'Free Trial' or item.final_price == 0 -%}
+              {%- assign is_free_trial = true -%}
+            {%- endif -%}
             <div class="cart-item">
               <div class="cart-item__image">
                 <a href="{{ item.url }}">
@@ -41,14 +46,21 @@
               </div>
               
               <div class="cart-item__quantity">
-                <form action="/cart/change" method="post">
-                  <input type="hidden" name="line" value="{{ forloop.index }}">
-                  <div class="qty-control">
-                    <button type="submit" name="quantity" value="{{ item.quantity | minus: 1 }}" class="qty-btn">−</button>
-                    <span class="qty-value">{{ item.quantity }}</span>
-                    <button type="submit" name="quantity" value="{{ item.quantity | plus: 1 }}" class="qty-btn">+</button>
+                {% if is_free_trial %}
+                  <div class="qty-control qty-control--locked" data-free-trial-line="{{ forloop.index }}" data-qty="{{ item.quantity }}">
+                    <span class="qty-value">1</span>
                   </div>
-                </form>
+                  <p class="cart-item__limit-note">Limit 1 per customer</p>
+                {% else %}
+                  <form action="/cart/change" method="post">
+                    <input type="hidden" name="line" value="{{ forloop.index }}">
+                    <div class="qty-control">
+                      <button type="submit" name="quantity" value="{{ item.quantity | minus: 1 }}" class="qty-btn">−</button>
+                      <span class="qty-value">{{ item.quantity }}</span>
+                      <button type="submit" name="quantity" value="{{ item.quantity | plus: 1 }}" class="qty-btn">+</button>
+                    </div>
+                  </form>
+                {% endif %}
               </div>
               
               <div class="cart-item__total">
@@ -314,7 +326,45 @@
 .cart-shop-btn:hover {
   background: #d3a374;
 }
+
+.qty-control--locked {
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.cart-item__limit-note {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  margin-top: 0.4rem;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
 </style>
+
+<script>
+(function() {
+  // Free journal is limited to one per customer. If a line somehow holds
+  // more than one (older cart, manual URL change), reset it to 1.
+  var lockedLines = document.querySelectorAll('[data-free-trial-line]');
+  var corrected = false;
+
+  lockedLines.forEach(function(el) {
+    if (corrected) return;
+    var qty = parseInt(el.getAttribute('data-qty'), 10) || 1;
+    var line = parseInt(el.getAttribute('data-free-trial-line'), 10);
+    if (qty > 1 && line) {
+      corrected = true;
+      fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ line: line, quantity: 1 })
+      })
+      .then(function() { window.location.reload(); })
+      .catch(function() { /* leave as-is if the correction fails */ });
+    }
+  });
+})();
+</script>
 
 {% schema %}
 {

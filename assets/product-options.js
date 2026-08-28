@@ -6,6 +6,13 @@
 (function() {
   'use strict';
 
+  // Mailchimp audience (pulled from the theme's footer signup form)
+  var MAILCHIMP = {
+    action: 'https://lorijsmith.us5.list-manage.com/subscribe/post-json',
+    u: 'ce5b25d7e73f18ff0a5c2ad81',
+    id: '55ace7222c'
+  };
+
   document.addEventListener('DOMContentLoaded', function() {
     initProductGallery();
     initPurchaseOptions();
@@ -25,9 +32,9 @@
     thumbs.forEach(function(thumb) {
       thumb.addEventListener('click', function() {
         const newSrc = this.getAttribute('data-image-src');
-        
+
         mainImage.src = newSrc;
-        
+
         thumbs.forEach(function(t) {
           t.classList.remove('active');
         });
@@ -48,8 +55,28 @@
     const variantInput = document.getElementById('variantId');
     const quantitySelector = document.getElementById('quantitySelector');
     const checkEligibilityBtn = document.getElementById('checkEligibilityBtn');
+    const newsletterCheckbox = document.getElementById('newsletterOptin');
 
     if (options.length === 0) return;
+
+    // Eligibility state — the free journal can only be claimed after a
+    // successful Mailchimp subscribe confirms this email is a new subscriber.
+    window.trialEligible = false;
+    window.trialEmail = '';
+
+    function setStatus(message, type) {
+      if (!emailStatus) return;
+      emailStatus.textContent = message;
+      emailStatus.style.color = type === 'success' ? '#22c55e' : (type === 'error' ? '#ef4444' : '#6b7280');
+    }
+
+    function resetEligibility() {
+      window.trialEligible = false;
+      const active = document.querySelector('.purchase-option.active');
+      if (active && active.getAttribute('data-purchase-type') === 'first-free' && addToCartBtn) {
+        addToCartBtn.disabled = true;
+      }
+    }
 
     // Select first option by default
     if (options[0]) {
@@ -60,100 +87,227 @@
       option.addEventListener('click', function(e) {
         // Don't toggle if clicking on form elements inside
         if (e.target.closest('.first-free-form')) return;
-        
+
         // Remove active from all
         options.forEach(function(opt) {
           opt.classList.remove('active');
         });
-        
+
         // Add active to clicked
         this.classList.add('active');
-        
+
         // Handle purchase type
         const purchaseType = this.getAttribute('data-purchase-type');
         handlePurchaseTypeChange(purchaseType, variantInput, addToCartBtn, quantitySelector);
       });
     });
 
-    // Check Eligibility button click handler
+    // Check Eligibility button — now performs a REAL Mailchimp subscribe.
+    // Success  => new subscriber, eligible to claim.
+    // Already a member => they've already claimed the free journal.
     if (checkEligibilityBtn && emailInput) {
       checkEligibilityBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        
+
         const email = emailInput.value.trim();
         const btnText = this.querySelector('.btn-text');
-        
+
         if (!email || !isValidEmail(email)) {
-          emailStatus.textContent = 'Please enter a valid email address.';
-          emailStatus.style.color = '#ef4444';
+          setStatus('Please enter a valid email address.', 'error');
           return;
         }
-        
-        // Show checking state
+
+        // The free journal comes WITH the subscription — opt-in is required.
+        if (newsletterCheckbox && !newsletterCheckbox.checked) {
+          setStatus('Please tick the Monthly Legacy Letter box — the free journal comes with the subscription.', 'error');
+          return;
+        }
+
         if (btnText) btnText.textContent = 'Checking...';
-        this.disabled = true;
-        
-        // Simulate API call
-        setTimeout(function() {
-          checkFirstTimeCustomer(email, emailStatus, addToCartBtn);
+        checkEligibilityBtn.disabled = true;
+        window.trialEligible = false;
+        if (addToCartBtn) addToCartBtn.disabled = true;
+
+        subscribeToMailchimp(email, function(data) {
+          const result = interpretMailchimp(data);
           if (btnText) btnText.textContent = 'Check Eligibility';
           checkEligibilityBtn.disabled = false;
-        }, 1500);
+
+          if (result.ok) {
+            window.trialEligible = true;
+            window.trialEmail = email;
+            setStatus('✓ You\'re subscribed and eligible — claim your free journal below!', 'success');
+            if (addToCartBtn) addToCartBtn.disabled = false;
+          } else {
+            window.trialEligible = false;
+            if (addToCartBtn) addToCartBtn.disabled = true;
+            setStatus('✕ ' + result.msg, 'error');
+          }
+        });
       });
     }
 
-    // Clear status on email input change
+    // Reset eligibility whenever the email or opt-in changes
     if (emailInput) {
       emailInput.addEventListener('input', function() {
-        if (emailStatus) {
-          emailStatus.textContent = '';
-          emailStatus.className = 'first-free-form__status';
-        }
+        setStatus('', 'neutral');
+        resetEligibility();
       });
-      
-      // Prevent click from bubbling to parent
       emailInput.addEventListener('click', function(e) {
         e.stopPropagation();
       });
+    }
+    if (newsletterCheckbox) {
+      newsletterCheckbox.addEventListener('change', resetEligibility);
     }
 
     // Form submission
     if (productForm) {
       productForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
         const activeOption = document.querySelector('.purchase-option.active');
         const purchaseType = activeOption ? activeOption.getAttribute('data-purchase-type') : 'onetime';
         const variants = window.productVariants || {};
         const quantity = parseInt(document.getElementById('quantity').value) || 1;
-        
+
         if (purchaseType === 'first-free') {
           const email = emailInput ? emailInput.value.trim() : '';
-          
+
           if (!email || !isValidEmail(email)) {
             alert('Please enter a valid email address to claim your free journal.');
             return;
           }
-          
-          // Store email for tracking
-          localStorage.setItem('newsletter_email', email);
-          
-          // Mark email as used for free trial
-          const usedEmails = JSON.parse(localStorage.getItem('used_trial_emails') || '[]');
-          if (!usedEmails.includes(email.toLowerCase())) {
-            usedEmails.push(email.toLowerCase());
-            localStorage.setItem('used_trial_emails', JSON.stringify(usedEmails));
+          if (newsletterCheckbox && !newsletterCheckbox.checked) {
+            alert('Please tick the Monthly Legacy Letter box — the free journal comes with the subscription.');
+            return;
           }
+          // Must pass the Mailchimp eligibility/subscribe step first
+          if (!window.trialEligible || window.trialEmail !== email) {
+            alert('Please tap "Check Eligibility" first to confirm your free journal.');
+            return;
+          }
+
+          // One free journal per customer — block a second one
+          guardAndAddFreeTrial(purchaseType, variants, emailInput, addToCartBtn);
+          return;
         }
-        
-        // Build cart item with properties
+
+        // Build cart item with properties (paid / subscription)
         const cartItem = buildCartItem(purchaseType, variants, quantity, emailInput);
-        
+
         // Add to cart via AJAX
         addToCartAjax(cartItem, addToCartBtn);
       });
     }
+  }
+
+  /**
+   * Free journal guard — ensure only ONE free journal per cart.
+   * A paid journal + one free journal is allowed; a second free journal is not.
+   */
+  function guardAndAddFreeTrial(purchaseType, variants, emailInput, addToCartBtn) {
+    const freeId = variants.freeTrial;
+
+    fetch('/cart.js', { headers: { 'Accept': 'application/json' } })
+      .then(function(r) { return r.json(); })
+      .then(function(cart) {
+        const items = (cart && cart.items) || [];
+        const alreadyHasFree = items.some(function(it) {
+          return (freeId && it.variant_id === freeId) ||
+                 (it.properties && it.properties['Purchase Type'] === 'Free Trial') ||
+                 (it.final_price === 0);
+        });
+
+        if (alreadyHasFree) {
+          alert('Your free journal is already in the cart — limit one per customer. If you\'d like another, it can be added as a regular purchase.');
+          window.location.href = '/cart';
+          return;
+        }
+
+        const item = buildCartItem(purchaseType, variants, 1, emailInput);
+        addToCartAjax(item, addToCartBtn);
+      })
+      .catch(function() {
+        // If the cart lookup fails, still add (quantity is forced to 1 anyway)
+        const item = buildCartItem(purchaseType, variants, 1, emailInput);
+        addToCartAjax(item, addToCartBtn);
+      });
+  }
+
+  /**
+   * Subscribe an email to Mailchimp via the embedded-form JSONP endpoint.
+   * No server / API key needed — same audience as the footer signup form.
+   */
+  function subscribeToMailchimp(email, onResult) {
+    const cb = 'mcCallback_' + Date.now();
+    const url = MAILCHIMP.action +
+      '?u=' + encodeURIComponent(MAILCHIMP.u) +
+      '&id=' + encodeURIComponent(MAILCHIMP.id) +
+      '&EMAIL=' + encodeURIComponent(email) +
+      '&c=' + cb;
+
+    const script = document.createElement('script');
+    let done = false;
+
+    function cleanup() {
+      try { delete window[cb]; } catch (e) { window[cb] = undefined; }
+      if (script.parentNode) script.parentNode.removeChild(script);
+    }
+
+    window[cb] = function(data) {
+      if (done) return;
+      done = true;
+      cleanup();
+      onResult(data);
+    };
+
+    script.onerror = function() {
+      if (done) return;
+      done = true;
+      cleanup();
+      onResult({ result: 'error', msg: 'network' });
+    };
+
+    setTimeout(function() {
+      if (done) return;
+      done = true;
+      cleanup();
+      onResult({ result: 'error', msg: 'timeout' });
+    }, 8000);
+
+    script.src = url;
+    document.body.appendChild(script);
+  }
+
+  /**
+   * Turn a Mailchimp response into a simple decision.
+   */
+  function interpretMailchimp(data) {
+    if (!data) {
+      return { ok: false, already: false, msg: 'Something went wrong — please try again.' };
+    }
+    if (data.result === 'success') {
+      return { ok: true, already: false, msg: '' };
+    }
+    const raw = (data.msg || '').toString();
+    const lower = raw.toLowerCase();
+
+    if (lower.indexOf('already subscribed') !== -1) {
+      return { ok: false, already: true, msg: 'This email has already claimed the free journal.' };
+    }
+    if (raw === 'network' || raw === 'timeout') {
+      return { ok: false, already: false, msg: 'Connection issue — please try again.' };
+    }
+    // Other Mailchimp errors (invalid address, etc.) — strip any HTML for display
+    return { ok: false, already: false, msg: stripHtml(raw) || 'Please enter a valid email address.' };
+  }
+
+  function stripHtml(str) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = str;
+    return (tmp.textContent || tmp.innerText || '').trim();
   }
 
   /**
@@ -165,12 +319,12 @@
       quantity: quantity,
       properties: {}
     };
-    
+
     switch(purchaseType) {
       case 'onetime':
         item.properties['Purchase Type'] = 'One-Time Purchase';
         break;
-        
+
       case 'subscribe':
         item.properties['Purchase Type'] = 'Subscription';
         item.properties['Discount'] = variants.subscriptionDiscount + '% Off';
@@ -179,7 +333,7 @@
           item.id = variants.subscription;
         }
         break;
-        
+
       case 'first-free':
         item.properties['Purchase Type'] = 'Free Trial';
         if (variants.freeTrial) {
@@ -188,15 +342,12 @@
         if (emailInput && emailInput.value) {
           item.properties['Email'] = emailInput.value;
         }
-        // Check for newsletter opt-in
-        const newsletterCheckbox = document.getElementById('newsletterOptin');
-        if (newsletterCheckbox && newsletterCheckbox.checked) {
-          item.properties['Newsletter'] = 'Weekly Bookmark';
-        }
+        // Subscription is required for this offer, so always record it
+        item.properties['Newsletter'] = 'Monthly Legacy Letter';
         item.quantity = 1;
         break;
     }
-    
+
     return item;
   }
 
@@ -206,10 +357,10 @@
   function addToCartAjax(item, btnEl) {
     const btnText = btnEl ? btnEl.querySelector('.btn-text') : null;
     const originalText = btnText ? btnText.textContent : 'Add to Cart';
-    
+
     if (btnText) btnText.textContent = 'Adding...';
     if (btnEl) btnEl.disabled = true;
-    
+
     fetch('/cart/add.js', {
       method: 'POST',
       headers: {
@@ -248,7 +399,7 @@
   function handlePurchaseTypeChange(type, variantInput, addToCartBtn, quantitySelector) {
     const btnText = addToCartBtn ? addToCartBtn.querySelector('.btn-text') : null;
     const variants = window.productVariants || {};
-    
+
     if (!btnText) return;
 
     switch(type) {
@@ -262,7 +413,7 @@
           variantInput.value = variants.default;
         }
         break;
-        
+
       case 'subscribe':
         btnText.textContent = 'Add to cart';
         if (addToCartBtn) addToCartBtn.disabled = false;
@@ -275,9 +426,11 @@
           variantInput.value = variants.default;
         }
         break;
-        
+
       case 'first-free':
         btnText.textContent = 'Claim Trial Journal';
+        // The claim button stays locked until Mailchimp eligibility passes
+        if (addToCartBtn) addToCartBtn.disabled = !window.trialEligible;
         // Hide quantity selector
         if (quantitySelector) quantitySelector.classList.add('hidden');
         // Reset quantity to 1
@@ -288,7 +441,7 @@
           variantInput.value = variants.freeTrial;
         }
         break;
-        
+
       default:
         btnText.textContent = 'Add to cart';
         if (quantitySelector) quantitySelector.classList.remove('hidden');
@@ -328,7 +481,7 @@
 
     // Hold to repeat (faster quantity changes)
     let holdInterval;
-    
+
     function startHold(increment) {
       holdInterval = setInterval(function() {
         const currentValue = parseInt(input.value) || 1;
@@ -339,7 +492,7 @@
         }
       }, 100); // Repeat every 100ms when held
     }
-    
+
     function stopHold() {
       clearInterval(holdInterval);
     }
@@ -349,7 +502,7 @@
     });
     minusBtn.addEventListener('mouseup', stopHold);
     minusBtn.addEventListener('mouseleave', stopHold);
-    
+
     plusBtn.addEventListener('mousedown', function() {
       setTimeout(function() { startHold(1); }, 300);
     });
@@ -361,25 +514,6 @@
       if (value < 1) value = 1;
       this.value = value;
     });
-  }
-
-  /**
-   * Check if customer is first-time
-   */
-  function checkFirstTimeCustomer(email, statusEl, btnEl) {
-    if (!statusEl) return;
-
-    const previousEmails = JSON.parse(localStorage.getItem('used_trial_emails') || '[]');
-    
-    if (previousEmails.includes(email.toLowerCase())) {
-      statusEl.textContent = '✕ This email has already been used for a free trial.';
-      statusEl.style.color = '#ef4444';
-      if (btnEl) btnEl.disabled = true;
-    } else {
-      statusEl.textContent = '✓ You\'re eligible for a free journal!';
-      statusEl.style.color = '#22c55e';
-      if (btnEl) btnEl.disabled = false;
-    }
   }
 
   /**
@@ -401,7 +535,7 @@
     const dots = document.querySelectorAll('.testimonial-dot');
     const prevBtn = document.querySelector('.testimonial-nav-btn--prev');
     const nextBtn = document.querySelector('.testimonial-nav-btn--next');
-    
+
     if (testimonials.length <= 1) return;
 
     let currentIndex = 0;
@@ -410,7 +544,7 @@
       testimonials.forEach(function(t, i) {
         t.style.display = i === index ? 'block' : 'none';
       });
-      
+
       dots.forEach(function(d, i) {
         d.classList.toggle('active', i === index);
       });

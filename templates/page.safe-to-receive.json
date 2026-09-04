@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "waitlist": {
+      "type": "waitlist",
+      "settings": {
+        "eyebrow": "",
+        "heading_line1": "Safe to",
+        "heading_line2": "Receive",
+        "subtext": "A new six-week experience coming this September. Join the waitlist for full details, timing, and early access.",
+        "show_name": true,
+        "name_placeholder": "Your name",
+        "email_placeholder": "Your email address",
+        "button_text": "Notify Me",
+        "success_message": "Thank you — you're on the waitlist. You'll hear from us soon.",
+        "bg_color": "#FFFFFF",
+        "max_width": 960,
+        "mailchimp_list_id": "4baf2e114e",
+        "mailchimp_group_params": "{}"
+      }
+    }
+  },
+  "order": ["waitlist"]
+}

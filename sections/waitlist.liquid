@@ -1,0 +1,242 @@
+{%- comment -%}
+  Waitlist section — "Join the Waitlist" style opt-in that subscribes to Mailchimp.
+  Built to match the shop brand (Hatton heading, Inter body, cream field, black button).
+  Default copy = Safe to Receive; all text/fields editable in the theme editor.
+{%- endcomment -%}
+
+<section class="waitlist-section" style="background: {{ section.settings.bg_color }};">
+  <div class="waitlist-inner" style="max-width: {{ section.settings.max_width }}px;">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="waitlist-eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    <h1 class="waitlist-title">
+      <span class="waitlist-title__l1">{{ section.settings.heading_line1 }}</span>
+      {%- if section.settings.heading_line2 != blank -%}
+        <span class="waitlist-title__l2">{{ section.settings.heading_line2 }}</span>
+      {%- endif -%}
+    </h1>
+
+    {%- if section.settings.subtext != blank -%}
+      <p class="waitlist-text">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+
+    <form class="waitlist-form" id="waitlistForm" novalidate>
+      {%- if section.settings.show_name -%}
+        <input type="text" id="wlName" class="waitlist-input waitlist-input--name"
+               name="FNAME" placeholder="{{ section.settings.name_placeholder }}" autocomplete="given-name">
+      {%- endif -%}
+      <div class="waitlist-form__row">
+        <input type="email" id="wlEmail" class="waitlist-input waitlist-input--email"
+               name="EMAIL" placeholder="{{ section.settings.email_placeholder }}" required autocomplete="email">
+        <button type="submit" class="waitlist-btn" id="waitlistBtn">
+          <span class="waitlist-btn__text">{{ section.settings.button_text }}</span>
+        </button>
+      </div>
+    </form>
+
+    <div class="waitlist-status" id="waitlistStatus" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+<style>
+  .waitlist-section {
+    padding: 96px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+  }
+  .waitlist-inner {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .waitlist-eyebrow {
+    font-family: var(--font-nav, 'Inter', sans-serif);
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-heading-brown, #e4b485);
+    margin: 0 0 1.2rem;
+  }
+  .waitlist-title {
+    font-family: var(--font-heading, 'Hatton', serif);
+    color: var(--color-black, #1e1e1c);
+    line-height: 0.92;
+    font-weight: 500;
+    margin: 0 0 0.5em;
+  }
+  .waitlist-title__l1 {
+    display: block;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(3rem, 8.5vw, 6.2rem);
+  }
+  .waitlist-title__l2 {
+    display: block;
+    font-weight: 500;
+    font-size: clamp(3.4rem, 10.5vw, 7.6rem);
+    margin-top: -0.05em;
+  }
+  .waitlist-text {
+    font-family: var(--font-body, 'Inter', sans-serif);
+    color: var(--color-black, #1e1e1c);
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    line-height: 1.55;
+    max-width: 600px;
+    margin: 0.7em auto 2.4em;
+    opacity: 0.9;
+  }
+  .waitlist-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .waitlist-input {
+    width: 100%;
+    background: var(--color-cream, #FAF7F2);
+    border: none;
+    outline: none;
+    padding: 1.3rem 1.5rem;
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 1rem;
+    color: var(--color-black, #1e1e1c);
+    box-sizing: border-box;
+  }
+  .waitlist-input::placeholder { color: #9b948a; }
+  .waitlist-input--name { margin-bottom: 12px; text-align: left; }
+  .waitlist-form__row {
+    display: flex;
+    align-items: stretch;
+  }
+  .waitlist-input--email { flex: 1 1 auto; min-width: 0; }
+  .waitlist-btn {
+    flex: 0 0 auto;
+    background: var(--color-black, #1e1e1c);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 1.3rem 2.4rem;
+    font-family: var(--font-nav, 'Inter', sans-serif);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+    white-space: nowrap;
+  }
+  .waitlist-btn:hover { background: var(--color-heading-brown, #e4b485); }
+  .waitlist-btn:disabled { opacity: 0.6; cursor: default; }
+  .waitlist-status {
+    margin-top: 1.1rem;
+    min-height: 1.3em;
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 0.95rem;
+  }
+  @media (max-width: 600px) {
+    .waitlist-section { padding: 72px 20px; }
+    .waitlist-form__row { flex-direction: column; gap: 12px; }
+    .waitlist-btn { padding: 1.15rem; }
+  }
+</style>
+
+<script>
+(function() {
+  'use strict';
+
+  // Mailchimp — subscribes waitlist signups to the "Lori J Smith + Co" audience.
+  // Segment set via an interest group so signups can be emailed as their own group.
+  var MC = {
+    action: 'https://lorijsmith.us5.list-manage.com/subscribe/post-json',
+    u: 'ce5b25d7e73f18ff0a5c2ad81',
+    id: '{{ section.settings.mailchimp_list_id }}',
+    // Optional Mailchimp interest-group params, e.g. { 'group[12345][67890]': '1' }
+    group: {{ section.settings.mailchimp_group_params | default: '{}' }}
+  };
+  var SUCCESS_MSG = {{ section.settings.success_message | json }};
+
+  var form = document.getElementById('waitlistForm');
+  if (!form) return;
+  var emailEl = document.getElementById('wlEmail');
+  var nameEl = document.getElementById('wlName');
+  var statusEl = document.getElementById('waitlistStatus');
+  var btn = document.getElementById('waitlistBtn');
+
+  function setStatus(msg, type) {
+    statusEl.textContent = msg;
+    statusEl.style.color = type === 'success' ? '#3f7d4f' : (type === 'error' ? '#c0392b' : 'inherit');
+  }
+  function isValidEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+  function stripHtml(s){ var d=document.createElement('div'); d.innerHTML=s; return (d.textContent||'').trim(); }
+
+  function subscribe(email, fname, cb) {
+    var jsonpCb = 'wlcb_' + Date.now();
+    var url = MC.action + '?u=' + encodeURIComponent(MC.u) + '&id=' + encodeURIComponent(MC.id) +
+              '&EMAIL=' + encodeURIComponent(email);
+    if (fname) url += '&FNAME=' + encodeURIComponent(fname);
+    for (var k in MC.group) { if (MC.group.hasOwnProperty(k)) url += '&' + encodeURIComponent(k) + '=' + encodeURIComponent(MC.group[k]); }
+    url += '&c=' + jsonpCb;
+
+    var script = document.createElement('script');
+    var done = false;
+    function cleanup(){ try{ delete window[jsonpCb]; }catch(e){ window[jsonpCb]=undefined; } if(script.parentNode) script.parentNode.removeChild(script); }
+    window[jsonpCb] = function(data){ if(done) return; done=true; cleanup(); cb(data); };
+    script.onerror = function(){ if(done) return; done=true; cleanup(); cb({result:'error',msg:'network'}); };
+    setTimeout(function(){ if(done) return; done=true; cleanup(); cb({result:'error',msg:'timeout'}); }, 8000);
+    script.src = url;
+    document.body.appendChild(script);
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = (emailEl.value || '').trim();
+    var fname = nameEl ? (nameEl.value || '').trim() : '';
+    if (!email || !isValidEmail(email)) { setStatus('Please enter a valid email address.', 'error'); return; }
+
+    var original = btn.querySelector('.waitlist-btn__text').textContent;
+    btn.querySelector('.waitlist-btn__text').textContent = 'Adding…';
+    btn.disabled = true;
+    setStatus('', 'neutral');
+
+    subscribe(email, fname, function(data) {
+      btn.disabled = false;
+      btn.querySelector('.waitlist-btn__text').textContent = original;
+      if (data && data.result === 'success') {
+        setStatus(SUCCESS_MSG, 'success');
+        form.reset();
+      } else {
+        var m = (data && data.msg ? data.msg.toString() : '').toLowerCase();
+        if (m.indexOf('already subscribed') !== -1) { setStatus('You\'re already on the list — thank you!', 'success'); form.reset(); }
+        else if (m === 'network' || m === 'timeout') { setStatus('Connection issue — please try again.', 'error'); }
+        else { setStatus(stripHtml(data && data.msg ? data.msg : '') || 'Something went wrong — please try again.', 'error'); }
+      }
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Waitlist",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow (small text above heading)", "default": "" },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Safe to" },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2", "default": "Receive" },
+    { "type": "textarea", "id": "subtext", "label": "Sub text", "default": "A new six-week experience coming this September. Join the waitlist for full details, timing, and early access." },
+    { "type": "checkbox", "id": "show_name", "label": "Show name field", "default": true },
+    { "type": "text", "id": "name_placeholder", "label": "Name placeholder", "default": "Your name" },
+    { "type": "text", "id": "email_placeholder", "label": "Email placeholder", "default": "Your email address" },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "Notify Me" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thank you — you're on the waitlist. You'll hear from us soon." },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FFFFFF" },
+    { "type": "range", "id": "max_width", "label": "Content width", "min": 600, "max": 1100, "step": 20, "unit": "px", "default": 960 },
+    { "type": "header", "content": "Mailchimp" },
+    { "type": "text", "id": "mailchimp_list_id", "label": "Audience (list) ID", "default": "4baf2e114e", "info": "4baf2e114e = Lori J Smith + Co" },
+    { "type": "textarea", "id": "mailchimp_group_params", "label": "Interest-group params (JSON)", "default": "{}", "info": "e.g. { \"group[123][456]\": \"1\" } to tag/segment as Safe to Receive" }
+  ],
+  "presets": [
+    { "name": "Waitlist" }
+  ]
+}
+{% endschema %}
